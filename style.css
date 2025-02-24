@@ -58,6 +58,9 @@
     border-radius: 7px;
     color:rgb(15, 5, 24);
 }
+#cart:hover{
+    background-color: rgb(15, 5, 24);
+}
 
 @media screen and (max-width: 805px){
     .list{
@@ -81,4 +84,14 @@
     #check.checked~ul{
         left: 0%;
     }
+}
+
+.hero-section{
+    width:100%;
+    min-height:100vh;
+    background-image: url(images/hero.png);
+    background-position: center;
+    background-size: cover;
+    padding: 10px 10px;
+    overflow: hidden;
 }
