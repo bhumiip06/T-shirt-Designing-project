@@ -12,10 +12,18 @@
     justify-content: space-around;
     align-items: center;
     line-height: 5rem;
+    height: 97px;
 }
 
+#logo{
+    float:left;
+}
 .left img{
     cursor: pointer;
+    width:85px;
+    height: auto;
+    padding-top:35px;
+    
 }
 
 .checkBtn{
