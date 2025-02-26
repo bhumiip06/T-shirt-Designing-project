@@ -249,10 +249,11 @@ input:focus~label,input:not(:placeholder-shown)~label{
     color: hsl(327,90%,28%);
     font-size: 15px;
 }
-i {
+/*i {
     font-size: 18px;
     margin-left: 10px;
     cursor: pointer;
+}
 .fa-eye{
     color:#34c759 ;
 }
