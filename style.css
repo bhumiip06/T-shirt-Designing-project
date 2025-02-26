@@ -185,8 +185,8 @@ body{
 .card-content p{
     font-size: 1rem;
     color:#555;
-
-
+}
+/*Login and signup form */
 .container{
     background: #fff;
     width: 450px;
@@ -313,5 +313,5 @@ button{
 }
 button:hover{
     text-decoration: underline;
-    color: blue
+    color: blue;
 }
