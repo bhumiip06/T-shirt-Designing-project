@@ -1,4 +1,4 @@
-let inputEl=document.querySelector("input");
+/*let inputEl=document.querySelector("input");
 let showEl=document.querySelector(".fa-eye");
 let hideEl=document.querySelector(".fa-eye-slash");
 
@@ -12,7 +12,7 @@ hideEl.addEventListener("click" ,() =>{
     inputEl.type="password";
     hideEl.classList.add("hide");
     showEl.classList.remove("hide");
-})
+})*/
 
 const signUpButton=document.getElementById('signUpButton');
 const signInButton=document.getElementById('signInButton');
