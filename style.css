@@ -221,11 +221,23 @@ input{
 .input-group{
     padding: 1% 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    
+}
+.input-group label {
+    padding-left: 1rem;
 }
 .input-group i{
-    position: absolute;
+    /* position: absolute; */
     color:black;
 
+}
+.input-group-input_field{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #757575;
+    margin: 0.5rem;
 }
 
 input:focus{
@@ -238,9 +250,6 @@ input::placeholder{
 }
 label{
     color: #757575;
-    position: relative;
-    left: 1.2em;
-    top: -1.3em;
     cursor: auto;
     transition: 0.3s ease all;
 }
@@ -249,20 +258,21 @@ input:focus~label,input:not(:placeholder-shown)~label{
     color: hsl(327,90%,28%);
     font-size: 15px;
 }
-/*i {
+i {
     font-size: 18px;
     margin-left: 10px;
     cursor: pointer;
 }
 .fa-eye{
     color:#34c759 ;
+    
 }
 .fa-eye-slash{
     color: #9b9b9b;
 }
 .hide{
     display: none;
-}*/
+}
 .recover{
     text-align: right;
     font-size: 1rem;
@@ -333,3 +343,4 @@ button:hover{
     text-decoration: underline;
     color: blue;
 }
+
