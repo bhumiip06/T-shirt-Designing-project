@@ -32,9 +32,12 @@
             <h1 class="form-title">Register</h1>
             <form method="post" action=" ">
                 <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" name="name" placeholder="Name" required>
                     <label for="name">Name</label>
+                    <div class="input-group-input_field">
+                        <i class="fas fa-user"></i>
+                    <input type="text" name="name" placeholder="Name" required>
+                    </div>
+                    
                 </div>
                <!--<div class="input-group">
                     <i class="fas fa-user"></i>
@@ -42,14 +45,17 @@
                     <label for ="1Name">Last Name</label>
                 </div>--> 
                 <div class="input-group">
-                    <i class="fas fa-envelope"></i>
+                    <label for="email">Email</label> 
+                    <div class="input-group-input_field">
+                        <i class="fas fa-envelope"></i>
                     <input type="email" name="email" id="email" placeholder="Email" required>
-                    <label for="email">Email</label>  
+                    </div> 
                 </div>
                 <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password" placeholder="password" required>
                     <label for="password">Password</label>
+                    <div class="input-group-input_field"><i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="password" required>
+                    </div>
                 </div>
                 <input type="submit" class="btn" value="Sign Up" name="signup">
             </form>
