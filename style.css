@@ -4,12 +4,14 @@
     padding: 0;
     box-sizing: border-box;
     color: #fff;
-    font-family: "Ubuntu",sans-serif,"Roboto";
+    font-family: "Ubuntu",'Segoe UI', Tahoma, Geneva, Verdana,sans-serif,"Roboto";
+    font-family:  sans-serif;
 }
 body{
     padding: 10px;
     background-color: #c9d6ff;
-    background : linear-gradient(to right,#e2e2e2,#c9d6ff);
+   /* background : linear-gradient(to right,#e2e2e2,#c9d6ff); */
+    background: linear-gradient(135deg, #e0eafc, #68a0f0);/* changed the background gradient */
 }
 .navbar{
     background-color: rgb(15, 5, 24);
@@ -190,12 +192,14 @@ body{
 /*Login and signup form */
 
 .container{
-    background: #fff;
+     background: #fff; 
+    /*background: linear-gradient(135deg, #e0eafc, #68a0f0);*/
     width: 450px;
     padding: 1.5rem;
     margin: 50px auto;
     border-radius: 10px;
-    box-shadow: 0 20px 35px rgba(0,0,1,0,9);
+   /* box-shadow: 0 20px 35px rgba(0,0,1,0,9); */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);/*box shadow updated */
 }
 form{
     margin: 0 2rem;
@@ -205,8 +209,9 @@ form{
     font-weight: bold;
     text-align: center;
     padding: 1.3rem;
-    margin-bottom: 0.4rem;
-    color: black;
+    margin-bottom: 30px;
+    /* color: black; */
+    color: #4a235a; /* color changed to purple */
 }
 input{
     color: inherit;
@@ -227,6 +232,7 @@ input{
 }
 .input-group label {
     padding-left: 1rem;
+    font-weight: 600; /* bolded the labels */
 }
 .input-group i{
     /* position: absolute; */
@@ -244,6 +250,7 @@ input:focus{
     background-color: transparent;
     outline: transparent;
     border-bottom: 2px solid hsl(327,90%,28%);
+    
 }
 input::placeholder{
     color: transparent;
@@ -288,19 +295,23 @@ i {
     text-decoration: underline;
 }
 .btn{
-    font-size: 1.1rem;
+    font-size: 1.125rem;
     padding: 8px 0;
+    margin-top: 20px; /* added space above the button */
     border-radius: 5px;
     outline: none;
     border: none;
     width: 100%;
-    background: rgb(125,125,235);
+    /* background: rgb(125,125,235); */
+    background: linear-gradient(to right, #4a235a, #5c6bc0); /* changed the background of the button from blue to purple bluish gradient */
     color: white;
     cursor: pointer;
     transition: 0.9s;
 }
 .btn:hover{
-    background:#07001f;
+    /* background:#07001f; */
+    background: linear-gradient(to right, #673ab7, #7986cb); /* added gradient for hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);   /* box shadow for subtle look of the button */
 }
 .or{
     font-size: 1.1rem;
@@ -311,7 +322,8 @@ i {
     text-align: center;
 }
 .icons i{
-    color: rgb(125,125,235);
+    /*color: rgb(125,125,235);*/
+    background-color: #eee;/* changed background color  */
     padding: 0.8rem 1.5rem;
     border-radius: 10px;
     font-size: 1.5rem;
@@ -321,9 +333,11 @@ i {
     transition: 1s;
 }
 .icons i:hover{
-    background: #07001f;
+   /*  background: #07001f;  */
     font-size: 1.6rem;
     border: 2px solid rgb(125,125,235);
+    background-color: #ddd; /* changed background color  */
+    
 }
 .links{
     display: flex;
@@ -331,6 +345,7 @@ i {
     padding:0 4rem;
     margin-top: 0.9rem;
     font-weight: bold;
+    color: #5c6bc0
 }
 button{
     color: rgb(125,125,235);
