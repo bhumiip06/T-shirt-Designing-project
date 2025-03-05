@@ -3,8 +3,9 @@ if(isset($_POST['name'])){
     $server="localhost";
     $username="root";
     $password="" ;
+    $database="printing design";
 
-    $con= mysqli_connect($server ,$username,$password);
+    $con= mysqli_connect($server ,$username,$password,$database);
 
     if(!$con){
         die("connection to this databse failed due to". mysqli_connect_error());
@@ -14,7 +15,7 @@ if(isset($_POST['name'])){
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
-    $sql= "INSERT INTO `form`.`register`(`S.no`, `name`, `email`, `password`, `date`) VALUES (NULL, '$name', '$email', '$password', current_timestamp());";
+    $sql= "INSERT INTO user(`name`, `email`, `password`) VALUES ( '$name', '$email', '$password');";
     //echo $sql;
 
     if($con->query($sql) == true){
@@ -23,7 +24,6 @@ if(isset($_POST['name'])){
     else{
         echo"Error: $sql <br> $con->error";
     }
-
     $con->close();
 }
 ?>
