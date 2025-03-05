@@ -14,16 +14,18 @@ body{
     background: linear-gradient(135deg, #e0eafc, #68a0f0);/* changed the background gradient */
 }
 .navbar{
-    background-color: rgb(15, 5, 24);
+    background-color: rgb(46, 16, 71);
     display: flex;
     justify-content: space-around;
     align-items: center;
     line-height: 5rem;
     height: 97px;
+    border-radius: 10px;
 }
 
 #logo{
     float:left;
+    border-radius: 5px;
 }
 .left img{
     cursor: pointer;
@@ -322,8 +324,8 @@ i {
     text-align: center;
 }
 .icons i{
-    /*color: rgb(125,125,235);*/
-    background-color: #eee;/* changed background color  */
+    color: rgb(125,125,235);
+/*     background-color: #eee; changed background color  */
     padding: 0.8rem 1.5rem;
     border-radius: 10px;
     font-size: 1.5rem;
@@ -333,10 +335,10 @@ i {
     transition: 1s;
 }
 .icons i:hover{
-   /*  background: #07001f;  */
+   background: #07001f;  
     font-size: 1.6rem;
     border: 2px solid rgb(125,125,235);
-    background-color: #ddd; /* changed background color  */
+    /*  background-color: #ddd; changed background color  */
     
 }
 .links{

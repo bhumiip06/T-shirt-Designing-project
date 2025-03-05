@@ -21,6 +21,7 @@ const signInButton=document.getElementById('signInButton');
 const signInForm=document.getElementById('Sign In');
 const signUpForm=document.getElementById('Sign Up');
 const loginButton = document.getElementById("login_button");
+/*const sign_UpButton=document.getElementById("signup_button");*/
 
 
 loginButton.addEventListener('click',()=>{
