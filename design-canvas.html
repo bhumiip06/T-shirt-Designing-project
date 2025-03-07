@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-shirt Designer</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 900px;
+            margin:auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #tshirtCanvas{
+            border:2px solid #000;
+            background-color: #fff;
+            cursor: crosshair;
+        }
+
+        .controls{
+            margin-top:20px;  
+            display: flex;
+            flex-direction: column;
+        }
+
+        .controls button, .controls select, .controls input{
+            margin-left:20px;
+            padding: 10px;
+            font-size: 16px;
+            align-items: flex-start;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>T-shirt Designer</h1>
+        <canvas id="tshirtCanvas" width="400" height="450"></canvas>
+        <div class="controls">
+            <input type="text" name="textInput" id="textInput" placeholder="Enter Text" >
+            <select name="" id="fontSelect">
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Times New Roman">Times New Roman</option>
+            </select>
+            <input type="color" name="" id="textColor" value="#000000">
+            <button id="addText">Add text</button>
+            <select id="shapeSelect">
+                <option value="rectangle">Rectangle</option>
+                <option value="circle">Circle</option>
+                <option value="triangle">Triangle</option>
+            </select>
+            <button id="addShape">Add Shape</button>
+            <input type="file" name="" id="imageUpload" accept="image/*" >
+            <button id="clearCanvas">Clear</button>
+            <button id="orderTshirt">Order T-shirt</button>
+        </div>
+    </div>
+    <script>
+        const canvas=document.getElementById("tshirtCanvas");
+        const ctx=canvas.getContext('2d');
+
+        let elements=[];
+        let selectedElement=null;
+        let isDragging=false;
+        let isResizing= false;
+        let offsetX, offsetY;
+
+        //add text to canvas
+        document.getElementById('addText').addEventListener('click', function(){
+            const textInput=document.getElementById('textInput').value;
+            const fontSelect=document.getElementById('fontSelect').value;
+            const textColor=document.getElementById('textColor').value;
+
+            if(textInput){
+                const textElement={
+                    type: 'text',
+                    content: textInput,
+                    font: fontSelect,
+                    color: textColor,
+                    x:50, y:50,
+                    width: ctx.measureText(textInput).width,
+                    height: 20,
+                    rotation: 0,
+                    isSelected: false
+                };
+                elements.push(textElement);
+                draw();
+            }
+        });
+
+        //Add shape to the canvas
+        document.getElementById('addShape').addEventListener('click', function(){
+            const shapeType=document.getElementById('shapeSelect').value;
+            if(!shapeType) return;
+
+            const shapeElement={
+                type: 'shape',
+                shape: shapeType,
+                x: 100, y: 100,
+                width: 50,
+                height: 50,
+                color: 'blue',
+                rotation: 0,
+                isSelected: false
+            };
+            elements.push(shapeElement);
+            draw();
+        });
+
+        // Clear canvas
+        document.getElementById("clearCanvas").addEventListener("click", function () {
+            elements = [];
+            draw();
+        });
+
+        //handle image
+        document.getElementById('imageUpload').addEventListener('change', function(event){
+            const file=event.target.files[0];
+            const reader=new FileReader();
+
+            reader.onload= function(e){
+                const imgElement={
+                    type: 'image',
+                    src: e.target.result,
+                    x: 50, y: 50,
+                    width: 100,
+                    height: 100,
+                    isSelected:false
+                };
+                elements.push(imgElement);
+                draw();
+            };
+
+            if(file){
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle dragging functionality & resizing functionality
+    canvas.addEventListener("mousedown", function (e) {
+        const { offsetX, offsetY } = e;
+        selectedElement = elements.find(el => offsetX >= el.x && offsetX <= el.x + el.width && offsetY >= el.y && offsetY <= el.y + el.height);
+        if (selectedElement) {
+            isDragging = true;
+            selectedElement.offsetX = offsetX - selectedElement.x;
+            selectedElement.offsetY = offsetY - selectedElement.y;
+
+            /*if(e.offsetX >= selectedElement.x + selectedElement.width -10 && e.offsetY >= selectedElement.y +selectedElement.height -10){
+                isResizing=true;
+            }
+            else {
+                isDragging = true;
+                offsetX = e.offsetX - selectedElement.x;
+                offsetY = e.offsetY - selectedElement.y;
+            }*/
+        }
+    });
+    canvas.addEventListener("mousemove", function (e) {
+        if (isDragging && selectedElement) {
+            selectedElement.x = e.offsetX - selectedElement.offsetX;
+            selectedElement.y = e.offsetY - selectedElement.offsetY;
+            draw();
+        }
+        if (isResizing && selectedElement) {
+            selectedElement.width = Math.max(20, e.offsetX - selectedElement.x);
+            selectedElement.height = Math.max(20, e.offsetY - selectedElement.y);
+            draw();
+    }
+    });
+    canvas.addEventListener("mouseup", function () {
+         isDragging = false;
+         isResizing = false;
+         selectedElement = null;
+    });
+
+
+
+        //draw elemets on canvas
+        function draw(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            elements.forEach(element => {
+                ctx.save();
+                ctx.translate(element.x + element.width/2, element.y +element.height/2);
+                ctx.rotate(element.rotation * Math.PI/180);
+                ctx.translate(-element.width/2, -element.height/2);
+
+                if(element.type === 'text'){
+                    ctx.font=`20px ${element.font}`;
+                    ctx.fillStyle=element.color;
+                    ctx.fillText(element.content, 0, 0);
+                    element.width=ctx.measureText(element.content).width;
+                    element.height=20;
+                }
+
+                else if(element.type === 'shape'){
+                    ctx.fillStyle=element.color;
+                    if(element.shape==='rectangle'){
+                        ctx.fillRect(0,0,element.width,element.height);
+                    }
+                    else if (element.shape === "circle") {
+                        ctx.beginPath();
+                        ctx.arc(element.width / 2, element.height / 2, element.width / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    } 
+                    else if (element.shape === "triangle") {
+                        ctx.beginPath();
+                        ctx.moveTo(0, element.height);
+                        ctx.lineTo(element.width / 2, 0);
+                        ctx.lineTo(element.width, element.height);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                }
+
+                else if(element.type ==='image'){
+                    const img=new Image();
+                    img.src=element.src;
+                    img.onload=function(){
+                        ctx.drawImage(img, 0, 0, element.width, element.height);
+                    };
+                }
+
+                //resizing elements
+                //ctx.fillStyle = "black";
+                //ctx.fillRect(element.width - 10, element.height - 10, 10, 10);
+
+
+                ctx.restore();
+            });
+        }
+    </script>
+</body>
+</html>
