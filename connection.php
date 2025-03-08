@@ -15,7 +15,7 @@ if(isset($_POST['name'])){
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
-    $sql= "INSERT INTO user(`name`, `email`, `password`) VALUES ( '$name', '$email', '$password');";
+    $sql= "INSERT INTO users(`name`, `email`, `password`) VALUES ( '$name', '$email', '$password');";
     //echo $sql;
 
     if($con->query($sql) == true){
