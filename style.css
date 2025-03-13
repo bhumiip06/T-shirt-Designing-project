@@ -4,17 +4,16 @@
     padding: 0;
     box-sizing: border-box;
     color: #222222;
-    font-family: "Ubuntu",'Segoe UI', Tahoma, Geneva, Verdana,sans-serif,"Roboto";
-    font-family:  sans-serif;
+    font-family: "Ubuntu",'Segoe UI', Tahoma, "Geneva", Verdana,sans-serif,"Roboto";
 }
 body{
     padding: 10px;
-    background-color:#F8F9FA
-   /* background : linear-gradient(to right,#e2e2e2,#c9d6ff); */
+    background-color:#F8F9FA;
+    margin:10px;
+    /* background : linear-gradient(to right,#e2e2e2,#c9d6ff); */
     /* background: linear-gradient(135deg, #e0eafc, #68a0f0); changed the background gradient */
     
 }
-
 
 .navbar {
     display: flex;
@@ -85,7 +84,7 @@ body{
         top: 60px; /* Adjust based on navbar height */
         left: 0;
         background-color: #0077B6;
-        width:100%;
+        /* width:100%; */
         padding: 10px 0; /* Add padding for better spacing */
         z-index: 1; /* Ensure it appears above other content */
     }
@@ -156,8 +155,16 @@ body{
     right: 10%;
 
 }
+/* about section */
 
+.about{
+    /* margin: 40px; */
+    background-color: rgb(238, 238, 238);
+}
 
+.working{
+    padding: 30px;
+}
 /* cards for featured tshirt designs  */
 
 .card-grid{
@@ -466,4 +473,23 @@ button{
 button:hover{
     text-decoration: underline;
     color: blue;
+}
+footer{
+    text-align: center;
+    background-color: #2d2d2d;
+    color: white;
+    height: 300px;
+}
+footer span{
+    color: #ffffff;
+    font-size: 20px;
+}
+footer i{
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 2rem;
+}
+footer span:hover{
+    color:#ffffff;
+    text-decoration: underline;
 }
