@@ -10,8 +10,6 @@ session_start();
     }else {
         echo "Connected successfully";
     }
-<<<<<<< HEAD
-    
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['sign In'])){
     $email=$_POST['email'];
@@ -29,23 +27,6 @@ session_start();
    else{
     echo "Not Found, Incorrect Email or Password";
    }
-=======
-    //echo " Success connecting to the db";
-
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $sql= "INSERT INTO users(`name`, `email`, `password`) VALUES ( '$name', '$email', '$password');";
-    //echo $sql;
-
-    if($con->query($sql) == true){
-        echo "Sucessfully recorded the response. Thank you!";
-    }
-    else{
-        echo"Error: $sql <br> $con->error";
-    }
-    $con->close();
->>>>>>> 0b6697018430470c4bf1dfd763ff027c2ffa9aec
 }
 }
 $con->close();
