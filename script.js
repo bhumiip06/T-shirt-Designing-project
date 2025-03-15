@@ -32,32 +32,32 @@ loginButton.addEventListener('click',()=>{
     sendLoginData(emailid.value, passwordid.value);
 })
 
-async function sendLoginData(username, password) {
-    const url = "http://localhost/my-api"; // Ensure this matches your API endpoint
-    const data = { username, password };
+// async function sendLoginData(username, password) {
+//     const url = "http://localhost/my-api"; // Ensure this matches your API endpoint
+//     const data = { username, password };
 
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+//     try {
+//         const response = await fetch(url, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify(data)
+//         });
 
-        const result = await response.json();
-        console.log("Response:", result);
+//         const result = await response.json();
+//         console.log("Response:", result);
 
-        if (response.ok) {
-            alert("Login successful!"); // Replace with actual logic
-        } else {
-            alert("Error: " + result.error);
-        }
-    } catch (error) {
-        console.error("Request failed:", error);
-        alert("Failed to connect to the server.");
-    }
-}
+//         if (response.ok) {
+//             alert("Login successful!"); // Replace with actual logic
+//         } else {
+//             alert("Error: " + result.error);
+//         }
+//     } catch (error) {
+//         console.error("Request failed:", error);
+//         alert("Failed to connect to the server.");
+//     }
+// }
 
 signUpButton.addEventListener('click',function(){
     signInForm.style.display="none";

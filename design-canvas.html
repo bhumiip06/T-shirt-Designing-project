@@ -3,246 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T-shirt Designer</title>
-    <!--<link rel="stylesheet" href="style.css">-->
+    <title>Document</title>
+    <!-- Import Google Fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script& family=Sofia& family=Fascinate+Inline& family=Fascinate& family=Updock& family=Monoton&family=Kalam:wght@3000& display=swap" rel="stylesheet">  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.28/webfont.js"></script>
+
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Righteous&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet"> -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Lobster&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Pacifico&family=Playfair+Display:wght@400;700&family=Righteous&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js" integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
     <style>
         body{
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f4f4f4;
             text-align: center;
         }
-
-        .container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 900px;
-            margin:auto;
-            padding: 20px;
-            background-color: white;
+        canvas{
+            border:1px solid black;
+            box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .design-container{
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
         }
 
-        #tshirtCanvas{
-            border:2px solid #000;
-            background-color: #fff;
-            cursor: crosshair;
+        .canvas-container{
+            flex:1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 150px;
         }
-
-        .controls{
-            margin-top:20px;  
+        .controls-container{
+            flex:0 0 500px;
+            padding-left: 20px;
             display: flex;
             flex-direction: column;
-        }
-
-        .controls button, .controls select, .controls input{
-            margin-left:20px;
-            padding: 10px;
-            font-size: 16px;
             align-items: flex-start;
-            width: 200px;
         }
+        
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>T-shirt Designer</h1>
-        <canvas id="tshirtCanvas" width="400" height="450"></canvas>
-        <div class="controls">
-            <input type="text" name="textInput" id="textInput" placeholder="Enter Text" >
-            <select name="" id="fontSelect">
+    <!-- <nav class="navbar">
+        <div class="left">
+          <a href="#" id="logo">
+            <img src="images/Logo.png" alt="Logo">
+          </a>
+        </div>
+        <div class="right">
+          <input type="checkbox" id="check">
+          <label for="check" class="checkBtn">
+            <i class="fa-solid fa-bars"></i>
+          </label>
+          <ul class="list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">T-shirts</a></li>
+            <li><a href="#">Design</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
+          </ul>
+        </div>
+      </nav>   -->
+    <h1>T-shirt Design Lab</h1>
+    <div class="design-container">
+        <div class="canvas-container">
+            <canvas id="canvas" width="300" height="400"></canvas>
+        </div>
+        <div class="controls-container">
+            <button id="addText">Add text</button>
+
+            <input type="color" id="color" value="#000000">
+
+            <input type="file" name="imageupload" id="imageupload">
+
+            <label for="fontSelect">Choose Font: </label>
+            <select name="font" id="fontSelect">
                 <option value="Arial">Arial</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Georgia">Georgia</option>
+                <option value="Bebas Neue">Bebas Neue</option>
+                <option value="Lobster">Lobster</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Pacifico">Pacifico</option>
+                <option value="Playfair">Playfair</option>
+                <option value="Righteous">Righteous</option>
+                <option value="Roboto Slab">Roboto Slab</option>
+                <option value="Anton">Anton</option>
                 <option value="Times New Roman">Times New Roman</option>
             </select>
-            <input type="color" name="" id="textColor" value="#000000">
-            <button id="addText">Add text</button>
-            <select id="shapeSelect">
-                <option value="rectangle">Rectangle</option>
-                <option value="circle">Circle</option>
-                <option value="triangle">Triangle</option>
+
+            <label for="fontSize">Choose Font Size: </label>
+            <select name="" id="fontSize">
+                <option value="15">15px</option>
+                <option value="18">18px</option>
+                <option value="20">20px</option>
+                <option value="25">25px</option>
+                <option value="28">28px</option>
+                <option value="30">30px</option>
+                <option value="32">32px</option>
+                <option value="38">38px</option>
+                <option value="40">40px</option>
+                <option value="50">50px</option>
+                <option value="54">54px</option>
+                <option value="58">58px</option>
+            </select>   
+            
+            <label for="fontStyle"> Font Style: </label>
+            <select name="" id="fontStyle">
+                <option value="Bold">Bold</option>
+                <option value="italic">Italic</option>
             </select>
-            <button id="addShape">Add Shape</button>
-            <input type="file" name="" id="imageUpload" accept="image/*" >
-            <button id="clearCanvas">Clear</button>
-            <button id="orderTshirt">Order T-shirt</button>
+
+            
+            <button id="clearDesign">Clear</button>
         </div>
     </div>
     <script>
-        const canvas=document.getElementById("tshirtCanvas");
-        const ctx=canvas.getContext('2d');
+        const canvas = new fabric.Canvas("canvas");
 
-        let elements=[];
-        let selectedElement=null;
-        let isDragging=false;
-        let isResizing= false;
-        let offsetX, offsetY;
-
-        //add text to canvas
-        document.getElementById('addText').addEventListener('click', function(){
-            const textInput=document.getElementById('textInput').value;
-            const fontSelect=document.getElementById('fontSelect').value;
-            const textColor=document.getElementById('textColor').value;
-
-            if(textInput){
-                const textElement={
-                    type: 'text',
-                    content: textInput,
-                    font: fontSelect,
-                    color: textColor,
-                    x:50, y:50,
-                    width: ctx.measureText(textInput).width,
-                    height: 20,
-                    rotation: 0,
-                    isSelected: false
-                };
-                elements.push(textElement);
-                draw();
-            }
-        });
-
-        //Add shape to the canvas
-        document.getElementById('addShape').addEventListener('click', function(){
-            const shapeType=document.getElementById('shapeSelect').value;
-            if(!shapeType) return;
-
-            const shapeElement={
-                type: 'shape',
-                shape: shapeType,
-                x: 100, y: 100,
-                width: 50,
-                height: 50,
-                color: 'blue',
-                rotation: 0,
-                isSelected: false
-            };
-            elements.push(shapeElement);
-            draw();
-        });
-
-        // Clear canvas
-        document.getElementById("clearCanvas").addEventListener("click", function () {
-            elements = [];
-            draw();
-        });
-
-        //handle image
-        document.getElementById('imageUpload').addEventListener('change', function(event){
-            const file=event.target.files[0];
-            const reader=new FileReader();
-
-            reader.onload= function(e){
-                const imgElement={
-                    type: 'image',
-                    src: e.target.result,
-                    x: 50, y: 50,
-                    width: 100,
-                    height: 100,
-                    isSelected:false
-                };
-                elements.push(imgElement);
-                draw();
-            };
-
-            if(file){
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Handle dragging functionality & resizing functionality
-    canvas.addEventListener("mousedown", function (e) {
-        const { offsetX, offsetY } = e;
-        selectedElement = elements.find(el => offsetX >= el.x && offsetX <= el.x + el.width && offsetY >= el.y && offsetY <= el.y + el.height);
-        if (selectedElement) {
-            isDragging = true;
-            selectedElement.offsetX = offsetX - selectedElement.x;
-            selectedElement.offsetY = offsetY - selectedElement.y;
-
-            /*if(e.offsetX >= selectedElement.x + selectedElement.width -10 && e.offsetY >= selectedElement.y +selectedElement.height -10){
-                isResizing=true;
-            }
-            else {
-                isDragging = true;
-                offsetX = e.offsetX - selectedElement.x;
-                offsetY = e.offsetY - selectedElement.y;
-            }*/
-        }
-    });
-    canvas.addEventListener("mousemove", function (e) {
-        if (isDragging && selectedElement) {
-            selectedElement.x = e.offsetX - selectedElement.offsetX;
-            selectedElement.y = e.offsetY - selectedElement.offsetY;
-            draw();
-        }
-        if (isResizing && selectedElement) {
-            selectedElement.width = Math.max(20, e.offsetX - selectedElement.x);
-            selectedElement.height = Math.max(20, e.offsetY - selectedElement.y);
-            draw();
-    }
-    });
-    canvas.addEventListener("mouseup", function () {
-         isDragging = false;
-         isResizing = false;
-         selectedElement = null;
-    });
-
-
-
-        //draw elemets on canvas
-        function draw(){
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            elements.forEach(element => {
-                ctx.save();
-                ctx.translate(element.x + element.width/2, element.y +element.height/2);
-                ctx.rotate(element.rotation * Math.PI/180);
-                ctx.translate(-element.width/2, -element.height/2);
-
-                if(element.type === 'text'){
-                    ctx.font=`20px ${element.font}`;
-                    ctx.fillStyle=element.color;
-                    ctx.fillText(element.content, 0, 0);
-                    element.width=ctx.measureText(element.content).width;
-                    element.height=20;
-                }
-
-                else if(element.type === 'shape'){
-                    ctx.fillStyle=element.color;
-                    if(element.shape==='rectangle'){
-                        ctx.fillRect(0,0,element.width,element.height);
-                    }
-                    else if (element.shape === "circle") {
-                        ctx.beginPath();
-                        ctx.arc(element.width / 2, element.height / 2, element.width / 2, 0, Math.PI * 2);
-                        ctx.fill();
-                    } 
-                    else if (element.shape === "triangle") {
-                        ctx.beginPath();
-                        ctx.moveTo(0, element.height);
-                        ctx.lineTo(element.width / 2, 0);
-                        ctx.lineTo(element.width, element.height);
-                        ctx.closePath();
-                        ctx.fill();
-                    }
-                }
-
-                else if(element.type ==='image'){
-                    const img=new Image();
-                    img.src=element.src;
-                    img.onload=function(){
-                        ctx.drawImage(img, 0, 0, element.width, element.height);
-                    };
-                }
-
-                //resizing elements
-                //ctx.fillStyle = "black";
-                //ctx.fillRect(element.width - 10, element.height - 10, 10, 10);
-
-
-                ctx.restore();
+        document.getElementById("addText").addEventListener('click', function(){
+            const text = new fabric.Textbox('Your Text Here', {
+                fontsize: 30,
+                fill: 'black',
+                left: 100,
+                top: 100,
+                width: 200,
+                selectionColor:"rgba(0,0,0,0.2",
+                fontFamily:"Calibri"
             });
-        }
+            canvas.add(text);
+            canvas.setActiveObject(text);
+            
+            // Listen for font change
+            document.getElementById("fontSelect").addEventListener('change', function () {
+                var activeObject = canvas.getActiveObject();
+                if(activeObject && activeObject.type === 'textbox') {
+                    activeObject.set({ fontFamily: this.value });
+                    canvas.renderAll();
+                }
+            });
+
+            //listen for text color change
+            document.getElementById("color").addEventListener("change", function(){
+                var activeObject=canvas.getActiveObject();
+                console.log("Active Object:",activeObject);
+                if(activeObject && activeObject.type === 'textbox') {
+                    activeObject.set({fill: this.value});
+                    canvas.renderAll();
+                }
+            });
+
+            //listen for font size change
+            document.getElementById("fontSize").addEventListener("change", function(){
+                var activeObject=canvas.getActiveObject();
+                console.log("Active Object: ",activeObject);
+                if(activeObject && activeObject.type==='textbox') {
+                    activeObject.set({fontSize: this.value});
+                    canvas.renderAll();
+                }
+            });
+
+            //listen for font style change
+            document.getElementById("fontStyle").addEventListener("change", function(){
+                var activeObject=canvas.getActiveObject();
+                console.log("Active Object:",activeObject);
+                if(activeObject && activeObject.type === 'textbox') {
+                    activeObject.set({fontStyle: this.value});
+                    canvas.renderAll();
+                }
+            });
+
+        });
+
+       document.getElementById("imageupload") .addEventListener('click',function(){
+            // var activeObject=canvas.getActiveObject();
+            const img=new fabric.Image('')
+       });
+        //clears the whole canvas
+        document.getElementById("clearDesign").addEventListener('click', function(){
+                canvas.clear();
+            })
+
     </script>
 </body>
 </html>

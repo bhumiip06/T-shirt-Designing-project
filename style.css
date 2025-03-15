@@ -3,102 +3,103 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #fff;
-    font-family: "Ubuntu",'Segoe UI', Tahoma, Geneva, Verdana,sans-serif,"Roboto";
-    font-family:  sans-serif;
+    color: #222222;
+    font-family: "Ubuntu",'Segoe UI', Tahoma, "Geneva", Verdana,sans-serif,"Roboto";
 }
 body{
     padding: 10px;
-    background-color: #c9d6ff;
-   /* background : linear-gradient(to right,#e2e2e2,#c9d6ff); */
+    background-color:#F8F9FA;
+    margin:10px;
+    /* background : linear-gradient(to right,#e2e2e2,#c9d6ff); */
     /* background: linear-gradient(135deg, #e0eafc, #68a0f0); changed the background gradient */
-    background: linear-gradient(135deg, #e83535, #be75ff);
+    
 }
 
-.navbar{
-   /* background-color: rgb(46, 16, 71);*/
-    background-color: rgb(15, 5, 24);
+.navbar {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    line-height: 5rem;
-    height: 107px;
-    border-radius:10px;
+    background-color:#0077B6;
+    padding: 10px 20px;
+    border-top-left-radius:10px ;
+    border-top-right-radius:10px ;
 }
 
-#logo{
-    float:left;
+.left img {
+    height: 45px;
+    border-radius: 5px;
+}
+
+.right {
    
+    position: relative;
+    display: flex;
+    align-items: center; /* Center items vertically */
 }
-.left{
-    height: 107px;
-}
-.left img{
+
+.checkBtn {
+    display: none; /* Hide the checkbox by default */
     cursor: pointer;
-    width:85px;
-    height: auto;
-    padding-top:10px;
-    margin-left:-185px;
-    border-radius:25%;
+    color: white;
+    font-size: 24px; /* Adjust size as needed */
+    margin-left: 20px; /* Space between logo and hamburger icon */
 }
 
-.checkBtn{
-    display: none;
-    cursor: pointer;
-    font-size: 30px;
-    float:right;
-    color: #ed1e79;
-    line-height: 80px;
-}
-
-#check{
-    display: none;
-}
-
-.right ul{
+.list {
     display: flex;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.right ul li a{
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    color:white;
-    cursor: pointer;
+.list li {
+    margin: 0 15px;
+}
+
+.list a {
+    color: white;
     text-decoration: none;
-    transition: all 1s;
+    padding: 10px 20px;
 }
 
-.right ul li a:hover{
+.list a:hover{
     background-color: #fff;
-    border-radius: 7px;
-    color:rgb(15, 5, 24);
-}
-#cart:hover{
-    background-color: #0f0518;
+     border-radius: 7px;
+     color:black;
 }
 
-@media screen and (max-width: 805px){
-    .list{
-        width:100%;
-        height:100vh;
-        background-color: rgb(15, 5, 24);
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 4rem;
-        left:100%;
-        transition: all 1s;
+#cart:hover{
+    background-color: #0077B6;
+}
+
+#check {
+    display: none; /* Hide the checkbox */
+}
+
+@media (max-width: 768px) {
+    .list {
+        display: none; /* Hide the menu by default on small screens */
+        flex-direction: column; /* Stack items vertically */
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        left: 0;
+        background-color: #0077B6;
+        /* width:100%; */
+        padding: 10px 0; /* Add padding for better spacing */
+        z-index: 1; /* Ensure it appears above other content */
     }
-    #check{
-        display: none;
+
+    #check:checked ~ .list {
+        display: flex; /* Show the menu when checked */
     }
-    .checkBtn{
-        display: block;
+
+    .checkBtn {
+        display: block; /* Show the toggle button */
     }
-    #check.checked~ul{
-        left: 0%;
+
+    .list li {
+        margin: 10px 0; /* Space between items in the dropdown */
+        text-align: center; /* Center text in dropdown */
     }
 }
 
@@ -119,7 +120,8 @@ body{
     text-decoration: none;
     padding: 10px 35px;
     color: #fff;
-    background-image: linear-gradient(45deg ,#0e0b37,#9b15ad);
+    background-color: #FFC300;
+    /* background-image: linear-gradient(45deg ,#0e0b37,#9b15ad); */
     font-size: 14px;
     border-radius: 30px;
     border-top-right-radius: 0;
@@ -153,8 +155,16 @@ body{
     right: 10%;
 
 }
+/* about section */
 
+.about{
+    /* margin: 40px; */
+    background-color: rgb(238, 238, 238);
+}
 
+.working{
+    padding: 30px;
+}
 /* cards for featured tshirt designs  */
 
 .card-grid{
@@ -197,10 +207,108 @@ body{
     color:#555;
 }
 
+/*Contact form */
+/*{
+    margin: 0;
+    padding:0;
+
+    font-family:'poppins',sans-serif;
+}*/
+.contact{
+    position:relative;
+    min-height: 100vh;
+   /* padding: 50px 100px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url(bb.jpg);
+    background-size: cover;
+}
+.contact .content{
+    max-width: 800px;
+    text-align: center;
+}
+.contact .content h2{
+    font-size: 36px;
+    font-weight: 500;
+    color: #2d0404;
+}
+.contact .content p{
+    font-weight: 300;
+    color: #200202;
+}
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.container .contactInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.container .contactInfo .box{
+    position: relative;
+    padding: 20px;
+    display: flex;
+}
+.container .contactInfo .box .icon{
+    min-width: 60px;
+    height: 60px;
+    background: #2b020b lack;;
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 22px;
+}
+.container .contactInfo .box .icons .text{
+   /* display: flex;*/
+    margin-left: 20px;
+    font-size: 16px;
+    color: #a41fb3;
+    flex-direction: column;
+    font-weight: 300;
+}
+.container .contactInfo .box .icons .text h3{
+    font-weight: 500;
+    color: #00bcd4;
+}
+.contactForm{
+    width: 40%;
+    padding: 40px;
+    background: #333;
+}
+.contactForm h2{
+    font-size: 300px;
+    color: #333;
+    font-weight: 500;
+}
+
+.contactForm .inputBox{
+    position: relative;
+    width: 100%;
+    margin-top: 100px;
+}
+.contactForm .inputBox input,
+.contactForm .inputBox textarea{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    resize: none;
+}
+
 /*Login and signup form */
 
 .container{
-     background: #fff; 
+     background: #ffffff; 
     /*background: linear-gradient(135deg, #e0eafc, #68a0f0);*/
     width: 450px;
     padding: 1.5rem;
@@ -366,4 +474,22 @@ button:hover{
     text-decoration: underline;
     color: blue;
 }
-
+footer{
+    text-align: center;
+    background-color: #2d2d2d;
+    color: white;
+    height: 300px;
+}
+footer span{
+    color: #ffffff;
+    font-size: 20px;
+}
+footer i{
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 2rem;
+}
+footer span:hover{
+    color:#ffffff;
+    text-decoration: underline;
+}
