@@ -1,18 +1,20 @@
-let inputEl=document.querySelector("input");
-let showEl=document.querySelector(".fa-eye");
-let hideEl=document.querySelector(".fa-eye-slash");
+const eyeIcon=document.getElementById('eye');
 
-showEl.addEventListener("click",() =>{
-    inputEl.type="text";
-    hideEl.classList.remove("hide");
-    showEl.classList.add("hide");
-})
+const passwordField=document.getElementById('password');
 
-hideEl.addEventListener("click" ,() =>{
-    inputEl.type="password";
-    hideEl.classList.add("hide");
-    showEl.classList.remove("hide");
-})
+eyeIcon.addEventListener('click',()=>{
+    if(passwordField.type ==="password" && passwordField.value){
+        passwordField.type="text";
+        eyeIcon.classList.remove('fa-eye')
+        eyeIcon.classList.add('fa-eye')
+        eyeIcon.classList.add('fa-eye-slash')
+    }
+    else{
+        passwordField.type="password";
+        eyeIcon.classList.remove('fa-eye-slash')
+        eyeIcon.classList.add('fa-eye')
+    }
+});
 
 const signUpButton=document.getElementById('signUpButton');
 const signInButton=document.getElementById('signInButton');
