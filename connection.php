@@ -3,7 +3,7 @@ session_start();
     $server="localhost";
     $username="root";
     $password="" ;
-    $database="printing_design";
+    $database="printing design";
     $con= mysqli_connect($server ,$username,$password,$database);
     if (!$con) {
         die("Connection failed: " .mysqli_connect_error());
