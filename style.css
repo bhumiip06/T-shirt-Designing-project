@@ -298,7 +298,19 @@ body{
     outline: none;
     resize: none;
 }
-
+.input-box label{
+    
+}
+#send{
+    padding:10px;
+    width:25%;
+    background-color:#00bcd4;
+    color:white;
+    text-decoration: none;
+    border-radius: 10px;
+    margin:10px;
+    margin-left: 50%;
+}
 /*Login and signup form */
 
 .container{

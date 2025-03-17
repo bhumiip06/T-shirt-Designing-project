@@ -24,7 +24,7 @@
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
                 <li><a href="#">Login</a></li>
-                <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <!-- <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping"></i></a></li> -->
               </ul>
             </div>
           </nav>
@@ -56,14 +56,15 @@
                     <div class="input-group-input_field">
                         <i class="fas fa-lock"></i>
                         <input type="password" id="password" name="password" placeholder="password" required>
-                        <i class="fa fa-eye" id="eye"></i>
+                        <i class="fa fa-eye" id="eye-icon"></i>
                     </div>
                 </div>
                 <div class="input-group">
                     <label for="confirm-password">Confirm Password</label>
                     <div class="input-group-input_field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="confirm-password" placeholder="confirm-password" required>
+                        <input type="password" name="confirm-password" placeholder="confirm-password" id="confirm-password" required>
+                        <!-- <i class="fa fa-eye" id="eye_icon"></i> -->
                     </div>
                 </div>
                 <input type="submit" class="btn" value="Sign Up" name="signup">
@@ -83,7 +84,7 @@
 
         <div class="container" id="Sign In">
             <h1 class="form-title">Sign In</h1>
-            <form method="post" action=" ">
+            <form method="post" action="connection.php">
                 <div class="input-group">
                     <label for="login_email">Email</label>  
                     <div class="input-group-input_field">
@@ -97,10 +98,9 @@
                     <div class="input-group-input_field">
                     <i class="fas fa-lock"></i>
                     <input type="password" id="login_password" placeholder="password" required >
-                    <i class="fa-solid fa-eye hide"></i>
-                    <i class="fa-solid fa-eye-slash"></i>
-                    </div>
-                    
+                    <i class="fa-solid fa-eye"  id="eye"></i>
+                  
+                    </div>  
                  </div>
                 <p class="recover">
                     <a href="#">Recover Password</a>

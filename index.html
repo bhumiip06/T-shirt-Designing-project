@@ -24,10 +24,10 @@
         </label>
         <ul class="list">
           <li><a href="#">Home</a></li>
-          <li><a href="#">T-shirts</a></li>
+          <li><a href="#card-grid">T-shirts</a></li>
           <li><a href="design-canvas.html">Design</a></li>
           <li><a href="#about">About Us</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
           <li><a href="login.html">Login</a></li>
           <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
         </ul>
@@ -42,7 +42,7 @@
       <img src="images/heroimg.png" class="heroImg">
     </div>
 <!-- about section and working -->
-    <div class="about">
+    <div class="about" id="about">
       <div class="working">
         <h1>Easy 4 Step Working</h1>
         <ul style="list-style: decimal;">
@@ -54,7 +54,7 @@
       </div>
     </div>
 <!-- tshirt feature cards -->
-    <div class="card-grid">
+    <div class="card-grid" id="card-grid">
       <div class="card">
         <img src="" alt="">
         <div class="card-content">
@@ -113,7 +113,7 @@
       </div>
     </div>
 <!-- contact form -->
-    <section class="contact">
+    <section class="contact" id="contact">
       <div class="content">
         <h2>Contact Us</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint facilis iure qui mollitia impedit delectus sit non blanditiis ea doloribus eos id molestiae, unde enim voluptatibus voluptas aliquid deserunt error.</p>
@@ -143,9 +143,9 @@
        <div class="contact-form">
         <form>
           <h2>Send Message</h2>
-          <label for="">Full Name</label>
-          <input type="text" name="" required="required">
-            
+          <div class="input-box">
+            <label for="">Full Name</label>
+            <input type="text" name="" required="required">
           </div>
           <div class="input-box">
             <label for="">Email</label>
@@ -153,10 +153,10 @@
           </div>
           <div class="input-box">
             <textarea  placeholder="Type your Message..." required="required"></textarea>
-           
           </div>
           <div class="input-box">
-            <input type="submit" name="" value="Send">
+            <!-- <input type="submit" name="" value="Send"> -->
+            <button type="submit" value="Send" id="send">Send</button>
           </div>
         </form>
        </div>
@@ -164,7 +164,7 @@
 
 <!-- footer -->
     <footer>
-      
+        <span> &copy; T-shirt Design </span>
     </footer>
 </body>
 </html>

@@ -1,18 +1,51 @@
+const EyeIcon=document.getElementById('eye-icon');
+
+const password_Field=document.getElementById('password');
+
+EyeIcon.addEventListener('click',()=>{
+    if(password_Field.type ==="password"){
+        password_Field.type="text";
+        EyeIcon.classList.remove('fa-eye');
+        EyeIcon.classList.add('fa-eye-slash');
+    }
+    else{
+        password_Field.type="password";
+        EyeIcon.classList.remove('fa-eye-slash');
+        EyeIcon.classList.add('fa-eye');
+    }
+});
+
+// const Eyeicon=document.getElementById('eye_icon');
+
+// const passwordfield=document.getElementById('confirm-password');
+
+// Eyeicon.addEventListener('click',()=>{
+//     if(passwordfield.type ==="password"){
+//         passwordfield.type="text";
+//         EyeIcon.classList.remove('fa-eye');
+//         EyeIcon.classList.add('fa-eye-slash');
+//     }
+//     else{
+//         passwordfield.type="password";
+//         EyeIcon.classList.remove('fa-eye-slash');
+//         EyeIcon.classList.add('fa-eye');
+//     }
+// });
+
 const eyeIcon=document.getElementById('eye');
 
-const passwordField=document.getElementById('password');
+const passwordField=document.getElementById('login_password');
 
 eyeIcon.addEventListener('click',()=>{
-    if(passwordField.type ==="password" && passwordField.value){
+    if(passwordField.type ==="password"){
         passwordField.type="text";
-        eyeIcon.classList.remove('fa-eye')
-        eyeIcon.classList.add('fa-eye')
-        eyeIcon.classList.add('fa-eye-slash')
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
     }
     else{
         passwordField.type="password";
-        eyeIcon.classList.remove('fa-eye-slash')
-        eyeIcon.classList.add('fa-eye')
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
     }
 });
 
