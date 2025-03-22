@@ -29,5 +29,5 @@ session_start();
    }
 }
 }
-$con->close();
+// $con->close();
 ?>
