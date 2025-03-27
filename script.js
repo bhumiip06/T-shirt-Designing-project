@@ -1,3 +1,19 @@
+const form =document.querySelector("form");
+
+form.addEventListener("submit",(e) => {
+    e.preventDefault;
+ //do nothing if form not validated
+    if(!validateForm(form)) return;
+})
+
+const validateForm =(from) => {
+    let valid=true;
+    //check for empty fields
+    let name =form.querySelector
+}
+
+
+
 const EyeIcon=document.getElementById('eye-icon');
 
 const password_Field=document.getElementById('password');
