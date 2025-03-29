@@ -160,18 +160,18 @@
               </div>
        </div>
        <div class="contact-form">
-        <form>
+        <form action="contact.php" method="POST"></form>>
           <h2>Send Message</h2>
           <div class="input-box">
-            <label for="">Full Name</label>
-            <input type="text" name="" required="required">
+            <label for="sender_name">Full Name</label>
+            <input type="text" name="sender_name" id="sender_name" required="required">
           </div>
           <div class="input-box">
-            <label for="">Email</label>
-            <input type="text" name="" required="required">
+            <label for="sender_email">Email</label>
+            <input type="email" name="sender_email" id="sender_email"required="required">
           </div>
           <div class="input-box">
-            <textarea  placeholder="Type your Message..." required="required"></textarea>
+            <textarea name="message_content" placeholder="Type your Message..." required="required"></textarea>
           </div>
           <div class="input-box">
             <!-- <input type="submit" name="" value="Send"> -->
