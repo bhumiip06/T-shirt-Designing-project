@@ -1,29 +1,21 @@
 <?php
-if(isset($_POST['name'])){
+// session_start();
     $server="localhost";
     $username="root";
     $password="" ;
     $database="printing design";
-
     $con= mysqli_connect($server ,$username,$password,$database);
-
-    if(!$con){
-        die("connection to this databse failed due to". mysqli_connect_error());
+    // if (!$con) {
+    //     die("Connection failed: " .mysqli_connect_error());
+    // }else {
+    //     echo "Connected successfully";
+    // }
+//PDO initialize
+    try{
+        $pdo=new PDO("mysql:host=$server;dbname=$database",$username,$password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    //echo " Success connecting to the db";
-
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $sql= "INSERT INTO users(`name`, `email`, `password`) VALUES ( '$name', '$email', '$password');";
-    //echo $sql;
-
-    if($con->query($sql) == true){
-        echo "Sucessfully recorded the response. Thank you!";
+    catch(PDOEXCEPTION $e){
+        die("Connection failed:".$e->getMessage());
     }
-    else{
-        echo"Error: $sql <br> $con->error";
-    }
-    $con->close();
-}
 ?>

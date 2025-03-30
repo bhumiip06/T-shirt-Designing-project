@@ -24,13 +24,13 @@
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
                 <li><a href="#">Login</a></li>
-                <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                <!-- <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping"></i></a></li> -->
               </ul>
             </div>
           </nav>
         <div class="container" id="Sign Up" style="display: none;">
             <h1 class="form-title">Register</h1>
-            <form method="post" action="connection.php">
+            <form method="post" action="signup.php">
                 <div class="input-group">
                     <label for="name">Name</label>
                     <div class="input-group-input_field">
@@ -39,11 +39,6 @@
                     </div>
                     
                 </div>
-               <!--<div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" name="1Name" id="1NAme" placeholder="Last Name" required>
-                    <label for ="1Name">Last Name</label>
-                </div>--> 
                 <div class="input-group">
                     <label for="email">Email</label> 
                     <div class="input-group-input_field">
@@ -52,35 +47,30 @@
                     </div> 
                 </div>
                 <div class="input-group">
-<<<<<<< HEAD
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="password" required>
-                    <i class="fa fa-eye" id="eye"></i>
-=======
->>>>>>> 0b6697018430470c4bf1dfd763ff027c2ffa9aec
                     <label for="password">Password</label>
-                    <div class="input-group-input_field"><i class="fas fa-lock"></i>
+                    <div class="input-group-input_field">
+                        <i class="fas fa-lock"></i>
                         <input type="password" id="password" name="password" placeholder="password" required>
-                    <!--  <i class="fa-solid fa-eye hide"></i>
-                        <i class="fa-solid fa-eye-slash"></i>  -->
+                        <i class="fa fa-eye" id="eye-icon"></i>
                     </div>
                 </div>
                 <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" name="confirm-password" placeholder="confirm-password" required>
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="input-group-input_field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="confirm-password" placeholder="confirm-password" id="confirm-password" required>
+                        <!-- <i class="fa fa-eye" id="eye_icon"></i> -->
+                    </div>
                 </div>
                 <input type="submit" class="btn" value="Sign Up" name="signup">
+<<<<<<< HEAD
                 <input type="submit" id="signup_button" class="btn" value="Sign Up" name="signup">
 
+=======
+>>>>>>> a456d710ec64541a625c736767fbbe89119094e5
             </form>
             <p class="or" style="color: black;">
-                --------or--------
-            </p>
-            <div class="icons">
-                <i class="fab fa-google"></i>
-                <i class="fab fa-facebook"></i>
-            </div>
-            <div class="links">
+                 <div class="links">
                 <p style="color: black;">Already Have Account ?</p>
                 <button id="signInButton">Sign In</button>
             </div>
@@ -88,7 +78,7 @@
 
         <div class="container" id="Sign In">
             <h1 class="form-title">Sign In</h1>
-            <form method="post" action=" ">
+            <form method="POST" action="login.php">
                 <div class="input-group">
                     <label for="login_email">Email</label>  
                     <div class="input-group-input_field">
@@ -101,11 +91,9 @@
                     <label for="login_password">Password</label>
                     <div class="input-group-input_field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="login_password" placeholder="password" required >
-                    <i class="fa-solid fa-eye hide"></i>
-                    <i class="fa-solid fa-eye-slash"></i>
-                    </div>
-                    
+                    <input type="password" name="login_password" id="login_password" placeholder="password" required >
+                    <i class="fa-solid fa-eye"  id="eye"></i>
+                    </div>  
                  </div>
                 <p class="recover">
                     <a href="#">Recover Password</a>
@@ -113,12 +101,7 @@
                 <input type="submit" id="login_button"  class="btn" value="Sign In" name="sign In">
             </form>
             <p class="or" style="color: black;">
-                --------or--------
             </p>
-            <div class="icons">
-                <i class="fab fa-google"></i>
-                <i class="fab fa-facebook"></i>
-            </div>
             <div class="links">
                 <p style="color: black;">Don't have account yet?</p>
                 <button id="signUpButton" >Sign Up</button>

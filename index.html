@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
+<<<<<<< HEAD
     <style>
       
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
@@ -395,8 +396,12 @@ textarea.input {
 }
 
     </style>
+=======
+
+>>>>>>> a456d710ec64541a625c736767fbbe89119094e5
 </head>
 <body>
+  <!--navigation-->
     <nav class="navbar">
       <div class="left">
         <a href="#" id="logo">
@@ -410,15 +415,16 @@ textarea.input {
         </label>
         <ul class="list">
           <li><a href="#">Home</a></li>
-          <li><a href="#">T-shirts</a></li>
+          <li><a href="#card-grid">T-shirts</a></li>
           <li><a href="design-canvas.html">Design</a></li>
           <li><a href="#about">About Us</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
           <li><a href="login.html">Login</a></li>
           <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
         </ul>
       </div>
     </nav>  
+<!-- hero section -->
     <div class="hero-section">
       <div class="content">
         <h1>Customize <br> Your Own T-shirts</h1>
@@ -426,18 +432,42 @@ textarea.input {
       </div>
       <img src="images/heroimg.png" class="heroImg">
     </div>
+<<<<<<< HEAD
     <div class="about">
+=======
+<!-- about section and working -->
+    <div class="about" id="about">
+>>>>>>> a456d710ec64541a625c736767fbbe89119094e5
       <div class="working">
         <h1>Easy 4 Step Working</h1>
-        <ul style="list-style: decimal;">
-          <li>Select T-shirt Style</li>
-          <li>Save and Preview Designs</li>
-          <li>Place your Order</li>
-          <li>Easy Payment methods</li>
-        </ul>
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Select T-shirt Style</h3>
+            <p>Choose from a variety of T-shirt styles and sizes to start creating your perfect look.</p>
+          </div>
+        
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Save and Preview Designs</h3>
+            <p>Upload your design or customize it with our tools. Save your design and preview it on your selected T-shirt style.</p>
+          </div>
+        
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Place Your Order</h3>
+            <p>Once you're happy with your design, proceed to place your order and confirm your details.</p>
+          </div>
+        
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Easy Payment Methods</h3>
+            <p>Choose from a variety of payment methods to complete your purchase quickly and securely.</p>
+          </div>
+        
       </div>
     </div>
-    <div class="card-grid">
+<!-- tshirt feature cards -->
+    <div class="card-grid" id="card-grid">
       <div class="card">
         <img src="" alt="">
         <div class="card-content">
@@ -494,6 +524,7 @@ textarea.input {
           <p></p>
         </div>
       </div>
+<<<<<<< HEAD
        
       <div class="container">
         <span class="big-circle"></span>
@@ -555,9 +586,63 @@ textarea.input {
       <script src="app.js"></script>
     
         </div>
+=======
+    </div>
+<!-- contact form -->
+    <section class="contact" id="contact">
+      <div class="content">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you. Whether you have questions, feedback, or need assistance with your T-shirt design, we’re here to help! Please fill out the form below, and our team will get back to you as soon as possible.<br>Thank you for choosing us to bring your designs to life!
+        </p>
+      </div>
+        <div class="contactInfo">
+          <div class="contact-form">
+            <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="text">
+              <h3>Address</h3>
+                <p>4671 Sugar Camp Road,<br>Owatonna,Minnesota,<br>55060</p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="icon"><i class="fa fa-phone" ></i></div>
+            <div class="text">
+              <h3>Phone</h3>
+                <p>957-456-8597</p>
+          </div>
+        </div> 
+        <div class="box">
+          <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+          <div class="text">
+            <h3>Email</h3>
+              <p>hfg@temp-mail.net</p>
+              </div>
+       </div>
+       <div class="contact-form">
+        <form action="contact.php" method="POST">
+          <h2>Send Message</h2>
+          <div class="input-box">
+            <label for="sender_name">Full Name</label>
+            <input type="text" name="sender_name" id="sender_name" required="required">
+          </div>
+          <div class="input-box">
+            <label for="sender_email">Email</label>
+            <input type="email" name="sender_email" id="sender_email"required="required">
+          </div>
+          <div class="input-box">
+            <textarea name="message_content" placeholder="Type your Message..." required="required"></textarea>
+          </div>
+          <div class="input-box">
+            <!-- <input type="submit" name="" value="Send"> -->
+            <button type="submit" value="Send" id="send">Send</button>
+          </div>
+        </form>
+       </div>
+      </section>
+>>>>>>> a456d710ec64541a625c736767fbbe89119094e5
 
+<!-- footer -->
     <footer>
-      
+        <span> &copy; T-shirt Design </span>
     </footer>
 </body>
 </html>
