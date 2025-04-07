@@ -8,7 +8,7 @@ require "connection.php";
 
         if (!empty($sender_name) && !empty($sender_email) && !empty($message_content)) {
             if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
-                $sql = "INSERT INTO contact_messages (sender_name, sender_email, message_content) VALUES (?,?,?)";
+                $sql = "INSERT INTO `contact_messages`(`sender_name`, `sender_email`, `message_content`) VALUES (?,?,?);";
 
                 $stmt = $con->prepare($sql);
                 if ($stmt === false) {
