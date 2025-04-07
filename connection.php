@@ -5,9 +5,9 @@
     $password="" ;
     $database="printing design";
     $con= mysqli_connect($server ,$username,$password,$database);
-    // if (!$con) {
-    //     die("Connection failed: " .mysqli_connect_error());
-    // }else {
+    if (!$con) {
+        die("Connection failed: " .mysqli_connect_error());
+   }//else {
     //     echo "Connected successfully";
     // }
 //PDO initialize
@@ -15,7 +15,7 @@
         $pdo=new PDO("mysql:host=$server;dbname=$database",$username,$password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    catch(PDOEXCEPTION $e){
+    catch(PDOException $e){
         die("Connection failed:".$e->getMessage());
     }
 ?>

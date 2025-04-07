@@ -95,11 +95,14 @@ canvas {
         </div>
         
         <div class="controls-container">
+            <!-- <label for="tshirt-color">Choose T-shirt color</label>
+            <input type="color" id="tshirt-color" value="#ff0000"> -->
+
             <button id="addText">Add text</button>
 
             <input type="color" id="color" value="#000000">
 
-            <input type="file" name="imageupload" id="imageupload">
+            <input type="file" name="imageupload" id="imageupload" accept="image/*">
 
             <label for="fontSelect">Choose Font: </label>
             <select name="font" id="fontSelect">
@@ -162,7 +165,7 @@ canvas {
                 var activeObject = canvas.getActiveObject();
                 if(activeObject && activeObject.type === 'textbox') {
                     activeObject.set({ fontFamily: this.value });
-                    canvas.renderAll();
+                    canvas.renderAll();//update canvas rendering
                 }
             });
 
@@ -172,7 +175,7 @@ canvas {
                 console.log("Active Object:",activeObject);
                 if(activeObject && activeObject.type === 'textbox') {
                     activeObject.set({fill: this.value});
-                    canvas.renderAll();
+                    canvas.renderAll();//update canvas rendering
                 }
             });
 
@@ -182,7 +185,7 @@ canvas {
                 console.log("Active Object: ",activeObject);
                 if(activeObject && activeObject.type==='textbox') {
                     activeObject.set({fontSize: this.value});
-                    canvas.renderAll();
+                    canvas.renderAll();//update canvas rendering
                 }
             });
 
@@ -192,16 +195,73 @@ canvas {
                 console.log("Active Object:",activeObject);
                 if(activeObject && activeObject.type === 'textbox') {
                     activeObject.set({fontStyle: this.value});
-                    canvas.renderAll();
+                    canvas.renderAll();//update canvas rendering
                 }
             });
 
         });
 
-       document.getElementById("imageupload") .addEventListener('click',function(){
+       document.getElementById("imageupload") .addEventListener('change',function(event){
             // var activeObject=canvas.getActiveObject();
-            const img=new fabric.Image('')
+            const file =event.target.files[0]; //to get the selected image file
+            if(file){
+                const reader=new FileReader();
+                reader.onload =function(e){
+                    const imageUrl =e.target.result;// to get the data url of image
+
+                    //create a fabric.js image from the url and add it to the canvas
+                    fabric.Image.fromURL(imageUrl,function(img){
+                        const canvasWidth=canvas.width;
+                        const canvasHeight=canvas.height;
+
+                        //calculating the scale factor to make the image smaller than the canvas 
+                        const scaleX=canvasWidth/img.width;
+                        const scaleY=canvasHeight/img.height;
+                        const scale=Math.min(scaleX,scaleY);//calculete the smaller scale factor to fit the image within the canvas
+
+                        img.scale(scale);
+
+                        //for positioning the image in the center
+                        img.set({
+                            left:(canvasWidth-img.width)/2,
+                            top: (canvasHeight-img.height)/2,
+                          
+                        });
+                        //finally adding the image to the canvas
+                        canvas.add(img);
+                        canvas.renderAll(); //update canvas rendering
+
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
        });
+
+       //tshirt color change
+    //    document.getElementById("tshirt-color").addEventListener("change",function(event){
+    //     const tshirtColor=event.target.value;
+    //     changeTshirtColor(tshirtColor);
+    //    });
+
+    //    function changeTshirtColor(tshirtColor){
+    //     if(!tshirtColorOverlay){
+    //         tshirtColorOverlay=new fabric.Rect({
+    //             left:0,
+    //             top:0,
+    //             width:canvas.width,
+    //             height:canvas.height,
+    //             fill:tshirtColor,
+    //             opacity:0.5,
+    //             selectable:false,
+    //             evented:false
+    //         });
+    //         canvas.add(tshirtColorOverlay);
+    //     }
+    //     else{
+    //         tshirtColorOverlay.set({ fill: tshirtColor });
+    //         canvas.renderAll();
+    //     }
+    //    }
         //clears the whole canvas
         document.getElementById("clearDesign").addEventListener('click', function(){
                 canvas.clear();
