@@ -140,8 +140,9 @@ canvas {
                 <option value="italic">Italic</option>
             </select>
 
-            
+            <button id="saveDesign">Save</button>
             <button id="clearDesign">Clear</button>
+            <button id="loadDesign">My Design</button>
         </div>
     </div>
     <script>
@@ -236,36 +237,31 @@ canvas {
                 reader.readAsDataURL(file);
             }
        });
+    
+    const saveBtn=document.getElementById("saveDesign");
+    saveBtn.addEventListener('click', ()=>{
+        const savedDesignJSON = JSON.stringify(canvas.toJSON());
+        localStorage.setItem("tshirtDesign",savedDesignJSON);
+        alert("design saved!");
+        });
 
-       //tshirt color change
-    //    document.getElementById("tshirt-color").addEventListener("change",function(event){
-    //     const tshirtColor=event.target.value;
-    //     changeTshirtColor(tshirtColor);
-    //    });
+        document.getElementById("loadDesign").addEventListener('click', () => {
+    const saved = localStorage.getItem("tshirtDesign");
+    if (saved) {
+        canvas.loadFromJSON(saved, () => {
+            canvas.renderAll();
+            alert("Design loaded!");
+        });
+    } else {
+        alert("No saved design found!");
+    }
+});
 
-    //    function changeTshirtColor(tshirtColor){
-    //     if(!tshirtColorOverlay){
-    //         tshirtColorOverlay=new fabric.Rect({
-    //             left:0,
-    //             top:0,
-    //             width:canvas.width,
-    //             height:canvas.height,
-    //             fill:tshirtColor,
-    //             opacity:0.5,
-    //             selectable:false,
-    //             evented:false
-    //         });
-    //         canvas.add(tshirtColorOverlay);
-    //     }
-    //     else{
-    //         tshirtColorOverlay.set({ fill: tshirtColor });
-    //         canvas.renderAll();
-    //     }
-    //    }
+   
         //clears the whole canvas
         document.getElementById("clearDesign").addEventListener('click', function(){
                 canvas.clear();
-            })
+            });
 
     </script>
 </body>

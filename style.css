@@ -528,7 +528,7 @@ button:hover{
     text-decoration: underline;
     color: blue;
 }
-footer{
+/* footer{
     text-align: center;
     background-color: #2d2d2d;
     color: white;
@@ -546,4 +546,4 @@ footer i{
 footer span:hover{
     color:#ffffff;
     text-decoration: underline;
-}
+} */
