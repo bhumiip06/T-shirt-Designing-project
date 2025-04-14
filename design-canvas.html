@@ -175,6 +175,21 @@
             width: 100%;
         }
     }*/
+
+    #delete-icon{
+        position: absolute;
+        width:24px;
+        height: 24px;
+        background-color: red;
+        color: white;
+        font-size: 18px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 24px;
+        cursor: pointer;
+        display:none;
+        z-index:10;
+    }
 </style>
 
         
@@ -194,6 +209,7 @@
 
         <!-- Design workspace -->
         <div class="tshirt">
+                
                 <canvas id="canvas" width="300" height="400"></canvas>
         </div>
         
@@ -201,7 +217,9 @@
             <!-- <label for="tshirt-color">Choose T-shirt color</label>
             <input type="color" id="tshirt-color" value="#ff0000"> -->
 
-            <button id="addText">Add text</button>
+            <!-- <button id="addText">Add text</button> -->
+             <label for="addText">Add Text</label>
+            <img src="file.png" id="addText" style="width: 40px;">
 
             <input type="color" id="color" value="#000000">
 
@@ -242,19 +260,23 @@
                 <option value="Bold">Bold</option>
                 <option value="italic">Italic</option>
             </select>
-
+            <div id="delete-icon"><i class="fa-solid fa-trash"></i></div>
             <button id="saveDesign">Save</button>
             <button id="clearDesign">Clear</button>
         </div>
     </div>
     <script>
         const canvas = new fabric.Canvas("canvas");
-
+        //cliparts
         const clipartImages=[
             "cliparts/clipart1.png",
             "cliparts/clipart2.png",
             "cliparts/clipart3.png",
-            "cliparts/clipart4.png"
+            "cliparts/clipart4.png",
+            "cliparts/clipart5.png",
+            "cliparts/clipart6.png",
+            "cliparts/clipart7.png",
+            "cliparts/clipart8.png"
         ];
 
         const gallery=document.querySelector(".clipart-gallery");
@@ -294,7 +316,7 @@
             });
         }
 
-
+        // listen for textbox insertion 
         document.getElementById("addText").addEventListener('click', function(){
             const text = new fabric.Textbox('Your Text Here', {
                 fontsize: 30,
@@ -349,6 +371,7 @@
 
         });
 
+        //listen for image upload
        document.getElementById("imageupload") .addEventListener('change',function(event){
             // var activeObject=canvas.getActiveObject();
             const file =event.target.files[0]; //to get the selected image file
@@ -384,7 +407,7 @@
                 reader.readAsDataURL(file);
             }
        });
-    
+    //listen for saving design
     const saveBtn=document.getElementById("saveDesign");
     saveBtn.addEventListener('click', ()=>{
         const savedDesignJSON = JSON.stringify(canvas.toJSON());
@@ -392,6 +415,44 @@
         alert("design saved!");
         });
 
+        //delete icon for deleting selected object
+        const deleteIcon=document.getElementById('delete-icon');
+
+        canvas.on('selection:created',showDeleteIcon);
+        canvas.on('selection:updated',showDeleteIcon);
+        canvas.on('selection:cleared',()=>{
+            deleteIcon.style.display='none';
+        });
+
+        //function for showing delete icon
+        function showDeleteIcon(e) {
+            const activeObject = e.selected[0];
+            if (activeObject) {
+                const canvasRect = canvas.getElement().getBoundingClientRect();
+                const objectCoords = canvas.getAbsoluteCoords(activeObject);
+                
+                deleteIcon.style.left = `${canvasRect.left + objectCoords.left + activeObject.width * activeObject.scaleX}px`;
+                deleteIcon.style.top = `${canvasRect.top + objectCoords.top - 20}px`;
+                deleteIcon.style.display = 'block';
+            }
+        }
+
+        fabric.Canvas.prototype.getAbsoluteCoords = function(object) {
+            return {
+                left: object.left * this.getZoom() + this.viewportTransform[4],
+                top: object.top * this.getZoom() + this.viewportTransform[5]
+            };
+        };
+
+        deleteIcon.addEventListener('click', function() {
+            const activeObject = canvas.getActiveObject();
+            if (activeObject) {
+                canvas.remove(activeObject);
+                canvas.discardActiveObject();
+                deleteIcon.style.display = 'none';
+                canvas.requestRenderAll();
+            }
+        });
         //clears the whole canvas
         document.getElementById("clearDesign").addEventListener('click', function(){
                 canvas.clear();
