@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
+    <title>Custom T-shirt Design | Home</title>
 
 </head>
 <body>
   <!--navigation-->
-    <nav class="navbar">
+    <nav class="navbar" aria-labael="Main Navigation">
       <div class="left">
         <a href="#" id="logo">
           <img src="images/Logo.png" alt="Logo">
@@ -39,7 +39,7 @@
         <h1>Customize <br> Your Own T-shirts</h1>
         <a href="design-canvas.html" class="heroBtn">Get Started</a>
       </div>
-      <img src="images/heroimg.png" class="heroImg">
+      <img src="images/heroimg.png" class="heroImg" alt="Model wearing a custom-designed T-shirt">
     </div>
 <!-- about section and working -->
     <div class="about" id="about">
@@ -163,12 +163,12 @@
         <form method="post" action="contact.php">
           <h2>Send Message</h2>
           <div class="input-box">
-            <label for="">Full Name</label>
-            <input type="text" name="sender_name" required="required">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname"  name="sender_name" required="required">
           </div>
           <div class="input-box">
-            <label for="">Email</label>
-            <input type="text" name="sender_email" required="required">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="sender_email" required="required">
           </div>
           <div class="input-box">
             <textarea  placeholder="Type your Message..." name="message_content" required="required"></textarea>
