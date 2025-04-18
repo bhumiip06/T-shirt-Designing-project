@@ -6,6 +6,9 @@
     color: #222222;
     font-family: "Ubuntu",'Segoe UI', Tahoma, "Geneva", Verdana,sans-serif,"Roboto";
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     padding: 10px;
     background-color:#F8F9FA;
@@ -68,6 +71,9 @@ body{
      color:black;
 }
 
+#user_profile:hover{
+    background-color: #0077B6;
+}
 #cart:hover{
     background-color: #0077B6;
 }
