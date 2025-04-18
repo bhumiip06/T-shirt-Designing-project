@@ -14,7 +14,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.css">
+
+    
     <style>
     body {
         font-family: 'Roboto', sans-serif;
@@ -239,6 +241,30 @@
     </style>
 </head>
 <body>
+     <!--navigation-->
+     <nav class="navbar">
+        <div class="left">
+          <a href="#" id="logo">
+            <img src="images/Logo.png" alt="Logo">
+          </a>
+        </div>
+        <div class="right">
+          <input type="checkbox" id="check">
+          <label for="check" class="checkBtn">
+            <i class="fa-solid fa-bars"></i>
+          </label>
+          <ul class="list">
+            <li><a href="#">Home</a></li>
+            <li><a href="#card-grid">Products</a></li>
+            <!-- <li><a href="design-canvas.html">Design</a></li> -->
+            <!-- <li><a href="#about">About Us</a></li> -->
+            <!-- <li><a href="#contact">Contact Us</a></li> -->
+            <li><a href="login.html">Login</a></li>
+            <li><a href="user-dashboard.html" id="user_profile"><i class="fa-solid fa-user" style="color: #FFFFFF;"></i></a></li>
+            <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
+          </ul>
+        </div>
+      </nav>
     <h1>T-shirt Design Lab</h1>
     
     <div class="design-container">
@@ -304,7 +330,7 @@
                 <option value="italic">Italic</option>
             </select>
             <div id="delete-icon"><i class="fa-solid fa-trash"></i></div>
-            <button id="saveDesign">Save</button>
+            <button id="saveDesign" onclick="saveDesign()">Save</button>
             <button id="clearDesign">Clear</button>
         </div>
     </div>
@@ -450,13 +476,26 @@
                 reader.readAsDataURL(file);
             }
        });
-    //listen for saving design
-    const saveBtn=document.getElementById("saveDesign");
-    saveBtn.addEventListener('click', ()=>{
-        const savedDesignJSON = JSON.stringify(canvas.toJSON());
-        localStorage.setItem("tshirtDesign",savedDesignJSON);
-        alert("design saved!");
-        });
+    // //listen for saving design
+    //    function saveDesign(){
+    //     const dataURL =canvas.toDataURL({
+    //         format:'png',
+    //         quality:1.0
+    //     });
+        
+    //     fetch('design.php',{
+    //         method:'POST',
+    //         headers:{'Content- Type':'application/json'},
+    //         body:JSON.stringify({image:dataURL})
+    //     })
+    //   .then(res=>res.json())
+    //   .then(data=>{
+    //     console.log(data.messsage);
+    //   })
+    //   .catch(err=>{
+    //     console.error('Error:',err);
+    //   });
+    // }
 
         //delete icon for deleting selected object
         const deleteIcon=document.getElementById('delete-icon');
