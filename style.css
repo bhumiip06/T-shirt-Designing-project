@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #222222;
+    color: #222;
     font-family: "Ubuntu",'Segoe UI', Tahoma, "Geneva", Verdana,sans-serif,"Roboto";
 }
 html{
@@ -13,68 +13,75 @@ body{
     padding: 10px;
     background-color:#F8F9FA;
     margin:10px;
-    /* background : linear-gradient(to right,#e2e2e2,#c9d6ff); */
-    /* background: linear-gradient(135deg, #e0eafc, #68a0f0); changed the background gradient */
-    
 }
 
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color:#0077B6;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border-top-left-radius:10px ;
-    border-top-right-radius:10px ;
+    border-radius:10px 10px 0 0 ;
 }
 
-.left img {
+ .left img {
     height: 45px;
     border-radius: 5px;
+} 
+.brand-name{
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 1px;
 }
 
-.right {
-   
-    position: relative;
+.navbar .left{
     display: flex;
-    align-items: center; /* Center items vertically */
+    align-items: center;
+    padding-left: 1rem;
+}
+.right {
+    display: flex;
+    align-items: center; 
+    position: relative;
+
 }
 
 .checkBtn {
     display: none; /* Hide the checkbox by default */
     cursor: pointer;
     color: white;
-    font-size: 24px; /* Adjust size as needed */
+    font-size: 26px; /* Adjust size as needed */
     margin-left: 20px; /* Space between logo and hamburger icon */
 }
 
 .list {
     display: flex;
     list-style: none;
-    margin: 0;
-    padding: 0;
+    gap:20px;
 }
 
-.list li {
+/* .list li {
     margin: 0 15px;
-}
+} */
 
-.list a {
+.list li a {
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 8px 16px;
+    transition: 0.3s;
+    border-radius: 7px;
 }
 
-.list a:hover{
-    background-color: #fff;
-     border-radius: 7px;
-     color:black;
+.list li a:hover{
+    background-color: white;
+    color:black;
 }
 
-#user_profile:hover{
-    background-color: #0077B6;
-}
-#cart:hover{
+#user_profile:hover, #cart:hover{
     background-color: #0077B6;
 }
 
@@ -90,9 +97,9 @@ body{
         top: 60px; /* Adjust based on navbar height */
         left: 0;
         background-color: #0077B6;
-        /* width:100%; */
+        width:100%;
         padding: 10px 0; /* Add padding for better spacing */
-        z-index: 1; /* Ensure it appears above other content */
+        z-index: 10; /* Ensure it appears above other content */
     }
 
     #check:checked ~ .list {
@@ -111,27 +118,12 @@ body{
 
 /* Hero section */
 .hero-section{
-    width:auto;
+    /* width:auto; */
     height:85vh;
-    background-image: url(images/hero.png);
-    background-position: center;
-    background-size: cover;
-    padding: 10px 10px;
+    background: url(images/hero.png) center/cover no-repeat; 
+    padding: 10px;
     overflow: hidden;
     position: relative;
-}
-
-.heroBtn{
-    display:inline-block;
-    text-decoration: none;
-    padding: 10px 35px;
-    color: #fff;
-    background-color: #FFC300;
-    /* background-image: linear-gradient(45deg ,#0e0b37,#9b15ad); */
-    font-size: 14px;
-    border-radius: 30px;
-    border-top-right-radius: 0;
-    transition: 0.5s;
 }
 
 .content{
@@ -140,13 +132,19 @@ body{
 }
 
 .content h1{
-    font-size: 70px;
+    font-size: 64px;
     color: #191818;
 }
 
-.content .heroBtn{
+.heroBtn{
+    display:inline-block;
+    text-decoration: none;
     padding: 14px 80px;
+    color: #fff;
+    background-color: #FFC300;
     font-size: 18px;
+    border-radius: 30px 0 30px 30px;
+    transition: 0.4s ease;
 }
 
 .heroBtn:hover{
@@ -155,89 +153,77 @@ body{
 }
 
 .heroImg{
-    width:530px;
     position:absolute;
-    bottom: 0;
+     bottom: 0;
     right: 10%;
-
+    width:530px;  
 }
 /* about section */
 
-.about{
-    /* margin: 40px; */
-    background-color: #f9f9f9;
-}
-
-.working{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px;
+.about, .working{
+    text-align:center;
+    padding: 50px 20px;
     background-color: #f9f9f9;
 }
 
 .working h1{
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
 }
 .step {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin: 15px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    width: 90%;
     max-width: 600px;
   }
   
   .step-number {
-    font-size: 2em;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #fff;
     background-color: #4CAF50;
     padding: 15px;
     border-radius: 50%;
     margin-right: 20px;
-    width: 50px;
-    height: 50px;
+    min-width: 50px;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   
   .step h3 {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
+    font-size: 1.25rem;
     margin-bottom: 10px;
   }
   
   .step p {
-    font-size: 1em;
+    font-size: 1rem;
     color: #666;
-    margin-top: 0;
   }
 /* cards for featured tshirt designs  */
-
+h1{
+    text-align: center;
+    margin-bottom: 25px;
+}
 .card-grid{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap:20px;
-    justify-items: center;
+    padding: 40px 20px;
 }
-
 .card{
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
 .card:hover{
-    transform: translateY(-10px);
+    transform: translateY(-8px);
 }
 
 .card img{
@@ -252,12 +238,10 @@ body{
 
 .card-content h3{
     font-size: 1.2rem;
-    margin-bottom: 10px;
     color: #0f0518;
 }
 
 .card-content p{
-    font-size: 1rem;
     color:#555;
 }
 /* Contact form */
@@ -265,7 +249,6 @@ body{
 .contact{
     position:relative;
     min-height: 100vh;
-   /* padding: 50px 100px;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -308,14 +291,12 @@ body{
     min-width: 60px;
     height: 60px;
     background: #2b020b lack;;
-    /*display: flex;*/
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     font-size: 22px;
 }
 .contact .contactInfo .box .icon .text{
-   /* display: flex;*/
     margin-left: 20px;
     font-size: 16px;
     color: #a41fb3;
@@ -368,47 +349,39 @@ body{
 /*Login and signup form */
 
 .container{
-     background: #ffffff; 
-    /*background: linear-gradient(135deg, #e0eafc, #68a0f0);*/
+    background: #ffffff; 
     width: 450px;
     padding: 1.5rem;
     margin: 50px auto;
     border-radius: 10px;
-   /* box-shadow: 0 20px 35px rgba(0,0,1,0,9); */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);/*box shadow updated */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 form{
     margin: 0 2rem;
 }
 .form-title{
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.75rem;
     text-align: center;
-    padding: 1.3rem;
-    margin-bottom: 30px;
-    /* color: black; */
-    color: #4a235a; /* color changed to purple */
+    margin-bottom: 20px;
+    color: #4a235a;
 }
-input{
-    color: inherit;
+.input-group input{
+    color: black;
     width: 100%;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #757575;
-    padding-left: 1.5rem;
+    border-bottom: 2px solid #757575;
+    padding-left: 10px;
     font-size: 15px;
-    color: black;
 }
 .input-group{
-    padding: 1% 0;
-    position: relative;
-    display: flex;
-    flex-direction: column;
+margin:1rem 0;
     
 }
 .input-group label {
-    padding-left: 1rem;
-    font-weight: 600; /* bolded the labels */
+    display:block;
+    margin-bottom: 6px;
+    font-weight: 600;
 }
 .input-group i{
     /* position: absolute; */
@@ -422,9 +395,8 @@ input{
     margin: 0.5rem;
 }
 
-input:focus{
-    background-color: transparent;
-    outline: transparent;
+.input-group input:focus{
+    outline: none;
     border-bottom: 2px solid hsl(327,90%,28%);
     
 }
@@ -473,21 +445,19 @@ i {
 .btn{
     font-size: 1.125rem;
     padding: 8px 0;
-    margin-top: 20px; /* added space above the button */
+    margin-top: 20px; 
     border-radius: 5px;
     outline: none;
     border: none;
     width: 100%;
-    /* background: rgb(125,125,235); */
-    background: linear-gradient(to right, #4a235a, #5c6bc0); /* changed the background of the button from blue to purple bluish gradient */
+    background: linear-gradient(to right, #4a235a, #5c6bc0);
     color: white;
     cursor: pointer;
     transition: 0.9s;
 }
 .btn:hover{
-    /* background:#07001f; */
-    background: linear-gradient(to right, #673ab7, #7986cb); /* added gradient for hover */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);   /* box shadow for subtle look of the button */
+    background: linear-gradient(to right, #673ab7, #7986cb); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
 }
 .or{
     font-size: 1.1rem;
@@ -518,10 +488,9 @@ i {
 .links{
     display: flex;
     justify-content: space-around;
-    padding:0 4rem;
-    margin-top: 0.9rem;
+    margin-top: 15px;
     font-weight: bold;
-    color: #5c6bc0
+    color: #5c6bc0;
 }
 button{
     color: rgb(125,125,235);

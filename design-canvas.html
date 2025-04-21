@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Import Google Fonts -->
-    
+    <!-- Import Google Fonts for text customization-->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.28/webfont.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Lobster&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Pacifico&family=Playfair+Display:wght@400;700&family=Righteous&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- import Fabric.js library for canvas editing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js" integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
+    
+    <!-- import font face observer to ensure fonts are loaded before rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.min.js"></script>
 
+    <!-- font awesome for icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- custom stylesheet -->
     <link rel="stylesheet" href="style.css">
 
     
     <style>
+        /* general body styles */
     body {
         font-family: 'Roboto', sans-serif;
         text-align: center;
@@ -32,6 +37,7 @@
         margin:30px 0 20px;
     }
 
+    /* container for design tools and workspace */
     .design-container {
         display: flex;
         flex-wrap:wrap;
@@ -43,13 +49,11 @@
         margin:auto;
     }
 
+    /* t-shirt display area */
     .tshirt {
         position: relative;
         width: 500px;
         height: 600px;
-        background-image: url('images/tshirt-template.png');
-        background-size: cover;
-        background-position: center;
         border: 2px solid #ccc;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -60,6 +64,7 @@
         
     }
 
+    /* canvas where the design is drawn */
     canvas {
         position: absolute;
         top: 160px;
@@ -71,6 +76,7 @@
         background-color: rgba(255,255,255,0.01);
     }
 
+    /* conttrol panel and clipart panel */
     .controls-container, .clipart-section{
         background-color: #fff;
         border-radius: 12px;
@@ -87,19 +93,11 @@
         color:#333;
         font-size:20px;
     }
-    /* .controls-container {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-        width: 250px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    } */
-
-    .controls-container button, .controls-container input ,.controls-container select {
+  
+    /* styles for all input elements and buttons */
+    .controls-container button, 
+    .controls-container input ,
+    .controls-container select {
         padding:10px 12px;
         font-size: 16px;
         border-radius: 8px;
@@ -108,17 +106,15 @@
         transition: 0.3s ease;
     }
 
+    /* button hover effects */
     .controls-container button:hover,
     .controls-container button:active {
         background-color: #4CAF50;
         color: #fff;
     }
 
-    /* .controls-container button:focus {
-        outline: none;
-    } */
-
-    .controls-container #saveDesign, #clearDesign {
+    /* special styles for download and clear buttons */
+    .controls-container #downloadDesign, #clearDesign {
         background-color: #4CAF50;
         color: #fff;
         font-weight: bold;
@@ -126,26 +122,13 @@
         transition: background-color 0.3s ease; */
     }
 
-    .controls-container #saveDesign:hover,
+    .controls-container #downloadDesign:hover,
     .controls-container #clearDesign:hover {
         background-color: #388e3c;
+        text-decoration: none;
     }
 
-    /* .clipart-section {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-        height: 400px;
-        overflow-y: auto;
-        padding: 20px;
-        border-radius: 8px;
-        background-color: #fff;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        border: 1px solid #ccc;
-        width: 250px;
-    } */
-
+    /* clipart section gallery */
     .clipart-gallery {
         display: flex;
         flex-wrap: wrap;
@@ -167,11 +150,7 @@
         border-color: #2196f3;
     }
 
-    /* select {
-        background-color: #f0f0f0;
-        border: 1px solid #ddd;
-    } */
-
+    /* color input */
     input[type="color"] {
         border: none;
         padding: 6px;
@@ -188,6 +167,7 @@
         margin-top:8px;
     }
 
+    /* add text button icon */
     #addText{
         cursor: pointer;
         transition:transform 0.2s;
@@ -198,7 +178,7 @@
         transform: scale(1.1);
     }
 
-
+    /* responsive stylese for mobile screens */
     @media (max-width: 768px) {
         .design-container {
             flex-direction: column;
@@ -224,6 +204,7 @@
 
     }
 
+    /* delete icon for selected elements */
     #delete-icon{
         position: absolute;
         width:24px;
@@ -241,59 +222,63 @@
     </style>
 </head>
 <body>
-     <!--navigation-->
+     <!--navigation bar with logo and menu links-->
      <nav class="navbar">
         <div class="left">
           <a href="#" id="logo">
             <img src="images/Logo.png" alt="Logo">
           </a>
         </div>
+
+        <!-- hamburger menu for mobile -->
         <div class="right">
           <input type="checkbox" id="check">
           <label for="check" class="checkBtn">
             <i class="fa-solid fa-bars"></i>
           </label>
           <ul class="list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#card-grid">Products</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Products</a></li>
             <!-- <li><a href="design-canvas.html">Design</a></li> -->
             <!-- <li><a href="#about">About Us</a></li> -->
             <!-- <li><a href="#contact">Contact Us</a></li> -->
             <li><a href="login.html">Login</a></li>
-            <li><a href="user-dashboard.html" id="user_profile"><i class="fa-solid fa-user" style="color: #FFFFFF;"></i></a></li>
+            <!-- <li><a href="user-dashboard.html" id="user_profile"><i class="fa-solid fa-user" style="color: #FFFFFF;"></i></a></li> -->
             <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
           </ul>
         </div>
       </nav>
-    <h1>T-shirt Design Lab</h1>
+      <!-- page title -->
+    <!-- <h1>T-shirt Design Lab</h1> -->
     
     <div class="design-container">
-        <!-- Clipart Section -->
+        <!-- Clipart Section  displays selectable clipart-->
          <div class="clipart-section">
             <h3>Clipart Gallery</h3>
             <div class="clipart-gallery">
-
+                <!-- cliparts filled in section using javascript -->
             </div>
          </div>
 
         <!-- Design workspace -->
         <div class="tshirt">
-                
-                <canvas id="canvas" width="300" height="400"></canvas>
+                <canvas id="tshirt-canvas" width="500" height="600"></canvas>
         </div>
         
+        <!-- controls: text, font, image upload, actions -->
         <div class="controls-container">
-            <!-- <label for="tshirt-color">Choose T-shirt color</label>
-            <input type="color" id="tshirt-color" value="#ff0000"> -->
-
-            <!-- <button id="addText">Add text</button> -->
-             <label for="addText">Add Text</label>
+            
+            <!-- text insertion -->
+            <label for="addText">Add Text</label>
             <img src="file.png" id="addText" style="width: 40px;">
-
+            
+            <!-- color picker for text -->
             <input type="color" id="color" value="#000000">
-
+            
+            <!-- upload image input -->
             <input type="file" name="imageupload" id="imageupload" accept="image/*">
-
+            
+            <!-- font selection  -->
             <label for="fontSelect">Choose Font: </label>
             <select name="font" id="fontSelect">
                 <option value="Arial">Arial</option>
@@ -308,6 +293,7 @@
                 <option value="Times New Roman">Times New Roman</option>
             </select>
 
+            <!-- font size selection  -->
             <label for="fontSize">Choose Font Size: </label>
             <select name="" id="fontSize">
                 <option value="15">15px</option>
@@ -324,18 +310,46 @@
                 <option value="58">58px</option>
             </select>   
             
+            <!-- font style selection  -->
             <label for="fontStyle"> Font Style: </label>
             <select name="" id="fontStyle">
                 <option value="Bold">Bold</option>
                 <option value="italic">Italic</option>
             </select>
+            
+            <!-- delete button (appears when an object is selected) -->
             <div id="delete-icon"><i class="fa-solid fa-trash"></i></div>
-            <button id="saveDesign" onclick="saveDesign()">Save</button>
+
+            <!-- Clear all canvas content -->
             <button id="clearDesign">Clear</button>
+            
+            <!-- button for downloading design as png -->
+            <button id="downloadDesign">Download</button>
         </div>
     </div>
     <script>
-        const canvas = new fabric.Canvas("canvas");
+        //create a new Fabric.js canvas and center objects by default
+        const canvas = new fabric.Canvas("tshirt-canvas");
+
+        fabric.Image.fromURL('images/t-shirt template.jpg', function(img) {
+            img.scaleToWidth(canvas.width);
+            canvas.setBackgroundImage(img, function() {
+                // Lock background
+                canvas.backgroundImage.selectable = false;
+                canvas.backgroundImage.evented = false;
+                
+                canvas.renderAll();
+
+                // Now safe to export
+                const dataURL = canvas.toDataURL({
+                    format: 'png',
+                    quality: 1
+                });
+            }, {
+                originX: 'left',
+                originY: 'top'
+           });
+        });
         //cliparts
         const clipartImages=[
             "cliparts/clipart1.png",
@@ -345,7 +359,19 @@
             "cliparts/clipart5.png",
             "cliparts/clipart6.png",
             "cliparts/clipart7.png",
-            "cliparts/clipart8.png"
+            "cliparts/clipart8.png",
+            "cliparts/clipart9.png",
+            "cliparts/clipart10.png",
+            "cliparts/clipart11.png",
+            "cliparts/clipart12.png",
+            "cliparts/clipart13.png",
+            "cliparts/clipart14.png",
+            "cliparts/clipart15.png",
+            "cliparts/clipart16.png",
+            "cliparts/clipart17.png",
+            "cliparts/clipart18.png",
+            "cliparts/clipart19.png",
+            "cliparts/clipart20.png"
         ];
 
         const gallery=document.querySelector(".clipart-gallery");
@@ -476,26 +502,6 @@
                 reader.readAsDataURL(file);
             }
        });
-    // //listen for saving design
-    //    function saveDesign(){
-    //     const dataURL =canvas.toDataURL({
-    //         format:'png',
-    //         quality:1.0
-    //     });
-        
-    //     fetch('design.php',{
-    //         method:'POST',
-    //         headers:{'Content- Type':'application/json'},
-    //         body:JSON.stringify({image:dataURL})
-    //     })
-    //   .then(res=>res.json())
-    //   .then(data=>{
-    //     console.log(data.messsage);
-    //   })
-    //   .catch(err=>{
-    //     console.error('Error:',err);
-    //   });
-    // }
 
         //delete icon for deleting selected object
         const deleteIcon=document.getElementById('delete-icon');
@@ -539,6 +545,33 @@
         document.getElementById("clearDesign").addEventListener('click', function(){
                 canvas.clear();
             });
+
+            //function for downloading designs
+            function saveDesign(){
+                const link=document.createElement('a');
+                link.download='tshirt_design.png';
+                link.href=canvas.toDataURL('image/png');
+                link.click();
+                
+            }
+            //download design 
+            document.getElementById("downloadDesign").addEventListener("click", function() {
+            // Remove active selection before downloading to avoid borders
+            canvas.discardActiveObject();
+            canvas.renderAll();
+
+            const dataURL = canvas.toDataURL({
+                format: "png",
+                quality: 1.0
+            });
+
+            // Create a temporary anchor to trigger the download
+            const link = document.createElement("a");
+            link.href = dataURL;
+            link.download = "tshirt_design.png";
+            link.click();
+        });
+
 
     </script>
 </body>
