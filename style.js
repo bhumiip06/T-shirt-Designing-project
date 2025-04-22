@@ -79,11 +79,11 @@ let total = 0;
     cartBoxes.forEach(cartBox => {
         const priceElement = cartBox.querySelector(".cart-price");
         const quantityElement = cartBox.querySelector(".number");
-        const price = priceElement.textContent.replace("$","");
+        const price = priceElement.textContent.replace("₹","");
         const quantity = quantityElement.textContent;
         total += price * quantity;
     });
-    updateTotalPriceElement.textContent = `$${total}`;
+    updateTotalPriceElement.textContent = `₹${total}`;
 };
 
 let cartItemCount = 0;
@@ -115,7 +115,7 @@ buyNowButton.addEventListener("click", () => {
     cartItemCountBadge.style.visibility = "hidden";
 
     const updateTotalPriceElement = document.querySelector(".total-price");
-    updateTotalPriceElement.textContent = "$0";
+    updateTotalPriceElement.textContent = "₹0";
 
     alert("Thank you for your purchase!");
 });

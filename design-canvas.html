@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Import Google Fonts for text customization-->
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.28/webfont.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Lobster&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Pacifico&family=Playfair+Display:wght@400;700&family=Righteous&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- import Fabric.js library for canvas editing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js" integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <!-- import font face observer to ensure fonts are loaded before rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+
 
     <!-- font awesome for icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -37,13 +34,13 @@
           </label>
           <ul class="list">
             <li><a href="index.html">Home</a></li>
-            <li><a href="">Products</a></li>
+            <!-- <li><a href="cart.html">Products</a></li> -->
             <!-- <li><a href="design-canvas.html">Design</a></li> -->
             <!-- <li><a href="#about">About Us</a></li> -->
             <!-- <li><a href="#contact">Contact Us</a></li> -->
             <li><a href="login.html">Login</a></li>
             <!-- <li><a href="user-dashboard.html" id="user_profile"><i class="fa-solid fa-user" style="color: #FFFFFF;"></i></a></li> -->
-            <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
+            <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
           </ul>
         </div>
       </nav>
@@ -66,11 +63,15 @@
         <div class="controls-container">
             
             <!-- text insertion -->
-            <label for="addText">Add Text</label>
             <img src="file.png" id="addText" style="width: 40px;">
             
             <!-- color picker for text -->
-            <input type="color" id="color" value="#000000">
+            <div class="class-picker-group">
+                <label for="textColor">
+                    <i class="fas fa-palette"></i> Color
+                  </label>
+                <input type="color" id="textColor" value="#000000">
+            </div>
             
             <!-- upload image input -->
             <input type="file" name="imageupload" id="imageupload" accept="image/*">
@@ -78,16 +79,16 @@
             <!-- font selection  -->
             <label for="fontSelect">Choose Font: </label>
             <select name="font" id="fontSelect">
-                <option value="Arial">Arial</option>
-                <option value="Bebas Neue">Bebas Neue</option>
+                <!-- <option value="Arial">Arial</option> -->
+                <!-- <option value="Bebas Neue">Bebas Neue</option> -->
                 <option value="Lobster">Lobster</option>
-                <option value="Montserrat">Montserrat</option>
+                <!-- <option value="Montserrat">Montserrat</option> -->
                 <option value="Pacifico">Pacifico</option>
-                <option value="Playfair">Playfair</option>
+                <!-- <option value="Playfair">Playfair</option> -->
                 <option value="Righteous">Righteous</option>
-                <option value="Roboto Slab">Roboto Slab</option>
+                <!-- <option value="Roboto Slab">Roboto Slab</option> -->
                 <option value="Anton">Anton</option>
-                <option value="Times New Roman">Times New Roman</option>
+                <!-- <option value="Times New Roman">Times New Roman</option> -->
             </select>
 
             <!-- font size selection  -->
@@ -122,8 +123,29 @@
             
             <!-- button for downloading design as png -->
             <button id="downloadDesign">Download</button>
+            <button id="buy-btn">Buy Now</button>
         </div>
     </div>
+    <script>
+        
+        const loadedFonts = {};
+    
+        function loadFont(fontName, callback) {
+          if (loadedFonts[fontName]) {
+            callback();
+            return;
+          }
+    
+          const font = new FontFaceObserver(fontName);
+          font.load().then(() => {
+            loadedFonts[fontName] = true;
+            console.log(`${fontName} loaded`);
+            callback();
+          }).catch(() => {
+            console.error(`Failed to load ${fontName}`);
+          });
+        }
+      </script>
     <script>
         //create a new Fabric.js canvas and center objects by default
         const canvas = new fabric.Canvas("tshirt-canvas");
@@ -147,6 +169,19 @@
                 originY: 'top'
            });
         });
+
+        // Set global styles for selected objects
+        fabric.Object.prototype.set({
+        borderColor: 'dodgerblue',
+        cornerColor: 'white',
+        cornerStyle: 'circle',
+        cornerStrokeColor: 'dodgerblue',
+        cornerSize: 10,
+        transparentCorners: false,
+        padding: 5
+        });
+    
+
         //cliparts
         const clipartImages=[
             "cliparts/clipart1.png",
@@ -182,23 +217,17 @@
 
         function insertClipart(clipartPath) {
             fabric.Image.fromURL(clipartPath, function(img) {
-                const canvasWidth=canvas.width;
-                const canvasHeight=canvas.height;
+                const canvasWidth=canvas.getWidth();
+                const canvasHeight=canvas.getHeight();
 
-                const scaleX = canvasWidth / img.width;
-                const scaleY = canvasHeight / img.height;
-                const scale = Math.min(scaleX, scaleY);
-
-                img.scale(scale);  // Scale the image to fit the canvas
-
-                // Calculate the center position (canvas center minus half of the image width/height)
-                const centerX = (canvasWidth - img.width * img.scaleX) / 2;
-                const centerY = (canvasHeight - img.height * img.scaleY) / 2;
+                const scaleFactor= 100/ img.width;
 
                 // Set the image's position to the center
                 img.set({
-                    left: centerX,
-                    top: centerY
+                    left: (canvasWidth - img.width * scaleFactor) / 2, // Center the image
+                    top: (canvasHeight - img.height * scaleFactor) / 2, // Center the image
+                    scaleX: scaleFactor,
+                    scaleY: scaleFactor,
                 });
 
                 // Add the image to the canvas
@@ -223,16 +252,21 @@
             canvas.setActiveObject(text);
             
             // Listen for font change
-            document.getElementById("fontSelect").addEventListener('change', function () {
-                var activeObject = canvas.getActiveObject();
-                if(activeObject && activeObject.type === 'textbox') {
-                    activeObject.set({ fontFamily: this.value });
-                    canvas.renderAll();//update canvas rendering
+            document.getElementById("fontSelect").addEventListener("change", function () {
+                const selectedFont = this.value;
+                const activeObject = canvas.getActiveObject();
+
+                if (activeObject && activeObject.type === "textbox") {
+                    loadFont(selectedFont, () => {
+                        activeObject.set("fontFamily", selectedFont);
+                        canvas.renderAll();
+                    });
                 }
             });
 
+
             //listen for text color change
-            document.getElementById("color").addEventListener("change", function(){
+            document.getElementById("textColor").addEventListener("change", function(){
                 var activeObject=canvas.getActiveObject();
                 console.log("Active Object:",activeObject);
                 if(activeObject && activeObject.type === 'textbox') {
@@ -264,8 +298,7 @@
         });
 
         //listen for image upload
-       document.getElementById("imageupload") .addEventListener('change',function(event){
-            // var activeObject=canvas.getActiveObject();
+       document.getElementById("imageupload").addEventListener('change',function(event){
             const file =event.target.files[0]; //to get the selected image file
             if(file){
                 const reader=new FileReader();
@@ -274,20 +307,16 @@
 
                     //create a fabric.js image from the url and add it to the canvas
                     fabric.Image.fromURL(imageUrl,function(img){
-                        const canvasWidth=canvas.width;
-                        const canvasHeight=canvas.height;
+                        const canvasWidth=canvas.getWidth();
+                        const canvasHeight=canvas.getHeight();
 
-                        //calculating the scale factor to make the image smaller than the canvas 
-                        const scaleX=canvasWidth/img.width;
-                        const scaleY=canvasHeight/img.height;
-                        const scale=Math.min(scaleX,scaleY);//calculete the smaller scale factor to fit the image within the canvas
-
-                        img.scale(scale);
-
+                        const scaleFactor=200/img.width;
                         //for positioning the image in the center
                         img.set({
-                            left:(canvasWidth-img.width)/2,
-                            top: (canvasHeight-img.height)/2,
+                            left: (canvasWidth-img.width*scaleFactor)/2,
+                            top: (canvasHeight - img.height * scaleFactor) / 2, // Center the image vertically
+                            scaleX: scaleFactor,
+                            scaleY: scaleFactor,
                           
                         });
                         //finally adding the image to the canvas
@@ -311,16 +340,17 @@
 
         //function for showing delete icon
         function showDeleteIcon(e) {
-            const activeObject = e.selected[0];
-            if (activeObject) {
-                const canvasRect = canvas.getElement().getBoundingClientRect();
-                const objectCoords = canvas.getAbsoluteCoords(activeObject);
-                
-                deleteIcon.style.left = `${canvasRect.left + objectCoords.left + activeObject.width * activeObject.scaleX}px`;
-                deleteIcon.style.top = `${canvasRect.top + objectCoords.top - 20}px`;
-                deleteIcon.style.display = 'block';
-            }
+        const activeObject = e.selected[0];
+        if (activeObject) {
+            const canvasRect = canvas.getElement().getBoundingClientRect();
+            const boundingRect = activeObject.getBoundingRect(true, true); // true = absolute, consider transformations
+
+            deleteIcon.style.left = `${canvasRect.left + boundingRect.left + boundingRect.width - 10}px`; // 10px padding
+            deleteIcon.style.top = `${canvasRect.top + boundingRect.top - 30}px`; // above object
+            deleteIcon.style.display = 'block';
         }
+}
+
 
         fabric.Canvas.prototype.getAbsoluteCoords = function(object) {
             return {
@@ -340,7 +370,12 @@
         });
         //clears the whole canvas
         document.getElementById("clearDesign").addEventListener('click', function(){
-                canvas.clear();
+            canvas.getObjects().forEach(function (obj){
+                if(obj!== canvas.backgroundImage){
+                    canvas.remove(obj);
+                }
+            });
+                canvas.renderAll();
             });
 
             //function for downloading designs
@@ -368,6 +403,8 @@
             link.download = "tshirt_design.png";
             link.click();
         });
+        console.log(document.getElementById("clearDesign"));
+console.log(document.getElementById("downloadDesign"));
 
 
     </script>
