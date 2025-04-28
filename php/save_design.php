@@ -28,7 +28,7 @@ $filepath = 'uploads/' . $filename;
 file_put_contents($filepath, $imageData);
 
 // Insert into DB using your table structure
-$stmt = $conn->prepare("INSERT INTO designs (user_id, product_id, design_data) VALUES (?, ?, ?)");
+$stmt = $con->prepare("INSERT INTO designs (user_id, product_id, design_data) VALUES (?, ?, ?)");
 $stmt->bind_param("iis", $user_id, $product_id, $filepath);
 $stmt->execute();
 
