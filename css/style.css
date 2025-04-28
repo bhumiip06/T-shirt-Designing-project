@@ -249,7 +249,7 @@ body{
     padding: 40px 20px;
 }
 .card{
-    background-color: rgb(206, 200, 200);
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

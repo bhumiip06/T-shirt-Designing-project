@@ -129,7 +129,7 @@
         </div>
     </div>
     <script src="js/design.js"></script>
-    <!-- <script>
+     <script>
         
         const loadedFonts = {};
     
@@ -406,9 +406,32 @@
             link.click();
         });
         console.log(document.getElementById("clearDesign"));
-console.log(document.getElementById("downloadDesign"));
+        console.log(document.getElementById("downloadDesign"));
+
+        //buynow  button
+        document.getElementById("buy-btn").addEventListener("click", function () {
+        canvas.discardActiveObject();
+        canvas.renderAll();
+
+        const imageData = canvas.toDataURL("image/png");
+        const productId = 1; // Change this as needed
+
+        fetch("save_design.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ image: imageData, product_id: productId })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = `cart.php?design_id=${data.design_id}`;
+            } else {
+                alert("Failed to save design.");
+            }
+        });
+    });
 
 
-    </script> -->
+    </script>
 </body>
 </html>

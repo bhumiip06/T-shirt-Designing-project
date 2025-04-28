@@ -18,7 +18,53 @@ require "connection.php";
                 $stmt->bind_param("sss", $sender_name, $sender_email, $message_content);
         
                 if ($stmt->execute()) {
-                    echo "Thank you for contacting us. We will get back to you soon!";
+                    echo '<!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        .toast {
+                            visibility: hidden;
+                            min-width: 250px;
+                            margin-left: -125px;
+                            background-color: #4BB543;
+                            color: white;
+                            text-align: center;
+                            border-radius: 8px;
+                            padding: 16px;
+                            position: fixed;
+                            z-index: 1;
+                            left: 50%;
+                            bottom: 30px;
+                            font-size: 17px;
+                            opacity: 0;
+                            transition: opacity 0.5s, bottom 0.5s;
+                        }
+            
+                        .toast.show {
+                            visibility: visible;
+                            opacity: 1;
+                            bottom: 50px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div id="toast" class="toast">Thank You for your Response.<br>We will be Contacting you soon.</div>
+                    <script>
+                        const toast = document.getElementById("toast");
+                        toast.classList.add("show");
+            
+                        setTimeout(() => {
+                            toast.classList.remove("show");
+                        }, 2000);
+            
+                        setTimeout(() => {
+                            window.location.href = "index.html";
+                        }, 2200);
+                    </script>
+                </body>
+                </html>
+                ';
+                exit;
                 } else {
                     echo"Error!" .$stmt->error;
                 }
