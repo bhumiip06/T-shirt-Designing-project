@@ -70,6 +70,8 @@ body{
     font-size: 25px;
     color:white;
     font-weight:bold;
+    background-color: transparent !important;
+    pointer-events: none;
 }
 
 .navbar .left{
