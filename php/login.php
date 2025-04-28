@@ -18,7 +18,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         if(password_verify($password,$user['user_password'])){
            // echo"Login Successful";
            $_SESSION['username']=$user['user_name']; //sets username in the session
-           header('Location: design-canvas.html');
+           $_SESSION['user_email']=$email; //sets email in the session
+           
+           header('Location: check_session.php');
+           exit();
         }
         else{
             echo"Invalid email or password";
@@ -27,6 +30,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         echo"No account found with that email.";
     }
 
-    $con->close();
+    // $con->close();
+    $pdo=null;
 }
 ?>
