@@ -9,5 +9,6 @@ if (!isset($_SESSION['username'])) {
 }
 
 // If the user is logged in, return a JSON response indicating the user is logged in
-echo json_encode(['loggedIn' => true, 'username' => $_SESSION['username']]);
+// echo json_encode(['loggedIn' => true, 'username' => $_SESSION['username']]);
+header('Location: ../design-canvas.php');
 ?>

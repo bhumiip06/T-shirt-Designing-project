@@ -1,6 +1,6 @@
 <?php
 session_start();
-var_dump($_SESSION);  // Check if the session data is present
+// var_dump($_SESSION);  // Check if the session data is present
 if (!isset($_SESSION['username'])) {
     header("Location: login.html");
     exit;
@@ -25,7 +25,9 @@ if (!isset($_SESSION['username'])) {
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/design.css">
-
+    <style>
+      
+    </style>
 </head>
 <body>
      <!--navigation bar with logo and menu links-->
@@ -43,14 +45,14 @@ if (!isset($_SESSION['username'])) {
             <i class="fa-solid fa-bars"></i>
           </label>
           <ul class="list">
+          <?php if (isset($_SESSION['username'])): ?>
+                <li class="welcome-message">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
+            <?php else: ?>
+                <li><a href="login.html">Login</a></li>
+            <?php endif; ?>
             <li><a href="index.html">Home</a></li>
-            <!-- <li><a href="cart.html">Products</a></li> -->
-            <!-- <li><a href="design-canvas.html">Design</a></li> -->
-            <!-- <li><a href="#about">About Us</a></li> -->
-            <!-- <li><a href="#contact">Contact Us</a></li> -->
-            <li><a href="php/logout.php">Logout</a></li>
-            <!-- <li><a href="user-dashboard.html" id="user_profile"><i class="fa-solid fa-user" style="color: #FFFFFF;"></i></a></li> -->
             <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
+            <li><a href="php/logout.php">Logout</a></li>
           </ul>
         </div>
       </nav>

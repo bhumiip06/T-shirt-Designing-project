@@ -69,7 +69,7 @@
                         }, 2000);
             
                         setTimeout(() => {
-                            window.location.href = "login.html";
+                            window.location.href = "../login.html";
                         }, 2200);
                     </script>
                 </body>

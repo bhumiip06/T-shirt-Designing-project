@@ -65,13 +65,11 @@ body{
     width:100px;
     border-radius: 5px;
 } 
-.brand-name{
-    font-family: 'Poppins',sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #fff;
-    text-transform: none;
-    letter-spacing: 1px;
+
+.welcome-message{
+    font-size: 25px;
+    color:white;
+    font-weight:bold;
 }
 
 .navbar .left{
