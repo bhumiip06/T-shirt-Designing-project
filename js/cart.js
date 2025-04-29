@@ -106,7 +106,30 @@ buyNowButton.addEventListener("click", () => {
         alert("Your cart is empty. Please add items to your cart before buying.");
         return;
     }
-
+    
+   /* buyNowButton.addEventListener("click", () => {
+        const cartBoxes = cartContent.querySelectorAll(".cart-box");
+        if (cartBoxes.length === 0) {
+            alert("Your cart is empty. Please add items to your cart before buying.");
+            return;
+        }
+    
+        // Optional: save cart items to localStorage if you want to display them on the address page
+        const cartData = [];
+        cartBoxes.forEach(cartBox => {
+            const title = cartBox.querySelector(".cart-product-title").textContent;
+            const price = cartBox.querySelector(".cart-price").textContent;
+            const quantity = cartBox.querySelector(".number").textContent;
+            const img = cartBox.querySelector(".cart-img").src;
+            cartData.push({ title, price, quantity, img });
+        });
+    
+        localStorage.setItem("checkoutCart", JSON.stringify(cartData));
+    
+        // ✅ Redirect only if cart is not empty
+        window.location.href = "adress.html";
+    });
+    
     cartBoxes.forEach(cartBox => cartBox.remove());
 
     cartItemCount = 0;
@@ -118,4 +141,42 @@ buyNowButton.addEventListener("click", () => {
     updateTotalPriceElement.textContent = "₹0";
 
     alert("Thank you for your purchase!");
+});*/
+
+const buyNowButton = document.querySelector(".btn-buy");
+
+buyNowButton.addEventListener("click", () => {
+    const cartBoxes = cartContent.querySelectorAll(".cart-box");
+
+    if (cartBoxes.length === 0) {
+        alert("Your cart is empty. Please add items to your cart before buying.");
+        return;
+    }
+
+    // Save cart items to localStorage
+    const cartData = [];
+    cartBoxes.forEach(cartBox => {
+        const title = cartBox.querySelector(".cart-product-title").textContent;
+        const price = cartBox.querySelector(".cart-price").textContent;
+        const quantity = cartBox.querySelector(".number").textContent;
+        const img = cartBox.querySelector(".cart-img").src;
+        cartData.push({ title, price, quantity, img });
+    });
+
+    localStorage.setItem("checkoutCart", JSON.stringify(cartData));
+
+    // Optional: clean up cart UI
+    cartBoxes.forEach(cartBox => cartBox.remove());
+
+    cartItemCount = 0;
+    const cartItemCountBadge = document.querySelector(".cart-item-count");
+    cartItemCountBadge.textContent = "";
+    cartItemCountBadge.style.visibility = "hidden";
+
+    const updateTotalPriceElement = document.querySelector(".total-price");
+    updateTotalPriceElement.textContent = "₹0";
+
+    // Redirect to address page
+    window.location.href = "adress.html";
+});
 });
