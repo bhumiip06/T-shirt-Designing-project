@@ -214,6 +214,10 @@ header{
     margin: 20px auto 0;
     cursor: pointer;
 }
+.btn-buy:hover{
+    text-decoration: none;
+    color: #fff;
+}
 #cart-close
 {
     position: absolute;
