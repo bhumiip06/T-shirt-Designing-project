@@ -1,4 +1,39 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto&family=Ubuntu:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&family=Ubuntu:wght@300;700&display=swap");@font-face{
+    font-family: 'Anton';
+    src:url('fonts/Anton/Anton-Regular.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Bebas_Neue';
+    src:url('fonts/Bebas_Neue/BebasNeue-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Lobster';
+    src:url('fonts/Lobster/Lobster-Regular.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Monsteratr';
+    src:url('fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Pacifico';
+    src:url('fonts/Pacifico/Pacifico-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Playfair_Display';
+    src:url('fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Righteous';
+    src:url('fonts/Righteous/Righteous-Regular.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: 'Roboto_Slab';
+    src:url('fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
+}
 *{
     margin: 0;
     padding: 0;
@@ -26,16 +61,17 @@ body{
 }
 
  .left img {
-    height: 45px;
+    height: 50px;
+    width:100px;
     border-radius: 5px;
 } 
-.brand-name{
-    font-family: 'Poppins',sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #fff;
-    text-transform: none;
-    letter-spacing: 1px;
+
+.welcome-message{
+    font-size: 25px;
+    color:white;
+    font-weight:bold;
+    background-color: transparent !important;
+    pointer-events: none;
 }
 
 .navbar .left{
@@ -64,9 +100,6 @@ body{
     gap:20px;
 }
 
-/* .list li {
-    margin: 0 15px;
-} */
 
 .list li a {
     color: white;
@@ -120,7 +153,7 @@ body{
 .hero-section{
     /* width:auto; */
     height:85vh;
-    background: url(images/hero.png) center/cover no-repeat; 
+    background: url(../images/hero.png) center/cover no-repeat; 
     padding: 10px;
     overflow: hidden;
     position: relative;
@@ -204,10 +237,12 @@ body{
     color: #666;
   }
 /* cards for featured tshirt designs  */
-h1{
-    text-align: center;
-    margin-bottom: 25px;
+.section-heading {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2.5rem; /* optional improvement */
 }
+
 .card-grid{
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -215,11 +250,12 @@ h1{
     padding: 40px 20px;
 }
 .card{
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+
 }
 
 .card:hover{
@@ -227,11 +263,15 @@ h1{
 }
 
 .card img{
+    margin-top:50px;
     width: 100%;
-    height: 200px;
+    height: 270px;
     object-fit: contain;
 }
 
+.card-content{
+    padding:15px;
+}
 
 .card-content h3{
     font-size: 1.2rem;
@@ -277,7 +317,7 @@ h1{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: url(images/bb.jpg);
+    background: url(../images/bb.jpg);
     background-size: cover;
 }
 .contact .content{
@@ -331,31 +371,32 @@ h1{
     font-weight: 500;
     color: #00bcd4;
 }
-.contactForm{
+/* .contact-form{
     width: 40%;
     padding: 40px;
     background: #333;
-}
-.contactForm h2{
+} */
+/* .contact-form h2{
     font-size: 300px;
     color: #333;
     font-weight: 500;
 
-}
+} */
 
-.contactForm .input-box{
+.contact-form .input-box{
     position: relative;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 10px;
 }
-.contactForm .input-box input,
-.contactForm .input-box textarea{
+.contact-form .input-box input,
+.contact-form .input-box textarea{
     width: 100%;
     padding: 5px 0;
     font-size: 16px;
     margin: 10px 0;
+    background:transparent;
     border: none;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #262424;
     outline: none;
     resize: none;
 }
@@ -452,20 +493,7 @@ i {
 .hide{
     display: none;
 }
-.recover{
-    text-align: right;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-}
-.recover a{
-    text-decoration: none;
-    color: rgb(125,125,235);
 
-}
-.recover a:hover{
-    color: blue;
-    text-decoration: underline;
-}
 .btn{
     font-size: 1.125rem;
     padding: 8px 0;
@@ -483,29 +511,7 @@ i {
     background: linear-gradient(to right, #673ab7, #7986cb); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
 }
-.or{
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
-    text-align: center;
-}
-.icons{
-    text-align: center;
-}
-.icons i{
-    color: rgb(125,125,235);
-    padding: 0.8rem 1.5rem;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border: 2px solid #dfe9f5;
-    margin: 0 15px;
-    transition: 1s;
-}
-.icons i:hover{
-   background: #07001f;  
-    font-size: 1.6rem;
-    border: 2px solid rgb(125,125,235);    
-}
+
 .links{
     display: flex;
     justify-content: space-around;
@@ -524,22 +530,63 @@ button:hover{
     text-decoration: underline;
     color: blue;
 }
-/* footer{
+
+.logo{
+    width: 40px;
+    height:40px;
+  }
+  footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 35px;
+  }
+  
+  footer .col{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+  }
+
+  footer .logo{
+    margin-bottom: 30px;
+  }
+  
+  footer h4{
+    font-size:14px;
+    padding-bottom: 20px;
+  }
+
+  footer p{
+    font-size: 12px;
+    margin: 0 0 8px 0;
+  }
+
+  footer a{
+    font-size: 13px;
+    text-decoration: none;
+    color:#222;
+    margin-bottom: 10px;
+  }
+
+  footer .follow{
+    margin-top:20px;
+  }
+
+  footer .follow i{
+    color:#465b52;
+    padding-right: 4px;
+    cursor: pointer;
+    font-size: 33px;
+  }
+
+  footer .follow i:hover,
+  footer a:hover{
+    color:#088178;
+  }
+  footer .copyright{
     text-align: center;
-    background-color: #2d2d2d;
-    color: white;
-    height: 300px;
-}
-footer span{
-    color: #ffffff;
-    font-size: 20px;
-}
-footer i{
-    padding: 0.8rem 1.5rem;
-    border-radius: 10px;
-    font-size: 2rem;
-}
-footer span:hover{
-    color:#ffffff;
-    text-decoration: underline;
-} */
+    width:100%
+  }

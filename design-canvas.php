@@ -1,231 +1,39 @@
+<?php
+session_start();
+// var_dump($_SESSION);  // Check if the session data is present
+if (!isset($_SESSION['username'])) {
+    header("Location: login.html");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Import Google Fonts for text customization-->
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.28/webfont.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Lobster&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Pacifico&family=Playfair+Display:wght@400;700&family=Righteous&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Custom T-shirt Design | T-shirt Design Lab </title>
 
     <!-- import Fabric.js library for canvas editing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js" integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <!-- import font face observer to ensure fonts are loaded before rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+
 
     <!-- font awesome for icons  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- custom stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
-    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/design.css">
     <style>
-        /* general body styles */
-    body {
-        font-family: 'Roboto', sans-serif;
-        text-align: center;
-        background-color: #f5f7fa;
-        margin: 0;
-        padding: 0;
-    }
-
-    h1 {
-        font-size: 40px;
-        color: #222;
-        margin:30px 0 20px;
-    }
-
-    /* container for design tools and workspace */
-    .design-container {
-        display: flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        align-items: flex-start;
-        gap: 30px;
-        padding: 20px;
-        max-width:1200px;
-        margin:auto;
-    }
-
-    /* t-shirt display area */
-    .tshirt {
-        position: relative;
-        width: 500px;
-        height: 600px;
-        border: 2px solid #ccc;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        
-    }
-
-    /* canvas where the design is drawn */
-    canvas {
-        position: absolute;
-        top: 160px;
-        left: 100px;
-        width: 300px;
-        height: 400px;
-        border: 1px dashed #2196f3;
-        cursor: crosshair;
-        background-color: rgba(255,255,255,0.01);
-    }
-
-    /* conttrol panel and clipart panel */
-    .controls-container, .clipart-section{
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        width:260px;
-        display: flex;
-        flex-direction: column;
-        gap:12px;
-    }
-
-    .controls-container h3, .clipart-section h3{
-        margin-bottom: 10px;
-        color:#333;
-        font-size:20px;
-    }
-  
-    /* styles for all input elements and buttons */
-    .controls-container button, 
-    .controls-container input ,
-    .controls-container select {
-        padding:10px 12px;
-        font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        background-color: #fafafa;
-        transition: 0.3s ease;
-    }
-
-    /* button hover effects */
-    .controls-container button:hover,
-    .controls-container button:active {
-        background-color: #4CAF50;
-        color: #fff;
-    }
-
-    /* special styles for download and clear buttons */
-    .controls-container #downloadDesign, #clearDesign {
-        background-color: #4CAF50;
-        color: #fff;
-        font-weight: bold;
-        /* border-radius: 8px;
-        transition: background-color 0.3s ease; */
-    }
-
-    .controls-container #downloadDesign:hover,
-    .controls-container #clearDesign:hover {
-        background-color: #388e3c;
-        text-decoration: none;
-    }
-
-    /* clipart section gallery */
-    .clipart-gallery {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .clipart-gallery img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        cursor: pointer;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        transition: transform 0.3s ease;
-    }
-
-    .clipart-gallery img:hover {
-        transform: scale(1.1);
-        border-color: #2196f3;
-    }
-
-    /* color input */
-    input[type="color"] {
-        border: none;
-        padding: 6px;
-        cursor: pointer;
-        width: 100%;
-        background-color: #eee;
-        border-radius: 6px;
-    }
-
-    .controls-container label {
-        font-size: 16px;
-        color: #555;
-        text-align: left;
-        margin-top:8px;
-    }
-
-    /* add text button icon */
-    #addText{
-        cursor: pointer;
-        transition:transform 0.2s;
-        margin:auto;
-    }
-
-    #addText:hover{
-        transform: scale(1.1);
-    }
-
-    /* responsive stylese for mobile screens */
-    @media (max-width: 768px) {
-        .design-container {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .tshirt{
-            width: 90%;
-            height:auto;
-            aspect-ratio: 1 / 1.2;
-        }
-
-        canvas{
-            top:140px;
-            left:80px;
-            width: 70%;
-            height: 60%;
-        }
-
-        .controls-container, .clipart-section {
-            width: 90%;
-        }
-
-    }
-
-    /* delete icon for selected elements */
-    #delete-icon{
-        position: absolute;
-        width:24px;
-        height: 24px;
-        background-color: red;
-        color: white;
-        font-size: 18px;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 24px;
-        cursor: pointer;
-        display:none;
-        z-index:10;
-    }
+      
     </style>
 </head>
 <body>
      <!--navigation bar with logo and menu links-->
      <nav class="navbar">
         <div class="left">
-          <a href="#" id="logo">
+          <a href="index.html" id="logo">
             <img src="images/Logo.png" alt="Logo">
           </a>
         </div>
@@ -237,19 +45,17 @@
             <i class="fa-solid fa-bars"></i>
           </label>
           <ul class="list">
+          <?php if (isset($_SESSION['username'])): ?>
+                <li class="welcome-message">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
+            <?php else: ?>
+                <li><a href="login.html">Login</a></li>
+            <?php endif; ?>
             <li><a href="index.html">Home</a></li>
-            <li><a href="">Products</a></li>
-            <!-- <li><a href="design-canvas.html">Design</a></li> -->
-            <!-- <li><a href="#about">About Us</a></li> -->
-            <!-- <li><a href="#contact">Contact Us</a></li> -->
-            <li><a href="login.html">Login</a></li>
-            <!-- <li><a href="user-dashboard.html" id="user_profile"><i class="fa-solid fa-user" style="color: #FFFFFF;"></i></a></li> -->
-            <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
+            <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
+            <li><a href="php/logout.php">Logout</a></li>
           </ul>
         </div>
       </nav>
-      <!-- page title -->
-    <!-- <h1>T-shirt Design Lab</h1> -->
     
     <div class="design-container">
         <!-- Clipart Section  displays selectable clipart-->
@@ -269,11 +75,15 @@
         <div class="controls-container">
             
             <!-- text insertion -->
-            <label for="addText">Add Text</label>
-            <img src="file.png" id="addText" style="width: 40px;">
+            <img src="images/file.png" id="addText" style="width: 40px;">
             
             <!-- color picker for text -->
-            <input type="color" id="color" value="#000000">
+            <div class="class-picker-group">
+                <label for="textColor">
+                    <i class="fas fa-palette"></i> Color
+                  </label>
+                <input type="color" id="textColor" value="#000000">
+            </div>
             
             <!-- upload image input -->
             <input type="file" name="imageupload" id="imageupload" accept="image/*">
@@ -281,16 +91,16 @@
             <!-- font selection  -->
             <label for="fontSelect">Choose Font: </label>
             <select name="font" id="fontSelect">
-                <option value="Arial">Arial</option>
-                <option value="Bebas Neue">Bebas Neue</option>
+                <!-- <option value="Arial">Arial</option> -->
+                <!-- <option value="Bebas Neue">Bebas Neue</option> -->
                 <option value="Lobster">Lobster</option>
-                <option value="Montserrat">Montserrat</option>
+                <!-- <option value="Montserrat">Montserrat</option> -->
                 <option value="Pacifico">Pacifico</option>
-                <option value="Playfair">Playfair</option>
+                <!-- <option value="Playfair">Playfair</option> -->
                 <option value="Righteous">Righteous</option>
-                <option value="Roboto Slab">Roboto Slab</option>
+                <!-- <option value="Roboto Slab">Roboto Slab</option> -->
                 <option value="Anton">Anton</option>
-                <option value="Times New Roman">Times New Roman</option>
+                <!-- <option value="Times New Roman">Times New Roman</option> -->
             </select>
 
             <!-- font size selection  -->
@@ -325,9 +135,30 @@
             
             <!-- button for downloading design as png -->
             <button id="downloadDesign">Download</button>
+            <button id="buy-btn">Buy Now</button>
         </div>
     </div>
-    <script>
+    <!-- <script src="js/design.js"></script> -->
+     <script>
+        
+        const loadedFonts = {};
+    
+        function loadFont(fontName, callback) {
+          if (loadedFonts[fontName]) {
+            callback();
+            return;
+          }
+    
+          const font = new FontFaceObserver(fontName);
+          font.load().then(() => {
+            loadedFonts[fontName] = true;
+            console.log(`${fontName} loaded`);
+            callback();
+          }).catch(() => {
+            console.error(`Failed to load ${fontName}`);
+          });
+        }
+        
         //create a new Fabric.js canvas and center objects by default
         const canvas = new fabric.Canvas("tshirt-canvas");
 
@@ -350,6 +181,19 @@
                 originY: 'top'
            });
         });
+
+        // Set global styles for selected objects
+        fabric.Object.prototype.set({
+        borderColor: 'dodgerblue',
+        cornerColor: 'white',
+        cornerStyle: 'circle',
+        cornerStrokeColor: 'dodgerblue',
+        cornerSize: 10,
+        transparentCorners: false,
+        padding: 5
+        });
+    
+
         //cliparts
         const clipartImages=[
             "cliparts/clipart1.png",
@@ -385,23 +229,17 @@
 
         function insertClipart(clipartPath) {
             fabric.Image.fromURL(clipartPath, function(img) {
-                const canvasWidth=canvas.width;
-                const canvasHeight=canvas.height;
+                const canvasWidth=canvas.getWidth();
+                const canvasHeight=canvas.getHeight();
 
-                const scaleX = canvasWidth / img.width;
-                const scaleY = canvasHeight / img.height;
-                const scale = Math.min(scaleX, scaleY);
-
-                img.scale(scale);  // Scale the image to fit the canvas
-
-                // Calculate the center position (canvas center minus half of the image width/height)
-                const centerX = (canvasWidth - img.width * img.scaleX) / 2;
-                const centerY = (canvasHeight - img.height * img.scaleY) / 2;
+                const scaleFactor= 100/ img.width;
 
                 // Set the image's position to the center
                 img.set({
-                    left: centerX,
-                    top: centerY
+                    left: (canvasWidth - img.width * scaleFactor) / 2, // Center the image
+                    top: (canvasHeight - img.height * scaleFactor) / 2, // Center the image
+                    scaleX: scaleFactor,
+                    scaleY: scaleFactor,
                 });
 
                 // Add the image to the canvas
@@ -426,16 +264,21 @@
             canvas.setActiveObject(text);
             
             // Listen for font change
-            document.getElementById("fontSelect").addEventListener('change', function () {
-                var activeObject = canvas.getActiveObject();
-                if(activeObject && activeObject.type === 'textbox') {
-                    activeObject.set({ fontFamily: this.value });
-                    canvas.renderAll();//update canvas rendering
+            document.getElementById("fontSelect").addEventListener("change", function () {
+                const selectedFont = this.value;
+                const activeObject = canvas.getActiveObject();
+
+                if (activeObject && activeObject.type === "textbox") {
+                    loadFont(selectedFont, () => {
+                        activeObject.set("fontFamily", selectedFont);
+                        canvas.renderAll();
+                    });
                 }
             });
 
+
             //listen for text color change
-            document.getElementById("color").addEventListener("change", function(){
+            document.getElementById("textColor").addEventListener("change", function(){
                 var activeObject=canvas.getActiveObject();
                 console.log("Active Object:",activeObject);
                 if(activeObject && activeObject.type === 'textbox') {
@@ -467,8 +310,7 @@
         });
 
         //listen for image upload
-       document.getElementById("imageupload") .addEventListener('change',function(event){
-            // var activeObject=canvas.getActiveObject();
+       document.getElementById("imageupload").addEventListener('change',function(event){
             const file =event.target.files[0]; //to get the selected image file
             if(file){
                 const reader=new FileReader();
@@ -477,20 +319,16 @@
 
                     //create a fabric.js image from the url and add it to the canvas
                     fabric.Image.fromURL(imageUrl,function(img){
-                        const canvasWidth=canvas.width;
-                        const canvasHeight=canvas.height;
+                        const canvasWidth=canvas.getWidth();
+                        const canvasHeight=canvas.getHeight();
 
-                        //calculating the scale factor to make the image smaller than the canvas 
-                        const scaleX=canvasWidth/img.width;
-                        const scaleY=canvasHeight/img.height;
-                        const scale=Math.min(scaleX,scaleY);//calculete the smaller scale factor to fit the image within the canvas
-
-                        img.scale(scale);
-
+                        const scaleFactor=200/img.width;
                         //for positioning the image in the center
                         img.set({
-                            left:(canvasWidth-img.width)/2,
-                            top: (canvasHeight-img.height)/2,
+                            left: (canvasWidth-img.width*scaleFactor)/2,
+                            top: (canvasHeight - img.height * scaleFactor) / 2, // Center the image vertically
+                            scaleX: scaleFactor,
+                            scaleY: scaleFactor,
                           
                         });
                         //finally adding the image to the canvas
@@ -514,16 +352,17 @@
 
         //function for showing delete icon
         function showDeleteIcon(e) {
-            const activeObject = e.selected[0];
-            if (activeObject) {
-                const canvasRect = canvas.getElement().getBoundingClientRect();
-                const objectCoords = canvas.getAbsoluteCoords(activeObject);
-                
-                deleteIcon.style.left = `${canvasRect.left + objectCoords.left + activeObject.width * activeObject.scaleX}px`;
-                deleteIcon.style.top = `${canvasRect.top + objectCoords.top - 20}px`;
-                deleteIcon.style.display = 'block';
-            }
+        const activeObject = e.selected[0];
+        if (activeObject) {
+            const canvasRect = canvas.getElement().getBoundingClientRect();
+            const boundingRect = activeObject.getBoundingRect(true, true); // true = absolute, consider transformations
+
+            deleteIcon.style.left = `${canvasRect.left + boundingRect.left + boundingRect.width - 10}px`; // 10px padding
+            deleteIcon.style.top = `${canvasRect.top + boundingRect.top - 30}px`; // above object
+            deleteIcon.style.display = 'block';
         }
+}
+
 
         fabric.Canvas.prototype.getAbsoluteCoords = function(object) {
             return {
@@ -543,7 +382,12 @@
         });
         //clears the whole canvas
         document.getElementById("clearDesign").addEventListener('click', function(){
-                canvas.clear();
+            canvas.getObjects().forEach(function (obj){
+                if(obj!== canvas.backgroundImage){
+                    canvas.remove(obj);
+                }
+            });
+                canvas.renderAll();
             });
 
             //function for downloading designs
@@ -571,8 +415,30 @@
             link.download = "tshirt_design.png";
             link.click();
         });
+        console.log(document.getElementById("clearDesign"));
+        console.log(document.getElementById("downloadDesign"));
 
+        //buynow  button
+        document.getElementById("buy-btn").addEventListener("click", function () {
+        canvas.discardActiveObject();
+        canvas.renderAll();
 
+        const imageData = canvas.toDataURL("image/png");
+        const productId = 1; // Change this as needed
+
+        fetch("save_design.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ image: imageData, product_id: productId })
+        })
+        .then(res => res.text()) // read response as text
+        .then(data => {
+            console.log("Raw PHP response:", data); // this will show you the actual PHP error
+            const json = JSON.parse(data); // will still error, but now you'll see the real cause
+        })
+        .catch(err => console.error("Fetch error:", err));
+
+    });
     </script>
 </body>
 </html>

@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <title>Login & Register</title>
+        <title>Custom T-shirt Design | Login & Register</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <nav class="navbar">
             <div class="left">
-              <a href="#" id="logo"><img src="images/Logo.png" alt="Logo"></a>
+              <a href="index.html" id="logo"><img src="images/Logo.png" alt="Logo"></a>
             </div>
             <div class="right">
               <input type="checkbox" id="check">
@@ -19,10 +19,10 @@
               </label>
               <ul class="list">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">T-shirts</a></li>
-                <li><a href="#">Design</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="cart.html">T-shirts</a></li>
+                <li><a href="design-canvas.php">Design</a></li>
+                <!-- <li><a href="#about">About Us</a></li> -->
+                <!-- <li><a href="#">Contact Us</a></li> -->
                 <li><a href="#">Login</a></li>
                 <!-- <li><a href="#" id="cart"><i class="fa-solid fa-cart-shopping"></i></a></li> -->
               </ul>
@@ -30,7 +30,7 @@
           </nav>
         <div class="container" id="Sign Up" style="display: none;">
             <h1 class="form-title">Register</h1>
-            <form method="post" action="signup.php">
+            <form method="post" action="php/signup.php">
                 <div class="input-group">
                     <label for="name">Name</label>
                     <div class="input-group-input_field">
@@ -43,7 +43,7 @@
                     <label for="email">Email</label> 
                     <div class="input-group-input_field">
                         <i class="fas fa-envelope"></i>
-                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="email" name="email" id="email" placeholder="Email" autocomplete="email" required>
                     </div> 
                 </div>
                 <div class="input-group">
@@ -72,13 +72,13 @@
         </div>
         <div class="container" id="Sign In">
             <h1 class="form-title">Sign In</h1>
-            <form method="POST" action="login.php">
+            <form method="POST" action="php/login.php">
                 <div class="input-group">
                     <label for="login_email">Email</label>  
                     <div class="input-group-input_field">
                         
                     <i class="fas fa-envelope"></i>
-                    <input type="email" name="email" id="login_email" placeholder="Email" required>
+                    <input type="email" name="email" id="login_email" placeholder="Email" autocomplete="email" required>
                     </div>
                 </div>
                 <div class="input-group">
@@ -89,9 +89,9 @@
                     <i class="fa-solid fa-eye"  id="eye"></i>
                     </div>  
                  </div>
-                <p class="recover">
+                <!-- <p class="recover">
                     <a href="#">Recover Password</a>
-                </p>
+                </p> -->
                 <input type="submit" id="login_button"  class="btn" value="Sign In" name="sign In">
             </form>
             <p class="or" style="color: black;">
@@ -100,7 +100,7 @@
                 <p style="color: black;">Don't have account yet?</p>
                 <button id="signUpButton" >Sign Up</button>
             </div>
-            <script src="script.js"></script>
+            <script src="js/login.js"></script>
    
         </div>
     </body>

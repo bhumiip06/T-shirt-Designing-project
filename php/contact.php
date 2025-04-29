@@ -1,35 +1,24 @@
 <?php
-    require "connection.php";
+require "connection.php";
 
-    if($_SERVER["REQUEST_METHOD"]=="POST"){
-        $name=trim($_POST["name"]);
-        $email=trim($_POST["email"]);
-        $password=trim($_POST["password"]);
-        $confirm_password=trim($_POST["confirm-password"]);
-        //validations
-        if(empty($name) || empty($email) || empty($password) || empty($confirm_password)){
-            die("All fields are required.");
-        }
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            die("Invalid email format.");
-        }
-        if($password!==$confirm_password){
-            die("Passwords do not match.");
-        }
-        //hashed passwords
-        $hashed_password=password_hash($password, PASSWORD_DEFAULT);
-        $phone=$phone ?? "";
-        $address=$address ?? "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $sender_name = trim($_POST['sender_name']);
+        $sender_email = trim($_POST['sender_email']);
+        $message_content = trim($_POST['message_content']);
 
-        $sql="INSERT INTO `users` ( `user_name`, `user_email`, `user_password`, `user_phone`, `user_address`) VALUES (?,?,?,?,?);";
+        if (!empty($sender_name) && !empty($sender_email) && !empty($message_content)) {
+            if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
+                $sql = "INSERT INTO `contact_messages`(`sender_name`, `sender_email`, `message_content`) VALUES (?,?,?);";
 
-        $stmt=$con->prepare($sql);
-        if($stmt){
-            $stmt->bind_param("sssss", $name, $email, $hashed_password, $phone, $address);
-
-            if ($stmt->execute()) {
-                echo '
-                <!DOCTYPE html>
+                $stmt = $con->prepare($sql);
+                if ($stmt === false) {
+                    die('MySQL prepare error: ' . $con->error);
+                }
+                // Bind the form values to the SQL query
+                $stmt->bind_param("sss", $sender_name, $sender_email, $message_content);
+        
+                if ($stmt->execute()) {
+                    echo '<!DOCTYPE html>
                 <html>
                 <head>
                     <style>
@@ -59,7 +48,7 @@
                     </style>
                 </head>
                 <body>
-                    <div id="toast" class="toast">Registration Successful</div>
+                    <div id="toast" class="toast">Thank You for your Response.<br>We will be Contacting you soon.</div>
                     <script>
                         const toast = document.getElementById("toast");
                         toast.classList.add("show");
@@ -69,25 +58,22 @@
                         }, 2000);
             
                         setTimeout(() => {
-                            window.location.href = "login.html";
+                            window.location.href = "index.html";
                         }, 2200);
                     </script>
                 </body>
                 </html>
                 ';
                 exit;
+                } else {
+                    echo"Error!" .$stmt->error;
+                }
+                $stmt->close();
+            } else {
+                echo "Invalid email format. Please enter a valid email address.";
             }
-            
-            else{
-                echo"Error!" .$stmt->error;
-            }
-
-            $stmt->close();
+        } else {
+            echo "All fields are required. Please fill in the form completely.";
         }
-        else{
-            echo "Database Error.";
-        }
-        $con->close();
-        
     }
 ?>
