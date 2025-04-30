@@ -12,6 +12,20 @@
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+  <!-- <style>
+    .popup {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #e35f26;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+  </style> -->
 </head>
 
 <body>
@@ -51,9 +65,11 @@
       <div class="total-title">Total</div>
       <div class="total-price">₹0</div>
     </div>
-    <a href="adress.html" ><button class="btn-buy">Buy Now</button></a>
+    <a href="adress.html"><button class="btn-buy">Buy Now</button></a>
     <i class="fa-solid fa-xmark" id="cart-close"></i>
   </div>
+  <div id="product-added-popup" class="popup">Product added to cart!</div>
+
   <!-- hero section -->
   <div class="hero-section">
     <div class="content">
@@ -282,6 +298,22 @@
     </div>
   </footer>
   <script src="js/cart.js"></script>
+  <!-- <script src="js/test.js"></script> -->
+  <!-- <script>
+ document.querySelectorAll('.add-cart').forEach(item => {
+  item.addEventListener('click', function() {
+    // Show the popup
+    const popup = document.getElementById('product-added-popup');
+    popup.style.display = 'block';
+
+    // Hide the popup after 2 seconds
+    setTimeout(() => {
+      popup.style.display = 'none';
+    }, 2000);
+  });
+});
+
+  </script> -->
 </body>
 
 </html>
