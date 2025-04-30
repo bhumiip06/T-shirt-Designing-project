@@ -184,6 +184,22 @@ header{
     cursor: pointer;
     color:black;
 }
+
+/* popup */
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e35f26;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+  }
+  
 .total{
     display: flex;
     justify-content: flex-end;
