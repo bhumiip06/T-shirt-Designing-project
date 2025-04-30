@@ -12,6 +12,20 @@ addCartButtons.forEach(button => {
     })
 });
 
+//popup 
+document.querySelectorAll('.add-cart').forEach(item => {
+    item.addEventListener('click', function() {
+      // Show the popup
+      const popup = document.getElementById('product-added-popup');
+      popup.style.display = 'block';
+  
+      // Hide the popup after 2 seconds
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 2000);
+    });
+  });
+
 const cartContent = document.querySelector(".cart-content");
 const addToCart = productBox => {
     const productImgsrc = productBox.querySelector("img").src;
