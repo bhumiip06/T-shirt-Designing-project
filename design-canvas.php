@@ -8,6 +8,7 @@ if (!isset($_SESSION['username'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,68 +27,69 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/design.css">
     <style>
-      
+
     </style>
 </head>
+
 <body>
-     <!--navigation bar with logo and menu links-->
-     <nav class="navbar">
+    <!--navigation bar with logo and menu links-->
+    <nav class="navbar">
         <div class="left">
-          <a href="index.html" id="logo">
-            <img src="images/Logo.png" alt="Logo">
-          </a>
+            <a href="index.html" id="logo">
+                <img src="images/Logo.png" alt="Logo">
+            </a>
         </div>
 
         <!-- hamburger menu for mobile -->
         <div class="right">
-          <input type="checkbox" id="check">
-          <label for="check" class="checkBtn">
-            <i class="fa-solid fa-bars"></i>
-          </label>
-          <ul class="list">
-          <?php if (isset($_SESSION['username'])): ?>
-                <li class="welcome-message">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></a></li>
-            <?php else: ?>
-                <li><a href="login.html">Login</a></li>
-            <?php endif; ?>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
-            <li><a href="php/logout.php">Logout</a></li>
-          </ul>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkBtn">
+                <i class="fa-solid fa-bars"></i>
+            </label>
+            <ul class="list">
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li class="welcome-message">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></li>
+                <?php else: ?>
+                    <li><a href="login.html">Login</a></li>
+                <?php endif; ?>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
+                <li><a href="php/logout.php">Logout</a></li>
+            </ul>
         </div>
-      </nav>
-    
+    </nav>
+
     <div class="design-container">
         <!-- Clipart Section  displays selectable clipart-->
-         <div class="clipart-section">
+        <div class="clipart-section">
             <h3>Clipart Gallery</h3>
             <div class="clipart-gallery">
                 <!-- cliparts filled in section using javascript -->
             </div>
-         </div>
+        </div>
 
         <!-- Design workspace -->
         <div class="tshirt">
-                <canvas id="tshirt-canvas" width="500" height="600"></canvas>
+            <canvas id="tshirt-canvas" width="500" height="600"></canvas>
         </div>
-        
+
         <!-- controls: text, font, image upload, actions -->
         <div class="controls-container">
-            
+
             <!-- text insertion -->
             <img src="images/file.png" id="addText" style="width: 40px;">
-            
+
             <!-- color picker for text -->
             <div class="class-picker-group">
                 <label for="textColor">
                     <i class="fas fa-palette"></i> Color
-                  </label>
+                </label>
                 <input type="color" id="textColor" value="#000000">
             </div>
-            
+
             <!-- upload image input -->
             <input type="file" name="imageupload" id="imageupload" accept="image/*">
-            
+
             <!-- font selection  -->
             <label for="fontSelect">Choose Font: </label>
             <select name="font" id="fontSelect">
@@ -118,327 +120,60 @@ if (!isset($_SESSION['username'])) {
                 <option value="50">50px</option>
                 <option value="54">54px</option>
                 <option value="58">58px</option>
-            </select>   
-            
+            </select>
+
             <!-- font style selection  -->
             <label for="fontStyle"> Font Style: </label>
             <select name="" id="fontStyle">
                 <option value="Bold">Bold</option>
                 <option value="italic">Italic</option>
             </select>
-            
+
             <!-- delete button (appears when an object is selected) -->
             <div id="delete-icon"><i class="fa-solid fa-trash"></i></div>
 
             <!-- Clear all canvas content -->
             <button id="clearDesign">Clear</button>
-            
+
             <!-- button for downloading design as png -->
             <button id="downloadDesign">Download</button>
-            <button id="buy-btn">Buy Now</button>
+            <!-- <button id="buy-btn">Buy Now</button> -->
+            <button id="buy-btn" onclick="saveDesign(true)">Buy Now</button>
+
+            <button onclick="saveDesign()">Save</button>
         </div>
     </div>
-    <!-- <script src="js/design.js"></script> -->
-     <script>
-        
-        const loadedFonts = {};
-    
-        function loadFont(fontName, callback) {
-          if (loadedFonts[fontName]) {
-            callback();
-            return;
-          }
-    
-          const font = new FontFaceObserver(fontName);
-          font.load().then(() => {
-            loadedFonts[fontName] = true;
-            console.log(`${fontName} loaded`);
-            callback();
-          }).catch(() => {
-            console.error(`Failed to load ${fontName}`);
-          });
-        }
-        
-        //create a new Fabric.js canvas and center objects by default
-        const canvas = new fabric.Canvas("tshirt-canvas");
+    <script src="js/design.js"></script>
+    <script>
+    //     function saveDesign(addToCart = false) {
+    //         let canvasEl = document.getElementById("tshirt-canvas");
+    //         let imageData = canvasEl.toDataURL("image/png");
 
-        fabric.Image.fromURL('images/t-shirt template.jpg', function(img) {
-            img.scaleToWidth(canvas.width);
-            canvas.setBackgroundImage(img, function() {
-                // Lock background
-                canvas.backgroundImage.selectable = false;
-                canvas.backgroundImage.evented = false;
-                
-                canvas.renderAll();
+    //     fetch("save_image.php", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({ image: imageData })
+    //     })
+    //     .then(res => res.text())
+    //     .then(link => {
+    //         alert("Design saved!");
 
-                // Now safe to export
-                const dataURL = canvas.toDataURL({
-                    format: 'png',
-                    quality: 1
-                });
-            }, {
-                originX: 'left',
-                originY: 'top'
-           });
-        });
+    //         if (addToCart) {
+    //             // Save design in cart via AJAX or redirect with query param
+    //             window.location.href = "php/cart.php?image=" + encodeURIComponent(link);
+    //         } else {
+    //             window.open(link, "_blank");
+    //         }
+    //     })
+    //     .catch(err => {
+    //         console.error("Error saving design:", err);
+    //         alert("Failed to save design.");
+    //     });
+    // }
 
-        // Set global styles for selected objects
-        fabric.Object.prototype.set({
-        borderColor: 'dodgerblue',
-        cornerColor: 'white',
-        cornerStyle: 'circle',
-        cornerStrokeColor: 'dodgerblue',
-        cornerSize: 10,
-        transparentCorners: false,
-        padding: 5
-        });
-    
-
-        //cliparts
-        const clipartImages=[
-            "cliparts/clipart1.png",
-            "cliparts/clipart2.png",
-            "cliparts/clipart3.png",
-            "cliparts/clipart4.png",
-            "cliparts/clipart5.png",
-            "cliparts/clipart6.png",
-            "cliparts/clipart7.png",
-            "cliparts/clipart8.png",
-            "cliparts/clipart9.png",
-            "cliparts/clipart10.png",
-            "cliparts/clipart11.png",
-            "cliparts/clipart12.png",
-            "cliparts/clipart13.png",
-            "cliparts/clipart14.png",
-            "cliparts/clipart15.png",
-            "cliparts/clipart16.png",
-            "cliparts/clipart17.png",
-            "cliparts/clipart18.png",
-            "cliparts/clipart19.png",
-            "cliparts/clipart20.png"
-        ];
-
-        const gallery=document.querySelector(".clipart-gallery");
-        clipartImages.forEach(clipart=>{
-            const imgElement=document.createElement("img");
-            imgElement.src =clipart;
-            imgElement.alt="Clipart";
-            imgElement.onclick=() =>insertClipart(clipart);
-            gallery.appendChild(imgElement);
-        });
-
-        function insertClipart(clipartPath) {
-            fabric.Image.fromURL(clipartPath, function(img) {
-                const canvasWidth=canvas.getWidth();
-                const canvasHeight=canvas.getHeight();
-
-                const scaleFactor= 100/ img.width;
-
-                // Set the image's position to the center
-                img.set({
-                    left: (canvasWidth - img.width * scaleFactor) / 2, // Center the image
-                    top: (canvasHeight - img.height * scaleFactor) / 2, // Center the image
-                    scaleX: scaleFactor,
-                    scaleY: scaleFactor,
-                });
-
-                // Add the image to the canvas
-                canvas.add(img);
-                canvas.setActiveObject(img);
-                canvas.renderAll(); 
-            });
-        }
-
-        // listen for textbox insertion 
-        document.getElementById("addText").addEventListener('click', function(){
-            const text = new fabric.Textbox('Your Text Here', {
-                fontsize: 30,
-                fill: 'black',
-                left: 100,
-                top: 100,
-                width: 200,
-                selectionColor:"rgba(0,0,0,0.5)",
-                fontFamily:"Calibri"
-            });
-            canvas.add(text);
-            canvas.setActiveObject(text);
-            
-            // Listen for font change
-            document.getElementById("fontSelect").addEventListener("change", function () {
-                const selectedFont = this.value;
-                const activeObject = canvas.getActiveObject();
-
-                if (activeObject && activeObject.type === "textbox") {
-                    loadFont(selectedFont, () => {
-                        activeObject.set("fontFamily", selectedFont);
-                        canvas.renderAll();
-                    });
-                }
-            });
-
-
-            //listen for text color change
-            document.getElementById("textColor").addEventListener("change", function(){
-                var activeObject=canvas.getActiveObject();
-                console.log("Active Object:",activeObject);
-                if(activeObject && activeObject.type === 'textbox') {
-                    activeObject.set({fill: this.value});
-                    canvas.renderAll();//update canvas rendering
-                }
-            });
-
-            //listen for font size change
-            document.getElementById("fontSize").addEventListener("change", function(){
-                var activeObject=canvas.getActiveObject();
-                console.log("Active Object: ",activeObject);
-                if(activeObject && activeObject.type==='textbox') {
-                    activeObject.set({fontSize: this.value});
-                    canvas.renderAll();//update canvas rendering
-                }
-            });
-
-            //listen for font style change
-            document.getElementById("fontStyle").addEventListener("change", function(){
-                var activeObject=canvas.getActiveObject();
-                console.log("Active Object:",activeObject);
-                if(activeObject && activeObject.type === 'textbox') {
-                    activeObject.set({fontStyle: this.value});
-                    canvas.renderAll();//update canvas rendering
-                }
-            });
-
-        });
-
-        //listen for image upload
-       document.getElementById("imageupload").addEventListener('change',function(event){
-            const file =event.target.files[0]; //to get the selected image file
-            if(file){
-                const reader=new FileReader();
-                reader.onload =function(e){
-                    const imageUrl =e.target.result;// to get the data url of image
-
-                    //create a fabric.js image from the url and add it to the canvas
-                    fabric.Image.fromURL(imageUrl,function(img){
-                        const canvasWidth=canvas.getWidth();
-                        const canvasHeight=canvas.getHeight();
-
-                        const scaleFactor=200/img.width;
-                        //for positioning the image in the center
-                        img.set({
-                            left: (canvasWidth-img.width*scaleFactor)/2,
-                            top: (canvasHeight - img.height * scaleFactor) / 2, // Center the image vertically
-                            scaleX: scaleFactor,
-                            scaleY: scaleFactor,
-                          
-                        });
-                        //finally adding the image to the canvas
-                        canvas.add(img);
-                        canvas.renderAll(); //update canvas rendering
-
-                    });
-                };
-                reader.readAsDataURL(file);
-            }
-       });
-
-        //delete icon for deleting selected object
-        const deleteIcon=document.getElementById('delete-icon');
-
-        canvas.on('selection:created',showDeleteIcon);
-        canvas.on('selection:updated',showDeleteIcon);
-        canvas.on('selection:cleared',()=>{
-            deleteIcon.style.display='none';
-        });
-
-        //function for showing delete icon
-        function showDeleteIcon(e) {
-        const activeObject = e.selected[0];
-        if (activeObject) {
-            const canvasRect = canvas.getElement().getBoundingClientRect();
-            const boundingRect = activeObject.getBoundingRect(true, true); // true = absolute, consider transformations
-
-            deleteIcon.style.left = `${canvasRect.left + boundingRect.left + boundingRect.width - 10}px`; // 10px padding
-            deleteIcon.style.top = `${canvasRect.top + boundingRect.top - 30}px`; // above object
-            deleteIcon.style.display = 'block';
-        }
-}
-
-
-        fabric.Canvas.prototype.getAbsoluteCoords = function(object) {
-            return {
-                left: object.left * this.getZoom() + this.viewportTransform[4],
-                top: object.top * this.getZoom() + this.viewportTransform[5]
-            };
-        };
-
-        deleteIcon.addEventListener('click', function() {
-            const activeObject = canvas.getActiveObject();
-            if (activeObject) {
-                canvas.remove(activeObject);
-                canvas.discardActiveObject();
-                deleteIcon.style.display = 'none';
-                canvas.requestRenderAll();
-            }
-        });
-        //clears the whole canvas
-        document.getElementById("clearDesign").addEventListener('click', function(){
-            canvas.getObjects().forEach(function (obj){
-                if(obj!== canvas.backgroundImage){
-                    canvas.remove(obj);
-                }
-            });
-                canvas.renderAll();
-            });
-
-            //function for downloading designs
-            function saveDesign(){
-                const link=document.createElement('a');
-                link.download='tshirt_design.png';
-                link.href=canvas.toDataURL('image/png');
-                link.click();
-                
-            }
-            //download design 
-            document.getElementById("downloadDesign").addEventListener("click", function() {
-            // Remove active selection before downloading to avoid borders
-            canvas.discardActiveObject();
-            canvas.renderAll();
-
-            const dataURL = canvas.toDataURL({
-                format: "png",
-                quality: 1.0
-            });
-
-            // Create a temporary anchor to trigger the download
-            const link = document.createElement("a");
-            link.href = dataURL;
-            link.download = "tshirt_design.png";
-            link.click();
-        });
-        console.log(document.getElementById("clearDesign"));
-        console.log(document.getElementById("downloadDesign"));
-
-        //buynow  button
-        document.getElementById("buy-btn").addEventListener("click", function () {
-        canvas.discardActiveObject();
-        canvas.renderAll();
-
-        const imageData = canvas.toDataURL("image/png");
-        const productId = 1; // Change this as needed
-
-        fetch("save_design.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ image: imageData, product_id: productId })
-        })
-        .then(res => res.text()) // read response as text
-        .then(data => {
-            console.log("Raw PHP response:", data); // this will show you the actual PHP error
-            const json = JSON.parse(data); // will still error, but now you'll see the real cause
-        })
-        .catch(err => console.error("Fetch error:", err));
-
-    });
     </script>
 </body>
+
 </html>
