@@ -312,7 +312,7 @@ function saveDesign(addToCart = false) {
     let canvasEl = document.getElementById("tshirt-canvas");
     let imageData = canvasEl.toDataURL("image/png");
 
-fetch("save_image.php", {
+fetch("php/save_image.php", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
