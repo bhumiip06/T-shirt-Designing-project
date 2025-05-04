@@ -72,11 +72,31 @@
       border-radius: 8px;
       display: none;
     }
+    .back-button {
+  display: inline-block;
+  font-size: 24px;
+  background-color: #e0e0e0;
+  color: #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background-color: #ccc;
+}
+
   </style>
 </head>
 <body>
 
   <div class="container">
+    <div class="back-button" onclick="goBack()">&#8592</div>    
     <h2>Enter Your Shipping Address</h2>
     <form id="addressForm">
       <label for="name">Full Name</label>
@@ -117,6 +137,14 @@
   </div>
 
   <script>
+//     function goBack() {
+//   if (document.referrer) {
+//     window.history.back();
+//   } else {
+//     window.location.href = 'index.html'; // Fallback page
+//   }
+// }
+
     const form = document.getElementById('addressForm');
     const confirmationBox = document.getElementById('confirmationBox');
 
@@ -156,6 +184,10 @@
     window.location.href = 'confirm.html';
   }, 2000); // 2000 ms = 2 seconds
     });
+    function goBack(){
+      localStorage.setItem('openCartOnLoad','true');
+      window.location.href='index.html';
+    }
   </script>
 
 </body>
