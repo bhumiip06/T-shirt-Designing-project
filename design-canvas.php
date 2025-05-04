@@ -144,36 +144,6 @@ if (!isset($_SESSION['username'])) {
         </div>
     </div>
     <script src="js/design.js"></script>
-    <script>
-    //     function saveDesign(addToCart = false) {
-    //         let canvasEl = document.getElementById("tshirt-canvas");
-    //         let imageData = canvasEl.toDataURL("image/png");
-
-    //     fetch("save_image.php", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({ image: imageData })
-    //     })
-    //     .then(res => res.text())
-    //     .then(link => {
-    //         alert("Design saved!");
-
-    //         if (addToCart) {
-    //             // Save design in cart via AJAX or redirect with query param
-    //             window.location.href = "php/cart.php?image=" + encodeURIComponent(link);
-    //         } else {
-    //             window.open(link, "_blank");
-    //         }
-    //     })
-    //     .catch(err => {
-    //         console.error("Error saving design:", err);
-    //         alert("Failed to save design.");
-    //     });
-    // }
-
-    </script>
 </body>
 
 </html>

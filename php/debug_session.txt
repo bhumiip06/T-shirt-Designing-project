@@ -1,0 +1,6 @@
+Array
+(
+    [user_id] => 7
+    [username] => Divya
+    [user_email] => deepu123@gmail.com
+)
