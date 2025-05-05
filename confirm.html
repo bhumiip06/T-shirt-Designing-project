@@ -96,6 +96,12 @@
       <label for="city">City</label>
       <input type="text" id="city" required>
 
+      <label for="price">Price</label>
+      <input type="number" id="price" required>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" required>
+
       <label for="zip">ZIP Code</label>
       <input type="text" id="zip" required>
 
@@ -114,7 +120,9 @@
         <p><strong>Name:</strong> <span id="summaryName"></span></p>
         <p><strong>Address:</strong> <span id="summaryAddress"></span></p>
         <p><strong>City:</strong> <span id="summaryCity"></span></p>
-        <p><strong>ZIP:</strong> <span id="summaryZip"></span></p>
+        <p><strong>Price:</strong> <span id="summaryPrice"></span></p>
+        <p><strong>Quantity:</strong> <span id="summaryQuantity"></span></p>
+        <p><strong>Zip:</strong> <span id="summaryZip"></span></p>
       </div>
 
       <button onclick="alert('Order Confirmed. Your t-shirt will be placed soon')">Confirm Order</button>
@@ -131,6 +139,8 @@
       document.getElementById('summaryName').innerText = document.getElementById('name').value;
       document.getElementById('summaryAddress').innerText = document.getElementById('address').value;
       document.getElementById('summaryCity').innerText = document.getElementById('city').value;
+      document.getElementById('summaryPrice').innerText = document.getElementById('price').value;
+      document.getElementById('summaryQuantity').innerText = document.getElementById('quantity').value;
       document.getElementById('summaryZip').innerText = document.getElementById('zip').value;
 
       previewSection.style.display = 'block';
