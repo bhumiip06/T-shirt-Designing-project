@@ -11,8 +11,8 @@ $user_id = $_SESSION['user_id'];  // Get the user ID from the session
 include 'php/connection.php';
 
 $design_id = 1; // Replace with actual selected design ID
-$total_price = 399.99; // Replace with actual calculated price
-$order_date = date('2025-05-04'); // Today’s date
+$total_price = 299.99; // Replace with actual calculated price
+$order_date = date('Y-m-d'); // Today’s date
 
 // Get and sanitize POST data
 $name = $con->real_escape_string($_POST['name']);
