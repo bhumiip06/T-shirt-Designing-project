@@ -1,4 +1,4 @@
-const cartIcon = document.querySelector("#cart-icon");
+const cartIcon = document.querySelector("#cart-icon"); 
 const cart = document.querySelector(".cart");
 const cartClose = document.querySelector("#cart-close");
 cartIcon.addEventListener("click", () => cart.classList.add("active"));
@@ -12,21 +12,20 @@ addCartButtons.forEach(button => {
     })
 });
 
-//popup 
+// Popup for adding items to the cart
 document.querySelectorAll('.add-cart').forEach(item => {
     item.addEventListener('click', function() {
-      // Show the popup
       const popup = document.getElementById('product-added-popup');
       popup.style.display = 'block';
-  
-      // Hide the popup after 2 seconds
       setTimeout(() => {
         popup.style.display = 'none';
       }, 2000);
     });
-  });
+});
 
 const cartContent = document.querySelector(".cart-content");
+
+// Add product to cart
 const addToCart = productBox => {
     const productImgsrc = productBox.querySelector("img").src;
     const productTitle = productBox.querySelector(".product-title").textContent;
@@ -34,7 +33,7 @@ const addToCart = productBox => {
 
     const cartItems = cartContent.querySelectorAll(".cart-product-title");
     for (let item of cartItems) {
-        if(item.textContent.trim() === productTitle.trim()) {
+        if (item.textContent.trim() === productTitle.trim()) {
             alert("This item is already in the cart.");
             return;
         }
@@ -55,23 +54,24 @@ const addToCart = productBox => {
         </div>
         <i class="ri-delete-bin-line cart-remove"></i>
     `;
-
     cartContent.appendChild(cartBox);
 
+    // Remove item from cart
     cartBox.querySelector(".cart-remove").addEventListener("click", () => {
         cartBox.remove();
         updateCartCount(-1);
         updateTotalPrice();
     });
 
+    // Update quantity in cart
     cartBox.querySelector(".cart-quantity").addEventListener("click", event => {
         const numberElement = cartBox.querySelector(".number");
         const decrementButton = cartBox.querySelector("#decrement");
         let quantity = parseInt(numberElement.textContent);
 
-        if(event.target.id === "decrement" && quantity > 1) {
+        if (event.target.id === "decrement" && quantity > 1) {
             quantity--;
-            if(quantity === 1) {
+            if (quantity === 1) {
                 decrementButton.style.color = "#999";
             }
         } else if (event.target.id === "increment") {
@@ -82,24 +82,27 @@ const addToCart = productBox => {
         numberElement.textContent = quantity;
         updateTotalPrice();
     });
+
     updateCartCount(1);
     updateTotalPrice();
 };
 
+// Update total price
 const updateTotalPrice = () => {
     const updateTotalPriceElement = document.querySelector(".total-price");
     const cartBoxes = cartContent.querySelectorAll(".cart-box");
-let total = 0;
+    let total = 0;
     cartBoxes.forEach(cartBox => {
         const priceElement = cartBox.querySelector(".cart-price");
         const quantityElement = cartBox.querySelector(".number");
-        const price = priceElement.textContent.replace("₹","");
+        const price = priceElement.textContent.replace("₹", "");
         const quantity = quantityElement.textContent;
-        total += price * quantity;
+        total += parseFloat(price) * parseInt(quantity);
     });
     updateTotalPriceElement.textContent = `₹${total}`;
 };
 
+// Update the number of items in the cart
 let cartItemCount = 0;
 const updateCartCount = change => {
     const cartItemCountBadge = document.querySelector(".cart-item-count");
@@ -113,50 +116,7 @@ const updateCartCount = change => {
     }
 };
 
-// const buyNowButton = document.querySelector(".btn-buy");
-// buyNowButton.addEventListener("click", () => {
-//     const cartBoxes = cartContent.querySelectorAll(".cart-box");
-//     if (cartBoxes.length === 0) {
-//         alert("Your cart is empty. Please add items to your cart before buying.");
-//         return;
-//     }
-    
-   /* buyNowButton.addEventListener("click", () => {
-        const cartBoxes = cartContent.querySelectorAll(".cart-box");
-        if (cartBoxes.length === 0) {
-            alert("Your cart is empty. Please add items to your cart before buying.");
-            return;
-        }
-    
-        // Optional: save cart items to localStorage if you want to display them on the address page
-        const cartData = [];
-        cartBoxes.forEach(cartBox => {
-            const title = cartBox.querySelector(".cart-product-title").textContent;
-            const price = cartBox.querySelector(".cart-price").textContent;
-            const quantity = cartBox.querySelector(".number").textContent;
-            const img = cartBox.querySelector(".cart-img").src;
-            cartData.push({ title, price, quantity, img });
-        });
-    
-        localStorage.setItem("checkoutCart", JSON.stringify(cartData));
-    
-        // ✅ Redirect only if cart is not empty
-        window.location.href = "adress.html";
-    });
-    
-    cartBoxes.forEach(cartBox => cartBox.remove());
-
-    cartItemCount = 0;
-    const cartItemCountBadge = document.querySelector(".cart-item-count");
-    cartItemCountBadge.textContent = cartItemCount;
-    cartItemCountBadge.style.visibility = "hidden";
-
-    const updateTotalPriceElement = document.querySelector(".total-price");
-    updateTotalPriceElement.textContent = "₹0";
-
-    alert("Thank you for your purchase!");
-});*/
-
+// Checkout functionality
 const buyNowButton = document.querySelector(".btn-buy");
 
 buyNowButton.addEventListener("click", () => {
@@ -167,7 +127,6 @@ buyNowButton.addEventListener("click", () => {
         return;
     }
 
-    // Save cart items to localStorage
     const cartData = [];
     cartBoxes.forEach(cartBox => {
         const title = cartBox.querySelector(".cart-product-title").textContent;
@@ -179,9 +138,8 @@ buyNowButton.addEventListener("click", () => {
 
     localStorage.setItem("checkoutCart", JSON.stringify(cartData));
 
-    // Optional: clean up cart UI
+    // Clear cart and reset cart item count
     cartBoxes.forEach(cartBox => cartBox.remove());
-
     cartItemCount = 0;
     const cartItemCountBadge = document.querySelector(".cart-item-count");
     cartItemCountBadge.textContent = "";
@@ -194,8 +152,8 @@ buyNowButton.addEventListener("click", () => {
     window.location.href = "adress.html";
 });
 
+// On page load: Restore cart data from localStorage
 window.addEventListener('DOMContentLoaded', () => {
-    // Restore cart if needed
     const savedCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
     if (savedCart.length > 0 && cartContent.children.length === 0) {
         savedCart.forEach(item => {
@@ -247,12 +205,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
         updateTotalPrice();
     }
-
-    // If coming back from address.html, auto-open cart
-    if (localStorage.getItem('openCartOnLoad') === 'true') {
-        cart.classList.add("active");
-        localStorage.removeItem('openCartOnLoad');
-    }
 });
-
-// });
