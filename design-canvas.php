@@ -18,6 +18,7 @@ if (!isset($_SESSION['username'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js" integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
 
 
     <!-- font awesome for icons  -->
@@ -26,9 +27,8 @@ if (!isset($_SESSION['username'])) {
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/design.css">
-    <style>
+    <link rel="stylesheet" href="css/cart.css">
 
-    </style>
 </head>
 
 <body>
@@ -53,12 +53,29 @@ if (!isset($_SESSION['username'])) {
                     <li><a href="login.html">Login</a></li>
                 <?php endif; ?>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li>
                 <li><a href="php/logout.php">Logout</a></li>
+                <!-- <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li> -->
+                <div id="cart-icon">
+                    <i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i>
+                    <span class="cart-item-count"></span>
+                </div>
             </ul>
         </div>
     </nav>
+    <div class="cart">
+        <h2 class="cart-title">Your Cart</h2>
+        <div class="cart-content">
+        </div>
+        <div class="total">
+            <div class="total-title">Total</div>
+            <div class="total-price">₹0</div>
+        </div>
+        <button class="btn-buy">Buy Now</button>
+        <i class="fa-solid fa-xmark" id="cart-close"></i>
+    </div>
+    <div id="product-added-popup" class="popup">Product added to cart!</div>
 
+    <!-- Design Area -->
     <div class="design-container">
         <!-- Clipart Section  displays selectable clipart-->
         <div class="clipart-section">
@@ -144,6 +161,7 @@ if (!isset($_SESSION['username'])) {
         </div>
     </div>
     <script src="js/design.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>

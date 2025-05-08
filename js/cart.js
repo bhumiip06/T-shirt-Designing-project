@@ -1,36 +1,34 @@
-const cartIcon = document.querySelector("#cart-icon"); 
+const cartIcon = document.querySelector("#cart-icon");
 const cart = document.querySelector(".cart");
 const cartClose = document.querySelector("#cart-close");
+const cartContent = document.querySelector(".cart-content");
+const buyNowButton = document.querySelector(".btn-buy");
+const cartItemCountBadge = document.querySelector(".cart-item-count");
+
+// Show or hide the cart
 cartIcon.addEventListener("click", () => cart.classList.add("active"));
 cartClose.addEventListener("click", () => cart.classList.remove("active"));
 
-const addCartButtons = document.querySelectorAll(".add-cart");
-addCartButtons.forEach(button => {
+// Add product to cart
+document.querySelectorAll(".add-cart").forEach(button => {
     button.addEventListener("click", event => {
         const productBox = event.target.closest(".product-box");
         addToCart(productBox);
-    })
-});
-
-// Popup for adding items to the cart
-document.querySelectorAll('.add-cart').forEach(item => {
-    item.addEventListener('click', function() {
-      const popup = document.getElementById('product-added-popup');
-      popup.style.display = 'block';
-      setTimeout(() => {
-        popup.style.display = 'none';
-      }, 2000);
+        
+        // Show popup for adding items
+        const popup = document.getElementById('product-added-popup');
+        popup.style.display = 'block';
+        setTimeout(() => popup.style.display = 'none', 2000);
     });
 });
 
-const cartContent = document.querySelector(".cart-content");
-
-// Add product to cart
-const addToCart = productBox => {
+// Add item to the cart
+const addToCart = (productBox) => {
     const productImgsrc = productBox.querySelector("img").src;
     const productTitle = productBox.querySelector(".product-title").textContent;
     const productPrice = productBox.querySelector(".price").textContent;
 
+    // Check if product is already in the cart
     const cartItems = cartContent.querySelectorAll(".cart-product-title");
     for (let item of cartItems) {
         if (item.textContent.trim() === productTitle.trim()) {
@@ -39,6 +37,7 @@ const addToCart = productBox => {
         }
     }
 
+    // Create new cart box
     const cartBox = document.createElement("div");
     cartBox.classList.add("cart-box");
     cartBox.innerHTML = `
@@ -56,11 +55,12 @@ const addToCart = productBox => {
     `;
     cartContent.appendChild(cartBox);
 
-    // Remove item from cart
+    // Setup remove item from cart
     cartBox.querySelector(".cart-remove").addEventListener("click", () => {
         cartBox.remove();
-        updateCartCount(-1);
+        updateCartCount();
         updateTotalPrice();
+        saveCartToLocalStorage();
     });
 
     // Update quantity in cart
@@ -71,9 +71,7 @@ const addToCart = productBox => {
 
         if (event.target.id === "decrement" && quantity > 1) {
             quantity--;
-            if (quantity === 1) {
-                decrementButton.style.color = "#999";
-            }
+            if (quantity === 1) decrementButton.style.color = "#999";
         } else if (event.target.id === "increment") {
             quantity++;
             decrementButton.style.color = "#333";
@@ -81,17 +79,21 @@ const addToCart = productBox => {
 
         numberElement.textContent = quantity;
         updateTotalPrice();
+        saveCartToLocalStorage();
     });
 
-    updateCartCount(1);
+    // Update UI after adding to cart
+    updateCartCount();
     updateTotalPrice();
+    saveCartToLocalStorage();
 };
 
-// Update total price
+// Update the total price
 const updateTotalPrice = () => {
     const updateTotalPriceElement = document.querySelector(".total-price");
     const cartBoxes = cartContent.querySelectorAll(".cart-box");
     let total = 0;
+
     cartBoxes.forEach(cartBox => {
         const priceElement = cartBox.querySelector(".cart-price");
         const quantityElement = cartBox.querySelector(".number");
@@ -99,14 +101,14 @@ const updateTotalPrice = () => {
         const quantity = quantityElement.textContent;
         total += parseFloat(price) * parseInt(quantity);
     });
+
     updateTotalPriceElement.textContent = `₹${total}`;
 };
 
-// Update the number of items in the cart
-let cartItemCount = 0;
-const updateCartCount = change => {
-    const cartItemCountBadge = document.querySelector(".cart-item-count");
-    cartItemCount += change;
+// Update cart item count
+const updateCartCount = () => {
+    const cartItemCount = cartContent.querySelectorAll(".cart-box").length;
+
     if (cartItemCount > 0) {
         cartItemCountBadge.style.visibility = "visible";
         cartItemCountBadge.textContent = cartItemCount;
@@ -117,8 +119,6 @@ const updateCartCount = change => {
 };
 
 // Checkout functionality
-const buyNowButton = document.querySelector(".btn-buy");
-
 buyNowButton.addEventListener("click", () => {
     const cartBoxes = cartContent.querySelectorAll(".cart-box");
 
@@ -140,17 +140,34 @@ buyNowButton.addEventListener("click", () => {
 
     // Clear cart and reset cart item count
     cartBoxes.forEach(cartBox => cartBox.remove());
-    cartItemCount = 0;
-    const cartItemCountBadge = document.querySelector(".cart-item-count");
-    cartItemCountBadge.textContent = "";
-    cartItemCountBadge.style.visibility = "hidden";
-
+    updateCartCount();
     const updateTotalPriceElement = document.querySelector(".total-price");
     updateTotalPriceElement.textContent = "₹0";
 
     // Redirect to address page
-    window.location.href = "adress.html";
+    window.location.href = "address.html";
 });
+
+// Sync cart to localStorage
+function saveCartToLocalStorage() {
+    const cartBoxes = document.querySelectorAll(".cart-box");
+    const cartItems = [];
+
+    cartBoxes.forEach(cartBox => {
+        const title = cartBox.querySelector(".cart-product-title").textContent.trim();
+        const price = cartBox.querySelector(".cart-price").textContent.trim();
+        const quantity = cartBox.querySelector(".number").textContent.trim();
+        const img = cartBox.querySelector(".cart-img").src;
+
+        cartItems.push({ title, price, quantity, img });
+    });
+
+    if (cartItems.length > 0) {
+        localStorage.setItem("checkoutCart", JSON.stringify(cartItems));
+    } else {
+        localStorage.removeItem("checkoutCart");
+    }
+}
 
 // On page load: Restore cart data from localStorage
 window.addEventListener('DOMContentLoaded', () => {
@@ -174,11 +191,12 @@ window.addEventListener('DOMContentLoaded', () => {
             `;
             cartContent.appendChild(cartBox);
 
-            // Setup listeners
+            // Setup listeners for restored items
             cartBox.querySelector(".cart-remove").addEventListener("click", () => {
                 cartBox.remove();
-                updateCartCount(-1);
+                updateCartCount();
                 updateTotalPrice();
+                saveCartToLocalStorage();
             });
 
             cartBox.querySelector(".cart-quantity").addEventListener("click", event => {
@@ -188,9 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 if (event.target.id === "decrement" && quantity > 1) {
                     quantity--;
-                    if (quantity === 1) {
-                        decrementButton.style.color = "#999";
-                    }
+                    if (quantity === 1) decrementButton.style.color = "#999";
                 } else if (event.target.id === "increment") {
                     quantity++;
                     decrementButton.style.color = "#333";
@@ -198,11 +214,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 numberElement.textContent = quantity;
                 updateTotalPrice();
+                saveCartToLocalStorage();
             });
-
-            updateCartCount(1);
         });
 
+        updateCartCount();
         updateTotalPrice();
     }
 });
