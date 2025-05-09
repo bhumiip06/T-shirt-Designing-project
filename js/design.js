@@ -69,7 +69,7 @@ const clipartImages = [
     "cliparts/clipart10.png",
     "cliparts/clipart11.png",
     "cliparts/stay-positive.png",
-    "cliparts/butterflies.png",
+    "cliparts/buterflies.png",
     "cliparts/clipart12.png",
     "cliparts/clipart13.png",
     "cliparts/clipart14.png",
