@@ -59,21 +59,28 @@ const clipartImages = [
     "cliparts/clipart3.png",
     "cliparts/clipart4.png",
     "cliparts/clipart5.png",
+    "cliparts/be-the-best-version-of-yourself.png",
     "cliparts/clipart6.png",
+    "cliparts/creativity.png",
+    "cliparts/flower.png",
     "cliparts/clipart7.png",
     "cliparts/clipart8.png",
     "cliparts/clipart9.png",
     "cliparts/clipart10.png",
     "cliparts/clipart11.png",
+    "cliparts/stay-positive.png",
+    "cliparts/butterflies.png",
     "cliparts/clipart12.png",
     "cliparts/clipart13.png",
     "cliparts/clipart14.png",
     "cliparts/clipart15.png",
+    "cliparts/bow.png",
     "cliparts/clipart16.png",
     "cliparts/clipart17.png",
     "cliparts/clipart18.png",
     "cliparts/clipart19.png",
-    "cliparts/clipart20.png"
+    "cliparts/clipart20.png",
+    "cliparts/clipart21.png"
 ];
 
 const gallery = document.querySelector(".clipart-gallery");
