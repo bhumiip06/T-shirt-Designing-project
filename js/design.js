@@ -117,7 +117,7 @@ function insertClipart(clipartPath) {
 // listen for textbox insertion 
 document.getElementById("addText").addEventListener('click', function () {
     const text = new fabric.Textbox('Your Text Here', {
-        fontsize: 30,
+        fontSize: 30,
         fill: 'black',
         left: 100,
         top: 100,
@@ -128,57 +128,58 @@ document.getElementById("addText").addEventListener('click', function () {
     canvas.add(text);
     canvas.setActiveObject(text);
 
-    // Listen for font change
-    document.getElementById("fontSelect").addEventListener("change", function () {
-        const selectedFont = this.value;
-        const activeObject = canvas.getActiveObject();
-
-        if (activeObject && activeObject.type === "textbox") {
-            loadFont(selectedFont, () => {
-                activeObject.set("fontFamily", selectedFont);
-                canvas.renderAll();
-            });
-        }
-    });
-
-
-    //listen for text color change
-    document.getElementById("textColor").addEventListener("change", function () {
-        var activeObject = canvas.getActiveObject();
-        console.log("Active Object:", activeObject);
-        if (activeObject && activeObject.type === 'textbox') {
-            activeObject.set({
-                fill: this.value
-            });
-            canvas.renderAll(); //update canvas rendering
-        }
-    });
-
-    //listen for font size change
-    document.getElementById("fontSize").addEventListener("change", function () {
-        var activeObject = canvas.getActiveObject();
-        console.log("Active Object: ", activeObject);
-        if (activeObject && activeObject.type === 'textbox') {
-            activeObject.set({
-                fontSize: this.value
-            });
-            canvas.renderAll(); //update canvas rendering
-        }
-    });
-
-    //listen for font style change
-    document.getElementById("fontStyle").addEventListener("change", function () {
-        var activeObject = canvas.getActiveObject();
-        console.log("Active Object:", activeObject);
-        if (activeObject && activeObject.type === 'textbox') {
-            activeObject.set({
-                fontStyle: this.value
-            });
-            canvas.renderAll(); //update canvas rendering
-        }
-    });
-
 });
+
+// Listen for font change
+document.getElementById("fontSelect").addEventListener("change", function () {
+    const selectedFont = this.value;
+    const activeObject = canvas.getActiveObject();
+
+    if (activeObject && activeObject.type === "textbox") {
+        loadFont(selectedFont, () => {
+            activeObject.set("fontFamily", selectedFont);
+            canvas.renderAll();
+        });
+    }
+});
+
+//listen for text color change
+document.getElementById("textColor").addEventListener("change", function () {
+    var activeObject = canvas.getActiveObject();
+    console.log("Active Object:", activeObject);
+    if (activeObject && activeObject.type === 'textbox') {
+        activeObject.set({
+            fill: this.value
+        });
+        canvas.renderAll(); //update canvas rendering
+    }
+});
+
+//listen for font size change
+document.getElementById("fontSize").addEventListener("change", function () {
+    var activeObject = canvas.getActiveObject();
+    console.log("Active Object: ", activeObject);
+    if (activeObject && activeObject.type === 'textbox') {
+        activeObject.set({
+            fontSize: this.value
+        });
+        canvas.renderAll(); //update canvas rendering
+    }
+});
+
+//listen for font style change
+document.getElementById("fontStyle").addEventListener("change", function () {
+    var activeObject = canvas.getActiveObject();
+    console.log("Active Object:", activeObject);
+    if (activeObject && activeObject.type === 'textbox') {
+        activeObject.set({
+            fontStyle: this.value
+        });
+        canvas.renderAll(); //update canvas rendering
+    }
+});
+
+
 
 //listen for image upload
 document.getElementById("imageupload").addEventListener('change', function (event) {
@@ -277,7 +278,8 @@ document.getElementById("downloadDesign").addEventListener("click", function () 
 
     const dataURL = canvas.toDataURL({
         format: "png",
-        quality: 1.0
+        quality: 1.0,
+        multiplier: 2 //for 2x resolution
     });
 
     // Create a temporary anchor to trigger the download
@@ -318,26 +320,25 @@ document.getElementById("downloadDesign").addEventListener("click", function () 
 function saveDesign() {
     canvas.discardActiveObject(); // Remove selection borders
     canvas.renderAll();
-  
+
     const imageData = canvas.toDataURL({
-      format: "png",
-      quality: 1.0
+        format: "png",
+        quality: 1.0
     });
-  
+
     fetch("php/save_image.php", {
-      method: "POST",
-      body: JSON.stringify({ image: imageData }),
-      headers: {
-        "Content-Type": "application/json"
-      }
+        method: "POST",
+        body: JSON.stringify({ image: imageData }),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
-    .then(res => res.text())
-    .then(link => {
-      alert("Design saved! Link: " + link);
-      window.open(link, "_blank");
-    })
-    .catch(err => {
-      console.error("Error saving design:", err);
-    });
-  }
-  
+        .then(res => res.text())
+        .then(link => {
+            alert("Design saved! Link: " + link);
+        })
+        .catch(err => {
+            console.error("Error saving design:", err);
+        });
+}
+
