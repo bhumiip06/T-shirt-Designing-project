@@ -94,9 +94,12 @@ if (file_put_contents($filePath, $image)) {
     // Combine host with the *absolute web path* ($uploadDirWeb) and the unique name
     $imageUrl = $protocol . "://" . $host . $uploadDirWeb . '/' . $uniqueName;
     // This will generate: http://localhost/T-shirt-Designing-project/uploads/design_...png
+   
+    // Generate a unique design name using current time
+    $design_name = 'Custom T-shirt_' . time();
 
     // --- Save Image URL to Database ---
-    $stmt = $con->prepare("INSERT INTO designs (design_data, user_id) VALUES (?, ?)");
+    $stmt = $con->prepare("INSERT INTO designs (design_data, design_name, user_id) VALUES (?, ?, ?)");
     if ($stmt === false) {
         http_response_code(500);
         header('Content-Type: application/json');
@@ -106,7 +109,7 @@ if (file_put_contents($filePath, $image)) {
         exit;
     }
 
-    $stmt->bind_param("si", $imageUrl, $user_id); // Storing the CORRECT generated URL
+    $stmt->bind_param("ssi", $imageUrl, $design_name, $user_id); // Storing the CORRECT generated URL
 
     if ($stmt->execute()) {
         // Success

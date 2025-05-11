@@ -98,6 +98,8 @@
   <div class="container">
     <div class="back-button" onclick="goBack()">&#8592</div>    
     <h2>Enter Your Shipping Address</h2>
+    <input type="hidden" name="cart_data" id="cartDataInput">
+
     <form id="addressForm" action="submit_order.php" method="POST">
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" required>
@@ -137,59 +139,30 @@
   </div>
 
   <script>
-//     function goBack() {
-//   if (document.referrer) {
-//     window.history.back();
-//   } else {
-//     window.location.href = 'index.html'; // Fallback page
-//   }
-// }
-
-  //   const form = document.getElementById('addressForm');
-  //   const confirmationBox = document.getElementById('confirmationBox');
-
-  //   form.addEventListener('submit', function (e) {
-  //     e.preventDefault();
-
-  //     const formData = {
-  //       name: document.getElementById('name').value.trim(),
-  //       phone: document.getElementById('phone').value.trim(),
-  //       email: document.getElementById('email').value.trim(),
-  //       address: document.getElementById('address').value.trim(),
-  //       city: document.getElementById('city').value.trim(),
-  //       state: document.getElementById('state').value.trim(),
-  //       zip: document.getElementById('zip').value.trim(),
-  //       country: document.getElementById('country').value.trim(),
-  //       notes: document.getElementById('notes').value.trim(),
-  //     };
-
-  //     // Example: send formData to your backend via fetch()
-  //     // fetch('/submit-address', {
-  //     //   method: 'POST',
-  //     //   headers: {
-  //     //     'Content-Type': 'application/json'
-  //     //   },
-  //     //   body: JSON.stringify(formData)
-  //     // }).then(res => res.json()).then(data => {
-  //     //   console.log('Server response:', data);
-  //     // });
-
-  //     // Show confirmation
-  //     confirmationBox.style.display = 'block';
-
-  //     // Optional: clear the form
-  //     form.reset();
-  //     // Redirect after showing the confirmation (e.g., after 2 seconds)
-  // setTimeout(() => {
-  //   window.location.href = 'confirm.html';
-  // }, 2000); // 2000 ms = 2 seconds
-  //   });
-    
   function goBack(){
-      localStorage.setItem('openCartOnLoad','true');
-      window.location.href='index.html';
+    localStorage.setItem('openCartOnLoad', 'true');
+    window.location.href = 'index.html';
   }
-  </script>
+
+  document.getElementById('addressForm').addEventListener('submit', function (e) {
+    e.preventDefault();  // Prevent form submission for debugging
+
+    // Retrieve cart data from localStorage
+    const cartData = localStorage.getItem('checkoutCart');
+
+    // Log cart data or a message if it's not found
+    if (cartData) {
+      console.log('Cart data found:', cartData);  // Log cart data for confirmation
+      document.getElementById('cartDataInput').value = cartData;  // Set the value of hidden input
+    } else {
+      console.log('No cart data found in localStorage');
+      document.getElementById('cartDataInput').value = '';  // Clear the value if no data
+    }
+    window.location.href="confirm.html";
+    // Simulate form submission (or call the actual submission here)
+    console.log('Form would be submitted here');
+  });
+</script>
 
 </body>
 </html>

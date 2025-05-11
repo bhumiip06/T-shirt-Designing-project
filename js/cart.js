@@ -27,7 +27,7 @@ const addToCart = (productBox) => {
     const productImgsrc = productBox.querySelector("img").src;
     const productTitle = productBox.querySelector(".product-title").textContent;
     const productPrice = productBox.querySelector(".price").textContent;
-
+    const designId =productBox.dataset.designId || "123";
     // Check if product is already in the cart
     const cartItems = cartContent.querySelectorAll(".cart-product-title");
     for (let item of cartItems) {
@@ -40,6 +40,7 @@ const addToCart = (productBox) => {
     // Create new cart box
     const cartBox = document.createElement("div");
     cartBox.classList.add("cart-box");
+    cartBox.setAttribute("data-design-id",designId);
     cartBox.innerHTML = `
         <img src="${productImgsrc}" class="cart-img">
         <div class="cart-detail">
@@ -222,3 +223,58 @@ window.addEventListener('DOMContentLoaded', () => {
         updateTotalPrice();
     }
 });
+
+//send cart data to backend
+
+document.querySelector('.btn-buy').addEventListener('click', () => {
+    const cartItems = document.querySelectorAll('.cart-content .cart-box');
+    const items = [];
+
+    cartItems.forEach(item => {
+        const designId = item.dataset.designId; // Ensure that design_id is set as a data attribute in HTML
+        const size = item.querySelector('.product-size') ? item.querySelector('.product-size').value : 'M'; // Default to 'M'
+        const quantity = parseInt(item.querySelector('.number').textContent); // Get the quantity from the cart item
+        const price = parseFloat(item.querySelector('.cart-price').textContent.replace('₹', '').trim()); // Get the price from the cart item
+
+        items.push({
+            design_id: designId,
+            size: size,
+            quantity: quantity,
+            price: price
+        });
+    });
+
+    // Collect user details
+    const userData = {
+        name: 'Test User',   // Collect this data dynamically from form fields
+        phone: '9876543210',
+        email: 'user@example.com',
+        address: '123 Street',
+        city: 'City',
+        state: 'State',
+        zip: '123456',
+        country: 'India',
+        notes: ''
+    };
+
+    fetch('submit_order.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            items: items,
+            user: userData
+        })
+    })
+    .then(res => res.json())
+    .then(response => {
+        if (response.success) {
+            alert("Order placed successfully!");
+            window.location.href = "confirm.html";
+        } else {
+            alert("Failed: " + response.message);
+        }
+    });
+});
+

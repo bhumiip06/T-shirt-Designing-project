@@ -105,8 +105,8 @@
     <div class="preview" id="previewSection">
       <h2>Preview Your T-Shirt</h2>
       <div class="tshirt-preview">
-        <img src="https://i.imgur.com/O5bPL0K.png" alt="T-Shirt" class="tshirt">
-        <img src="https://i.imgur.com/rRGCdGg.png" alt="Design" class="design" id="designImage">
+        <img src="https://i.imgur.com/O5bPL0K.png" alt="T-Shirt" class="tshirt" id="designImage">
+        <!-- <img src="https://i.imgur.com/rRGCdGg.png" alt="Design" class="design" id="designImage"> -->
       </div>
 
       <div class="order-summary" id="orderSummary">
@@ -123,23 +123,28 @@
 
   <script>
     const form = document.getElementById('addressForm');
-    const previewSection = document.getElementById('previewSection');
+const previewSection = document.getElementById('previewSection');
+const designImage = document.getElementById('designImage'); // Image element for design preview
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
 
-      document.getElementById('summaryName').innerText = document.getElementById('name').value;
-      document.getElementById('summaryAddress').innerText = document.getElementById('address').value;
-      document.getElementById('summaryCity').innerText = document.getElementById('city').value;
-      document.getElementById('summaryZip').innerText = document.getElementById('zip').value;
+  // Get user input values
+  document.getElementById('summaryName').innerText = document.getElementById('name').value;
+  document.getElementById('summaryAddress').innerText = document.getElementById('address').value;
+  document.getElementById('summaryCity').innerText = document.getElementById('city').value;
+  document.getElementById('summaryZip').innerText = document.getElementById('zip').value;
 
-      previewSection.style.display = 'block';
-      form.style.display = 'none';
-    /*function confirmOrder() {
-  // You can also store or send data here if needed
-  window.location.href = 'thank.html';
-}*/
-    });
+  // Retrieve the design image URL from localStorage (if available)
+  const savedCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
+  const designImageUrl = savedCart.length > 0 ? savedCart[0].img : 'https://i.imgur.com/rRGCdGg.png'; // Use the first item’s image or fallback to a default image
+
+  // Set the design image for the preview
+  designImage.src = designImageUrl;
+
+  previewSection.style.display = 'block';
+  form.style.display = 'none';
+});
   </script>
 </body>
 </html>

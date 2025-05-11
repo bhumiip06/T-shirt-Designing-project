@@ -88,11 +88,13 @@ header{
     margin-top: 10px;
     position: relative;
 }
-.product-box .price-and-cart{
+.product-box .price-and-cart {
     display: flex;
-    justify-content: flex-start;
-    gap: 50%;
+    justify-content: space-between; /* Push items to far left and far right */
     align-items: center;
+    width: 100%; /* Ensures full width */
+    padding: 0 10px; /* Optional: spacing inside */
+    box-sizing: border-box;
 }
 /* .price-and-cart .price{
     font-size: 18px;

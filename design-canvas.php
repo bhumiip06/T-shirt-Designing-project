@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js" integrity="sha512-CeIsOAsgJnmevfCi2C7Zsyy6bQKi43utIjdA87Q0ZY84oDqnI0uwfM9+bKiIkI75lUeI00WG/+uJzOmuHlesMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.1.0/fontfaceobserver.standalone.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
 
     <!-- font awesome for icons  -->
@@ -28,7 +28,6 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/design.css">
     <link rel="stylesheet" href="css/cart.css">
-
 </head>
 
 <body>
@@ -53,6 +52,7 @@ if (!isset($_SESSION['username'])) {
                     <li><a href="login.html">Login</a></li>
                 <?php endif; ?>
                 <li><a href="index.html">Home</a></li>
+                <li><a href="my_designs.php">My designs</a></li>
                 <li><a href="php/logout.php">Logout</a></li>
                 <!-- <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li> -->
                 <div id="cart-icon">
@@ -154,10 +154,7 @@ if (!isset($_SESSION['username'])) {
 
             <!-- button for downloading design as png -->
             <button id="downloadDesign">Download</button>
-            <!-- <button id="buy-btn">Buy Now</button> -->
-            <button id="buy-btn" onclick="saveDesign(true)">Buy Now</button>
-
-            <button onclick="saveDesign()">Save</button>
+            <button id="saveDesign" onclick="saveDesign()">Save</button>
         </div>
     </div>
     <script src="js/design.js"></script>
