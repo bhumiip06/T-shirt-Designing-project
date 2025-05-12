@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>T-Shirt Design Preview</title>
@@ -10,7 +11,8 @@
       background-color: #f7f7f7;
     }
 
-    h2 {
+    h2,
+    h3 {
       color: #333;
     }
 
@@ -20,7 +22,7 @@
       background: white;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     form {
@@ -56,35 +58,46 @@
       display: none;
     }
 
-    .tshirt-preview {
-      position: relative;
-      width: 300px;
+    .tshirt-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 20px;
     }
 
-    .tshirt {
-      width: 100%;
-    }
-
-    .design {
-      position: absolute;
-      top: 80px;
-      left: 65px;
-      width: 170px;
-      height: 170px;
+    .tshirt-img {
+      width: 120px;
+      height: 120px;
       object-fit: contain;
-      pointer-events: none;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .item-details {
+      flex-grow: 1;
     }
 
     .order-summary {
-      margin-top: 20px;
+      margin-top: 30px;
       background: #f0f0f0;
       padding: 20px;
       border-radius: 8px;
     }
+
+    .total-price {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
+    <div class="back-button" onclick="goBack()">&#8592</div>
+
     <h2>Confirm Details</h2>
     <form id="addressForm">
       <label for="name">Full Name</label>
@@ -96,55 +109,127 @@
       <label for="city">City</label>
       <input type="text" id="city" required>
 
-      <label for="zip">ZIP Code</label>
-      <input type="text" id="zip" required>
+      <label for="contact">Contact Number</label>
+      <input type="text" id="contact" required>
 
       <button type="submit">Continue to Preview</button>
     </form>
 
     <div class="preview" id="previewSection">
-      <h2>Preview Your T-Shirt</h2>
-      <div class="tshirt-preview">
-        <img src="https://i.imgur.com/O5bPL0K.png" alt="T-Shirt" class="tshirt" id="designImage">
-        <!-- <img src="https://i.imgur.com/rRGCdGg.png" alt="Design" class="design" id="designImage"> -->
-      </div>
+      <h2>Preview Your T-Shirts</h2>
+      <div id="tshirtItemsContainer"></div>
 
       <div class="order-summary" id="orderSummary">
         <h3>Order Summary</h3>
         <p><strong>Name:</strong> <span id="summaryName"></span></p>
         <p><strong>Address:</strong> <span id="summaryAddress"></span></p>
         <p><strong>City:</strong> <span id="summaryCity"></span></p>
-        <p><strong>ZIP:</strong> <span id="summaryZip"></span></p>
+        <p><strong>Contact:</strong> <span id="summaryContact"></span></p>
+        <p class="total-price"><strong>Total Price:</strong> ₹<span id="pretotalPrice"></span></p>
       </div>
 
-      <button onclick="alert('Order Confirmed. Your t-shirt will be placed soon')">Confirm Order</button>
+      <button onclick="confirmOrder()">Confirm Order</button>
     </div>
   </div>
 
   <script>
     const form = document.getElementById('addressForm');
-const previewSection = document.getElementById('previewSection');
-const designImage = document.getElementById('designImage'); // Image element for design preview
+    const previewSection = document.getElementById('previewSection');
+    const tshirtItemsContainer = document.getElementById('tshirtItemsContainer');
 
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
+    let totalPrice = 0;
+    let orderData = {};
 
-  // Get user input values
-  document.getElementById('summaryName').innerText = document.getElementById('name').value;
-  document.getElementById('summaryAddress').innerText = document.getElementById('address').value;
-  document.getElementById('summaryCity').innerText = document.getElementById('city').value;
-  document.getElementById('summaryZip').innerText = document.getElementById('zip').value;
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-  // Retrieve the design image URL from localStorage (if available)
-  const savedCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
-  const designImageUrl = savedCart.length > 0 ? savedCart[0].img : 'https://i.imgur.com/rRGCdGg.png'; // Use the first item’s image or fallback to a default image
+      const name = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
+      const city = document.getElementById('city').value;
+      const contact = document.getElementById('contact').value;
 
-  // Set the design image for the preview
-  designImage.src = designImageUrl;
+      document.getElementById('summaryName').innerText = name;
+      document.getElementById('summaryAddress').innerText = address;
+      document.getElementById('summaryCity').innerText = city;
+      document.getElementById('summaryContact').innerText = contact;
 
-  previewSection.style.display = 'block';
-  form.style.display = 'none';
-});
+      const savedCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
+      tshirtItemsContainer.innerHTML = '';
+      totalPrice = 0;
+      console.log("Saved cart data:", savedCart);
+
+      savedCart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('tshirt-item');
+
+        const img = document.createElement('img');
+        img.src = item.img || 'https://i.imgur.com/O5bPL0K.png';
+        img.classList.add('tshirt-img');
+
+        const details = document.createElement('div');
+        details.classList.add('item-details');
+
+        const itemName = item.title || `Design ${index + 1}`;
+        const rawQty = item.quantity;
+        const rawPrice = item.price.replace('₹', '').trim(); // Remove ₹ and any extra spaces
+
+        const itemQty = !isNaN(parseInt(rawQty)) ? parseInt(rawQty) : 1;
+        const itemPrice = !isNaN(parseFloat(rawPrice)) ? parseFloat(rawPrice) : 0;
+        const itemSize = item.size || 'M';
+        console.log(`Item ${index + 1}:`, item);
+        console.log("Parsed price:", parseFloat(item.price), "Parsed quantity:", parseInt(item.quantity));
+
+        totalPrice += itemPrice * itemQty;
+
+        details.innerHTML = `
+          <p><strong>Product:</strong> ${itemName}</p>
+          <p><strong>Size:</strong> ${itemSize}</p>
+          <p><strong>Quantity:</strong> ${itemQty}</p>
+          <p><strong>Unit Price:</strong> ₹${itemPrice}</p>
+        `;
+
+        itemDiv.appendChild(img);
+        itemDiv.appendChild(details);
+        tshirtItemsContainer.appendChild(itemDiv);
+      });
+
+      document.getElementById('pretotalPrice').innerText = totalPrice.toFixed(2);
+
+      // Store order data to be submitted later
+      orderData = { name, address, city, contact, totalPrice };
+
+      previewSection.style.display = 'block';
+      form.style.display = 'none';
+    });
+
+    function confirmOrder() {
+      fetch('submit_order.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Order Confirmed. Your t-shirts will be placed soon');
+            localStorage.removeItem('checkoutCart');
+            window.location.href = 'index.html'; // or order-success page
+          } else {
+            alert('Failed to confirm order. Please try again.');
+            console.error(data.error);
+          }
+        })
+        .catch(error => {
+          alert('Something went wrong. Please try again.');
+          console.error('Error:', error);
+        });
+    }
+
+    function goBack() {
+      localStorage.setItem('openCartOnLoad', 'true');
+      window.location.href = 'address.html';
+    }
   </script>
 </body>
+
 </html>

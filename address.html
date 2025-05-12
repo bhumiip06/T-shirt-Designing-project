@@ -98,9 +98,10 @@
   <div class="container">
     <div class="back-button" onclick="goBack()">&#8592</div>    
     <h2>Enter Your Shipping Address</h2>
-    <input type="hidden" name="cart_data" id="cartDataInput">
 
     <form id="addressForm" action="submit_order.php" method="POST">
+    <input type="hidden" name="cart_data" id="cartDataInput">
+      
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" required>
 
@@ -137,7 +138,7 @@
       <a href="confirm.html"></a>
     </div> -->
   </div>
-
+  <!-- <script src="js/cart.js"></script> -->
   <script>
   function goBack(){
     localStorage.setItem('openCartOnLoad', 'true');
@@ -145,7 +146,7 @@
   }
 
   document.getElementById('addressForm').addEventListener('submit', function (e) {
-    e.preventDefault();  // Prevent form submission for debugging
+   e.preventDefault();  // Prevent form submission for debugging
 
     // Retrieve cart data from localStorage
     const cartData = localStorage.getItem('checkoutCart');
@@ -158,7 +159,8 @@
       console.log('No cart data found in localStorage');
       document.getElementById('cartDataInput').value = '';  // Clear the value if no data
     }
-    window.location.href="confirm.html";
+    this.submit();
+    //window.location.href="confirm.html";
     // Simulate form submission (or call the actual submission here)
     console.log('Form would be submitted here');
   });

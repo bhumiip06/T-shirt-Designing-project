@@ -92,7 +92,7 @@ $result = $stmt->get_result();
         <?php endif; ?>
 
         <?php while ($row = $result->fetch_assoc()): ?>
-            <div class="product-box" data-dessign-id="<?php echo $row['design_id'];?>">
+            <div class="product-box" data-design-id="<?php echo $row['design_id'];?>">
                 <div class="img-box">
                     <img src="<?php echo htmlspecialchars($row['design_data'] ?? 'default_image.jpg'); ?>" alt="T-shirt Design">
                 </div>
@@ -107,7 +107,7 @@ $result = $stmt->get_result();
                 </select>
 
                 <div class="price-and-cart">
-                    <span class="price">₹400</span>
+                    <span class="price">400</span>
                     <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
                 </div>
 
