@@ -15,9 +15,6 @@ $orderCount = $orderCountQuery->fetch_assoc()['total_orders'];
 $userCountQuery = $con->query("SELECT COUNT(*) AS total_users FROM users");
 $userCount = $userCountQuery->fetch_assoc()['total_users'];
 
-// Query to get the count of products (T-shirts)
-$productCountQuery = $con->query("SELECT COUNT(*) AS total_products FROM products");
-$productCount = $productCountQuery->fetch_assoc()['total_products'];
 
 ?>
 
