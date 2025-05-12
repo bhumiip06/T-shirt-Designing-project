@@ -52,9 +52,8 @@ if (!isset($_SESSION['username'])) {
                     <li><a href="login.html">Login</a></li>
                 <?php endif; ?>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="my_designs.php">My designs</a></li>
+                <li><a href="php/my_designs.php">My designs</a></li>
                 <li><a href="php/logout.php">Logout</a></li>
-                <!-- <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li> -->
                 <div id="cart-icon">
                     <i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i>
                     <span class="cart-item-count"></span>

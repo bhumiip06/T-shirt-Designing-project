@@ -62,7 +62,6 @@ $result = $stmt->get_result();
                 <li><a href="index.html">Home</a></li>
                 <li><a href="design-canvas.php">Design Lab</a></li>
                 <li><a href="php/logout.php">Logout</a></li>
-                <!-- <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li> -->
                 <div id="cart-icon">
                     <i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i>
                     <span class="cart-item-count"></span>
@@ -111,13 +110,11 @@ $result = $stmt->get_result();
                     <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
                 </div>
 
-                <!-- Corrected Delete Button with null check -->
                 <form method="POST" action="delete_design.php">
                     <?php if (isset($row['design_id'])): ?>
                         <input type="hidden" name="design_id" value="<?php echo htmlspecialchars($row['design_id']); ?>">
                         <button type="submit" class="delete-btn">Delete</button>
                     <?php else: ?>
-                        <!-- Optionally display a message or skip the button if design_id is not available -->
                         <span class="no-id-message">Design ID not available</span>
                     <?php endif; ?>
                 </form>
