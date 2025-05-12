@@ -5,17 +5,19 @@ require "connection.php";
         $sender_name = trim($_POST['sender_name']);
         $sender_email = trim($_POST['sender_email']);
         $message_content = trim($_POST['message_content']);
+        $message_type=trim($_POST['message_type']);
+        $status=$_POST['status'];
 
         if (!empty($sender_name) && !empty($sender_email) && !empty($message_content)) {
             if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
-                $sql = "INSERT INTO `contact_messages`(`sender_name`, `sender_email`, `message_content`) VALUES (?,?,?);";
+                $sql = "INSERT INTO `contact_messages`(`sender_name`, `sender_email`, `message_content`, `status`, `message_type`) VALUES (?,?,?,?,?);";
 
                 $stmt = $con->prepare($sql);
                 if ($stmt === false) {
                     die('MySQL prepare error: ' . $con->error);
                 }
                 // Bind the form values to the SQL query
-                $stmt->bind_param("sss", $sender_name, $sender_email, $message_content);
+                $stmt->bind_param("sssss", $sender_name, $sender_email, $message_content,$status,$message_type);
         
                 if ($stmt->execute()) {
                     echo '<!DOCTYPE html>
@@ -58,7 +60,7 @@ require "connection.php";
                         }, 2000);
             
                         setTimeout(() => {
-                            window.location.href = "index.html";
+                            window.location.href = "../index.html";
                         }, 2200);
                     </script>
                 </body>

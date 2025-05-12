@@ -50,6 +50,7 @@ $result = $con->query("
             <li><a href="index.php">Dashboard</a></li>
             <li><a href="orders.php">Orders</a></li>
             <li><a href="users.php" class="active">Users</a></li>
+            <li><a href="feedback.php">Feedback/Queries</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
   <!-- <style>
     .popup {
@@ -45,9 +45,9 @@
       <ul class="list">
         <li><a href="#">Home</a></li>
         <li><a href="#card-grid">T-shirts</a></li>
-        <li><a href="admin/index.php">Admin</a></li>
-        <li><a href="design-canvas.php">Design</a></li>
-        <li><a href="#about">About Us</a></li>
+        <li><a href="my_designs.php">My Designs</a></li>
+        <li><a href="design-canvas.php">Design Lab</a></li>
+        <!-- <li><a href="#about">About Us</a></li> -->
         <li><a href="#contact">Contact Us</a></li>
         <li><a href="login.html">Login</a></li>
         <!-- <li><a href="cart.html" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i></a></li> -->
@@ -82,34 +82,44 @@
   <!-- about section and working -->
   <div class="about" id="about">
     <div class="working">
-  <h1>Customize in 4 Simple Steps</h1>
+      <h1>Customize in 5 Simple Steps</h1>
 
-  <div class="step">
-    <div class="step-number"><i class="fa-solid fa-tshirt"></i></div>
-    <h3>Choose Your T-shirt Size</h3>
-    <p>Select your preferred size for the white round-neck T-shirt available for customization.</p>
+      <div class="step">
+        <div class="step-number"><i class="fa-solid fa-tshirt"></i></div>
+        <h3>Create Your Design</h3>
+        <p>Upload your image or add custom text with adjustable font, size, and color. Personalize your T-shirt to match
+          your style.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number"><i class="fa-solid fa-save"></i></div>
+        <h3>Save or Download Your Design</h3>
+        <p>Once satisfied with your design, save it to your account for future edits or download it in high-resolution
+          formats like PNG or PDF for printing.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number"><i class="fa-solid fa-cogs"></i></div>
+        <h3>Choose Size</h3>
+        <p>Select your preferred size for the T-shirt. Options typically include Small (S), Medium (M), Large (L), and
+          Extra Large (XL).</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number"><i class="fa-solid fa-cart-shopping"></i></div>
+        <h3>Add to Cart</h3>
+        <p>Review your design & size. Once satisfied, add the customized T-shirt to your shopping cart.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number"><i class="fa-solid fa-credit-card"></i></div>
+        <h3>Confirm Checkout & Pay</h3>
+        <p>Proceed to checkout, enter your shipping details, and select 'Cash on Delivery' as your payment method.
+          Confirm your order and await delivery.</p>
+      </div>
+    </div>
   </div>
 
-  <div class="step">
-    <div class="step-number"><i class="fa-solid fa-paintbrush"></i></div>
-    <h3>Create Your Design</h3>
-    <p>Add custom text with adjustable font, size, and color. Insert cliparts from our gallery or upload your own images to personalize your T-shirt.</p>
-  </div>
-
-  <div class="step">
-    <div class="step-number"><i class="fa-solid fa-download"></i></div>
-    <h3>Download or Save</h3>
-    <p>Preview and download your design for free, or save it for later use.</p>
-  </div>
-
-  <div class="step">
-    <div class="step-number"><i class="fa-solid fa-credit-card"></i></div>
-    <h3>Buy the T-shirt</h3>
-    <p>Place an order for your custom-designed T-shirt using our secure checkout process.</p>
-  </div>
-</div>
-
-  </div>
   <!-- tshirt feature cards -->
   <section class="shop" id="card-grid">
     <h1 class="section-title">Featured T-shirts</h1>
@@ -119,18 +129,6 @@
           <img src="images/tshirt_design.png">
         </div>
         <h2 class="product-title">White Cotton T-Shirt with “Read and Ignored” Sarcastic Quote</h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        
-        <div class="price-and-cart">
-          <span class="price">₹400</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
       </div>
 
       <div class="product-box">
@@ -138,18 +136,6 @@
           <img src="images/tshirt_design (1).png">
         </div>
         <h2 class="product-title">Casual Round White "Ride Bicycle"</h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        
-        <div class="price-and-cart">
-          <span class="price">₹450</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
       </div>
 
       <div class="product-box">
@@ -157,18 +143,6 @@
           <img src="images/tshirt_design (10).png">
         </div>
         <h2 class="product-title">White Chemes "Dilchasp" Design </h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        
-        <div class="price-and-cart">
-          <span class="price">₹499</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
       </div>
 
       <div class="product-box">
@@ -176,18 +150,6 @@
           <img src="images/tshirt_design (2).png">
         </div>
         <h2 class="product-title">Casual White Eagles Print</h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        
-        <div class="price-and-cart">
-          <span class="price">₹499</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
       </div>
 
       <div class="product-box">
@@ -195,18 +157,6 @@
           <img src="images/tshirt_design (3).png">
         </div>
         <h2 class="product-title">Awesome Print</h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-
-        <div class="price-and-cart">
-          <span class="price">₹499</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
       </div>
 
 
@@ -215,18 +165,6 @@
           <img src="images/tshirt_design (4).png">
         </div>
         <h2 class="product-title">"Heartfully Yours" Tee</h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        
-        <div class="price-and-cart">
-          <span class="price">₹499</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
       </div>
 
 
@@ -235,18 +173,7 @@
           <img src="images/tshirt_design (5).png">
         </div>
         <h2 class="product-title">"Cheers... But Mad About It"</h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        
-        <div class="price-and-cart">
-          <span class="price">₹499</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
+
       </div>
 
 
@@ -255,18 +182,7 @@
           <img src="images/tshirt_design (7).png">
         </div>
         <h2 class="product-title">Pikachu T-shirt Print</h2>
-        <label for="size">Size:</label>
-        <select class="product-size">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        
-        <div class="price-and-cart">
-          <span class="price">₹499</span>
-          <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
-        </div>
+
       </div>
 
     </div>
@@ -318,6 +234,17 @@
             <div class="input-box">
               <textarea placeholder="Type your Message..." name="message_content" required="required"></textarea>
             </div>
+            <div class="input-box">
+              <label for="message_type">Message Type</label>
+              <select id="message_type" name="message_type" required>
+                <option value="feedback">Feedback</option>
+                <option value="query">Query</option>
+                <option value="complaint">Complaint</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <input type="hidden" name="status" value="new">
+
             <div class="input-box">
               <!-- <input type="submit" name="" value="Send"> -->
               <button type="submit" id="send">Send</button>

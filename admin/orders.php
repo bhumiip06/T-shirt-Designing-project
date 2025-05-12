@@ -50,6 +50,7 @@ if (isset($_GET['user_id'])) {
             <li><a href="index.php">Dashboard</a></li>
             <li><a href="orders.php" class="active">Orders</a></li>
             <li><a href="users.php">Users</a></li>
+            <li><a href="feedback.php">Feedback/Queries</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>
