@@ -31,7 +31,6 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         echo"No account found with that email.";
     }
 
-    // $con->close();
     $pdo=null;
 }
 ?>
