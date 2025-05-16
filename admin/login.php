@@ -99,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <button type="submit">Login</button>
         </form>
+        <a href="../login.html" style="display:flex;justify-content:center; margin-top:10px;">Go To Login</a>
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
     </div>
 </body>
