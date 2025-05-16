@@ -141,7 +141,7 @@ buyNowButton.addEventListener("click", async () => {
     
         localStorage.setItem("cart-data",JSON.stringify(cart_data));
     
-       window.location.href="address.html";
+       window.location.href="../address.html";
 
         
 });

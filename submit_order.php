@@ -41,9 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $zip = $con->real_escape_string(trim($_POST['zip']));
                 $country = $con->real_escape_string(trim($_POST['country']));
                 $notes = $con->real_escape_string(trim($_POST['notes'] ?? ''));
-
+                $payment=$con->real_escape_string(trim($_POST['payment'] ?? ''));
                 $total_price = 0;
                 $order_date = date('Y-m-d');
+                $delivery_date = date('Y-m-d', strtotime($order_date . ' +5 days'));
+
 
                 foreach ($cart_items as $item) {
                     if (isset($item['price'], $item['quantity'], $item['design_id'], $item['size'])) {
@@ -54,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $total_price += $item_total_price;
 
                         $stmt = $con->prepare("INSERT INTO shopping (
-                            user_id, design_id, name, phone, email, address, city, state, zip, country, notes, quantity, size, total_price, order_date
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            user_id, design_id, name, phone, email, address, city, state, zip, country, notes ,payment_mode, quantity, size, total_price, order_date,delivery_date
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?,?)");
 
                         if ($stmt) {
                             $stmt->bind_param(
-                                "iisssssssssisds",
+                                "iissssssssssisdss",
                                 $user_id,
                                 $design_id,
                                 $name,
@@ -71,10 +73,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $zip,
                                 $country,
                                 $notes,
+                                $payment,
                                 $quantity,
                                 $size,
                                 $item_total_price,
-                                $order_date
+                                $order_date,
+                                $delivery_date
                             );
 
                             if (!$stmt->execute()) {
@@ -98,7 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         "phone" => $phone,
                         "address" => $address,
                         "city" => $city,
-                        "total_price" => $total_price
+                        "total_price" => $total_price,
+                        "payment_mode"=>$payment,
+                        "delivery_date"=>$delivery_date
                     ];
                 }
             }
@@ -172,6 +178,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       margin-bottom: 20px;
       font-weight: bold;
     }
+
+    .goback{
+      display: flex;
+      justify-content:center;
+      align-items: center;
+    }
+
+    .goback a{
+      text-decoration: none;
+      color: white;
+      background-color: #0077B6;
+      border-radius: 8px;
+      padding:10px;
+    }
   </style>
 </head>
 <body>
@@ -201,8 +221,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     <?php endforeach; ?>
     <p class="total-price">Total Price: ₹<?= number_format($orderData['total_price'], 2) ?></p>
+    <p><strong>Payment Mode: </strong> <?= htmlspecialchars(ucwords(str_replace('_', ' ', $orderData['payment_mode']))) ?></p>
+
+    <p><strong>Delivery Date: </strong> <?=htmlspecialchars($orderData['delivery_date'])?></p>
   </div>
 <?php endif; ?>
-
+<div class="goback">
+  <a href="php/my_designs.php">Go To My Designs</a>
+</div>
 </body>
 </html>

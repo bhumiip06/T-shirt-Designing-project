@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-include 'php/connection.php';
+include 'connection.php';
 
 // Check if the design_id is set and not empty
 if (isset($_POST['design_id']) && !empty($_POST['design_id'])) {

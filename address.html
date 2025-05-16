@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Shipping Address</title>
@@ -36,7 +37,9 @@
       font-weight: bold;
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -72,36 +75,79 @@
       border-radius: 8px;
       display: none;
     }
-    .back-button {
-  display: inline-block;
-  font-size: 24px;
-  background-color: #e0e0e0;
-  color: #333;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 20px;
-}
 
-.back-button:hover {
-  background-color: #ccc;
+    .back-button {
+      display: inline-block;
+      font-size: 24px;
+      background-color: #e0e0e0;
+      color: #333;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .back-button:hover {
+      background-color: #ccc;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .payment-option:hover {
+      border-color: #4CAF50;
+      background-color: #eefaf0;
+    }
+
+    .payment-option input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+      width: 10%;
+    }
+
+    .popup {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 15px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
   </style>
 </head>
+
 <body>
 
   <div class="container">
-    <div class="back-button" onclick="goBack()">&#8592</div>    
+    <div class="back-button" onclick="goBack()">&#8592</div>
     <h2>Enter Your Shipping Address</h2>
 
     <form id="addressForm" action="submit_order.php" method="POST">
-    <input type="hidden" name="cart_data" id="cartDataInput">
-      
+      <input type="hidden" name="cart_data" id="cartDataInput">
+
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" required>
 
@@ -129,35 +175,67 @@
       <label for="notes">Special Instructions (optional)</label>
       <textarea id="notes" rows="3" name="notes"></textarea>
 
-     <button type="submit">Submit Address</button>
+      <label>Payment Method</label>
+      <div class="payment-options">
+        <label class="payment-option" for="cod">
+          <input type="radio" id="cod" name="payment" value="Cash on Delivery" required>
+          Cash on Delivery
+        </label>
+      </div>
+
+      <button type="submit">Submit Address</button>
+      <div id="confirm-order-popup" class="popup"> Order Confirmed !</div>
     </form>
 
-   
+
   </div>
+
   <script>
-  function goBack(){
-    localStorage.setItem('openCartOnLoad', 'true');
-    window.location.href = 'index.html';
-  }
-
-  document.getElementById('addressForm').addEventListener('submit', function (e) {
-   e.preventDefault();  // Prevent form submission for debugging
-
-    // Retrieve cart data from localStorage
-    const cartData = localStorage.getItem('checkoutCart');
-
-    // Log cart data or a message if it's not found
-    if (cartData) {
-      console.log('Cart data found:', cartData);  // Log cart data for confirmation
-      document.getElementById('cartDataInput').value = cartData;  // Set the value of hidden input
-    } else {
-      console.log('No cart data found in localStorage');
-      document.getElementById('cartDataInput').value = '';  // Clear the value if no data
+    function goBack() {
+      localStorage.setItem('openCartOnLoad', 'true');
+      window.location.href = 'index.html';
     }
-    this.submit();
-    console.log('Form would be submitted here');
-  });
-</script>
+
+    document.getElementById('addressForm').addEventListener('submit', function (e) {
+      e.preventDefault();  // Prevent form submission for debugging
+
+      // Retrieve cart data from localStorage
+      const cartData = localStorage.getItem('checkoutCart');
+
+      // Log cart data or a message if it's not found
+      if (cartData) {
+        console.log('Cart data found:', cartData);  // Log cart data for confirmation
+        document.getElementById('cartDataInput').value = cartData;  // Set the value of hidden input
+      } else {
+        console.log('No cart data found in localStorage');
+        document.getElementById('cartDataInput').value = '';  // Clear the value if no data
+      }
+      this.submit();
+      console.log('Form would be submitted here');
+    });
+
+    document.getElementById('addressForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const cartData = localStorage.getItem('checkoutCart');
+      if (cartData) {
+        document.getElementById('cartDataInput').value = cartData;
+      } else {
+        document.getElementById('cartDataInput').value = '';
+      }
+
+      // Show popup
+      const popup = document.getElementById('confirm-order-popup');
+      popup.style.display = 'block';
+
+      // wait 2.5s then submit
+      setTimeout(() => {
+        this.submit();  
+      }, 2500);
+    });
+
+  </script>
 
 </body>
+
 </html>

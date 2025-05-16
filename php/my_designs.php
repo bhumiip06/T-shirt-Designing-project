@@ -3,12 +3,12 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    header("Location: ../login.html");
     exit;
 }
 
 // Include your DB connection file
-include 'php/connection.php'; // adjust this path as needed
+include 'connection.php'; // adjust this path as needed
 
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT design_id, design_name, design_data, created_at FROM designs WHERE user_id = ?";
@@ -32,9 +32,9 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- custom stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/design.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/design.css">
+    <link rel="stylesheet" href="../css/cart.css">
 
 </head>
 
@@ -43,7 +43,7 @@ $result = $stmt->get_result();
     <nav class="navbar">
         <div class="left">
             <a href="index.html" id="logo">
-                <img src="images/Logo.png" alt="Logo">
+                <img src="../images/Logo.png" alt="Logo">
             </a>
         </div>
 
@@ -57,11 +57,11 @@ $result = $stmt->get_result();
                 <?php if (isset($_SESSION['username'])): ?>
                     <li class="welcome-message">Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></li>
                 <?php else: ?>
-                    <li><a href="login.html">Login</a></li>
+                    <li><a href="../login.html">Login</a></li>
                 <?php endif; ?>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="design-canvas.php">Design Lab</a></li>
-                <li><a href="php/logout.php">Logout</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../design-canvas.php">Design Lab</a></li>
+                <li><a href="logout.php">Logout</a></li>
                 <div id="cart-icon">
                     <i class="fa-solid fa-cart-shopping" style="color: #FFFFFF;"></i>
                     <span class="cart-item-count"></span>
@@ -122,7 +122,7 @@ $result = $stmt->get_result();
         <?php endwhile; ?>
     </div>
 
-    <script src="js/cart.js"></script>
+    <script src="../js/cart.js"></script>
     <script>
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', function(e) {
