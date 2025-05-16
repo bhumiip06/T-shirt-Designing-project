@@ -18,14 +18,13 @@
         }
         //hashed passwords
         $hashed_password=password_hash($password, PASSWORD_DEFAULT);
-        $phone=$phone ?? "";
-        $address=$address ?? "";
+        
 
-        $sql="INSERT INTO `users` ( `user_name`, `user_email`, `user_password`, `user_phone`, `user_address`) VALUES (?,?,?,?,?);";
+        $sql="INSERT INTO `users` ( `user_name`, `user_email`, `user_password`) VALUES (?,?,?);";
 
         $stmt=$con->prepare($sql);
         if($stmt){
-            $stmt->bind_param("sssss", $name, $email, $hashed_password, $phone, $address);
+            $stmt->bind_param("sss", $name, $email, $hashed_password);
 
             if ($stmt->execute()) {
                 echo '

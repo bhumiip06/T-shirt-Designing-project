@@ -65,6 +65,7 @@ const clipartImages = [
     "cliparts/flower.png",
     "cliparts/clipart7.png",
     "cliparts/clipart8.png",
+    "cliparts/panda.png",
     "cliparts/clipart9.png",
     "cliparts/clipart10.png",
     "cliparts/clipart11.png",
