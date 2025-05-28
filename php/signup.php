@@ -65,11 +65,11 @@
             
                         setTimeout(() => {
                             toast.classList.remove("show");
-                        }, 2000);
+                        }, 1000);
             
                         setTimeout(() => {
                             window.location.href = "../login.html";
-                        }, 2200);
+                        }, 1200);
                     </script>
                 </body>
                 </html>
