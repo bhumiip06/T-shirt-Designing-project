@@ -108,17 +108,15 @@ if (!isset($_SESSION['username'])) {
 
             <!-- font selection  -->
             <label for="fontSelect">Choose Font: </label>
-            <select name="font" id="fontSelect">
-                <!-- <option value="Arial">Arial</option> -->
-                <!-- <option value="Bebas Neue">Bebas Neue</option> -->
+            <select name="font" id="fontSelect">  
+                <option value="Bebas_Neue">Bebas Neue</option>
                 <option value="Lobster">Lobster</option>
-                <!-- <option value="Montserrat">Montserrat</option> -->
+                <option value="Montserrat">Montserrat</option>
                 <option value="Pacifico">Pacifico</option>
-                <!-- <option value="Playfair">Playfair</option> -->
+                <option value="Playfair_Display">Playfair</option> 
                 <option value="Righteous">Righteous</option>
-                <!-- <option value="Roboto Slab">Roboto Slab</option> -->
+                <option value="Roboto_Slab">Roboto Slab</option> 
                 <option value="Anton">Anton</option>
-                <!-- <option value="Times New Roman">Times New Roman</option> -->
             </select>
 
             <!-- font size selection  -->
