@@ -25,10 +25,12 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
            exit();
         }
         else{
-            echo"Invalid email or password";
+            header("Location: ../login.html?error=invalid");
+            exit();
         }
     }else{
-        echo"No account found with that email.";
+        header("Location: ../login.html?error=noaccount");
+        exit();
     }
 
     $pdo=null;

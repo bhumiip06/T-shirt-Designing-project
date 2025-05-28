@@ -45,3 +45,17 @@ signInButton.addEventListener('click',function(){
     signInForm.style.display="block";
     signUpForm.style.display="none";
 })
+
+    // Get the query string from the URL
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+
+    // Get the error message container
+    const errorMessage = document.getElementById("error-message");
+
+    // Display appropriate message
+    if (error === "invalid") {
+        errorMessage.textContent = "Invalid email or password.";
+    } else if (error === "noaccount") {
+        errorMessage.textContent = "No account found with that email.";
+    }
