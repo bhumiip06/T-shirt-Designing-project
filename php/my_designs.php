@@ -106,7 +106,7 @@ $result = $stmt->get_result();
                 </select>
 
                 <div class="price-and-cart">
-                    <span class="price">400</span>
+                    <span class="price">₹400</span>
                     <i class="fa-solid fa-cart-shopping add-cart" style="color: #FFFFFF;"></i>
                 </div>
 

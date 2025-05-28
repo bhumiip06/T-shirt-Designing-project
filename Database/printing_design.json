@@ -1,0 +1,52 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"printing design"},
+{"type":"table","name":"contact_messages","database":"printing design","data":
+[
+{"message_id":"1","sender_name":"abc","sender_email":"abc@gmail.com","message_content":"good","created_at":"2025-04-07 12:04:36","status":"new","message_type":"other"},
+{"message_id":"2","sender_name":"abc","sender_email":"abc@gmail.com","message_content":"good","created_at":"2025-04-07 12:06:57","status":"new","message_type":"other"},
+{"message_id":"3","sender_name":"abc","sender_email":"abc@gmail.com","message_content":"very easy to use","created_at":"2025-04-27 21:50:11","status":"new","message_type":"other"},
+{"message_id":"4","sender_name":"bhumika","sender_email":"bhumikapimoli45@gmail.com","message_content":"It was fun designing my own tshirt","created_at":"2025-04-27 22:08:55","status":"new","message_type":"other"},
+{"message_id":"5","sender_name":"bhumika","sender_email":"bhumikapimoli45@gmail.com","message_content":"It was fun designing my own tshirt","created_at":"2025-04-27 22:10:01","status":"new","message_type":"other"},
+{"message_id":"6","sender_name":"bhumika","sender_email":"bhumikapimoli45@gmail.com","message_content":"It was fun designing my own tshirt","created_at":"2025-04-27 22:10:19","status":"new","message_type":"other"},
+{"message_id":"7","sender_name":"priya","sender_email":"priya123@gmail.com","message_content":"quality of the t-shirt is very bad i want refund","created_at":"2025-05-12 20:13:26","status":"new","message_type":"other"},
+{"message_id":"8","sender_name":"bhumika","sender_email":"bhumikapimoli45@gmail.com","message_content":"waste of money totally torn and stained t-shirt received","created_at":"2025-05-12 20:18:12","status":"new","message_type":"complaint"},
+{"message_id":"9","sender_name":"bhumika","sender_email":"bhumikapimoli45@gmail.com","message_content":"waste of money totally torn and stained t-shirt received","created_at":"2025-05-12 20:19:15","status":"new","message_type":"complaint"},
+{"message_id":"10","sender_name":"Kriti","sender_email":"kriti12@gmail.com","message_content":"I had a positive experience and look forward to using your platform again. Thank you for providing such a creative tool!","created_at":"2025-05-16 14:32:57","status":"new","message_type":"feedback"}
+]
+}
+,{"type":"table","name":"designs","database":"printing design","data":
+[
+{"design_id":"16","design_name":"","user_id":"5","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1746870371.png","created_at":"2025-05-10 15:16:11"},
+{"design_id":"18","design_name":"Custom T-shirt_1746871984","user_id":"5","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1746871984.png","created_at":"2025-05-10 15:43:04"},
+{"design_id":"19","design_name":"Custom T-shirt_1746872604","user_id":"5","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1746872604.png","created_at":"2025-05-10 15:53:24"},
+{"design_id":"21","design_name":"Custom T-shirt_1746872666","user_id":"5","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1746872666.png","created_at":"2025-05-10 15:54:26"},
+{"design_id":"22","design_name":"Custom T-shirt_1746872690","user_id":"5","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1746872690.png","created_at":"2025-05-10 15:54:50"},
+{"design_id":"24","design_name":"Custom T-shirt_1746943625","user_id":"7","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1746943625.png","created_at":"2025-05-11 11:37:05"},
+{"design_id":"25","design_name":"Custom T-shirt_1746953853","user_id":"7","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1746953853.png","created_at":"2025-05-11 14:27:33"},
+{"design_id":"26","design_name":"Custom T-shirt_1747037322","user_id":"9","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747037322.png","created_at":"2025-05-12 13:38:42"},
+{"design_id":"27","design_name":"Custom T-shirt_1747037339","user_id":"9","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747037339.png","created_at":"2025-05-12 13:38:59"},
+{"design_id":"28","design_name":"Custom T-shirt_1747042564","user_id":"9","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747042564.png","created_at":"2025-05-12 15:06:04"},
+{"design_id":"29","design_name":"Custom T-shirt_1747042580","user_id":"9","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747042580.png","created_at":"2025-05-12 15:06:20"},
+{"design_id":"30","design_name":"Custom T-shirt_1747052714","user_id":"7","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747052714.png","created_at":"2025-05-12 17:55:14"},
+{"design_id":"31","design_name":"Custom T-shirt_1747053342","user_id":"7","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747053342.png","created_at":"2025-05-12 18:05:42"},
+{"design_id":"32","design_name":"Custom T-shirt_1747384679","user_id":"10","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747384679.png","created_at":"2025-05-16 14:07:59"},
+{"design_id":"33","design_name":"Custom T-shirt_1747385203","user_id":"10","design_data":"http:\/\/localhost\/T-shirt-Designing-project\/uploads\/design_1747385203.png","created_at":"2025-05-16 14:16:43"}
+]
+}
+,{"type":"table","name":"shopping","database":"printing design","data":
+[
+{"id":"1","user_id":"10","design_id":"33","name":"Kriti","phone":"75896413230","email":"kriti12@gmail.com","address":"Kashipur","city":"Kashipur","state":"Uttarakhand","zip":"244713","country":"India","notes":"","payment_mode":"Cash on Delivery","quantity":"1","total_price":"400.00","status":"pending","order_date":"2025-05-16","created_at":"2025-05-16 14:25:15","delivery_date":"2025-05-21","size":"L"},
+{"id":"2","user_id":"10","design_id":"32","name":"Kriti","phone":"75896413230","email":"kriti12@gmail.com","address":"Kashipur","city":"Kashipur","state":"Uttarakhand","zip":"244713","country":"India","notes":"","payment_mode":"Cash on Delivery","quantity":"2","total_price":"800.00","status":"pending","order_date":"2025-05-16","created_at":"2025-05-16 14:25:15","delivery_date":"2025-05-21","size":"M"}
+]
+}
+,{"type":"table","name":"users","database":"printing design","data":
+[
+{"user_id":"4","user_name":"hemant","user_email":"hemant123@gmail.com","user_password":"$2y$10$jd7QVy2X3nrxhC24jUGykOEmv3sZt3GquF6atsRgwPff1h\/PNIGfO","created_at":"2025-04-22 10:08:52"},
+{"user_id":"5","user_name":"Priya","user_email":"priya123@gmail.com","user_password":"$2y$10$Irmn5pJdBa1gIR\/5JmqCGe9Mn7tEaKLAGaUvD\/Bg6ZQ0NC0hXsNgC","created_at":"2025-04-28 12:32:53"},
+{"user_id":"7","user_name":"Divya","user_email":"deepu123@gmail.com","user_password":"$2y$10$1Su1OUZ7ZquPhAQ6XtDwSO4iptUItpi4ljRVeas5WNuU7MQAZ2rd.","created_at":"2025-04-28 22:33:14"},
+{"user_id":"9","user_name":"Bhumi","user_email":"ibhumika456@gmail.com","user_password":"$2y$10$fG1T1wIljXpFCpOlYrMwOev7heKaALDKwJmVG3tyGQYka\/Gqe5U4m","created_at":"2025-05-12 13:37:51"},
+{"user_id":"10","user_name":"Kriti","user_email":"kriti12@gmail.com","user_password":"$2y$10$54zdBftnmdNieq\/CVHPC\/uBD0nHhJrkuPC4pZvAMOqmMT6zJGzqFC","created_at":"2025-05-16 14:05:26"}
+]
+}
+]
